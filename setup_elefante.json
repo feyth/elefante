@@ -1,0 +1,33 @@
+{
+  "nome": "Assistente de Inicialização do Elefante",
+  "versao": "1.0",
+  "descricao": "Guia passo a passo para a IA iniciar e estruturar a memória do projeto do zero.",
+  "gatilho_sugerido": "#elefante iniciar_projeto",
+  "passos": [
+    {
+      "passo": 1,
+      "acao": "Ler a Mente do Usuário",
+      "instrucao": "Pergunte ao usuário o Nome do Projeto, a Stack Tecnológica (Backend, Frontend, Banco de Dados) e o Objetivo Principal do sistema."
+    },
+    {
+      "passo": 2,
+      "acao": "Atualizar 01-ESTADO_ATUAL.md",
+      "instrucao": "Com base nas respostas do Passo 1, abra e preencha as lacunas [NOME DO PROJETO] e [INSERIR TECNOLOGIAS] no arquivo .elefante/01-ESTADO_ATUAL.md."
+    },
+    {
+      "passo": 3,
+      "acao": "Definir Cultura",
+      "instrucao": "Pergunte ao usuário se ele deseja adicionar alguma regra específica de código (ex: 'Sempre usar Tailwind' ou 'Proibido usar jQuery'). Atualize o arquivo 02-REGRAS_E_CULTURA.md com essas regras."
+    },
+    {
+      "passo": 4,
+      "acao": "Criar Log de Início",
+      "instrucao": "Crie um arquivo dentro de .elefante/historico/ chamado YYYYMMDD_inicializacao_projeto.md relatando que o boilerplate do Elefante foi instanciado com sucesso e o projeto começou."
+    },
+    {
+      "passo": 5,
+      "acao": "Apresentação",
+      "instrucao": "Finalize o processo informando ao usuário que a Memória (SSOT) está configurada e pergunte: 'Qual será a nossa primeira missão no código?'"
+    }
+  ]
+}
