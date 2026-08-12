@@ -126,5 +126,7 @@ elefante/
 - Todas as melhorias do GUIA-SSOT-HOOKS.md foram implementadas
 - Framework agora possui proteção tripla: Steering (sempre ativo) + Hook PostTaskExec (após tarefas) + Hook Stop (ao encerrar)
 - **Adicionado:** Template Python/FastAPI/Flask completo (.mestre-python/)
+- **Adicionado:** README.md prático e GUIA-DE-USO.md completo (v2.2)
 - Templates disponíveis: 4 (Laravel, Django, Next.js, Python)
-- Próximo passo: Testar em projeto real e documentar resultados
+- Documentação prática criada para facilitar adoção
+- Próximo passo: Criar exemplos funcionais e vídeos demonstrativos

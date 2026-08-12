@@ -21,6 +21,7 @@
 |---|---|---|
 | 2026-08-12 | `20260812_implementacao_protecao_ssot.md` | Implementação da Proteção Automática do SSOT (v2.1) |
 | 2026-08-12 | `20260812_adicao_template_python.md` | Adição do template Python/FastAPI/Flask ao framework |
+| 2026-08-12 | `20260812_criar_documentacao_pratica.md` | Criação de README.md prático e GUIA-DE-USO.md (v2.2) |
 
 ### Autenticação e Segurança
 | Data | Arquivo | Descrição |
