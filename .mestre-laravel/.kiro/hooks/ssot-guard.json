@@ -1,0 +1,14 @@
+{
+  "version": "v1",
+  "hooks": [
+    {
+      "name": "SSOT Guard - Session End Checklist",
+      "trigger": "Stop",
+      "description": "Hook que dispara ao encerrar sessão para garantir checklist final de documentação",
+      "action": {
+        "type": "agent",
+        "prompt": "Checklist final antes de encerrar sessão:\n[ ] 01-ESTADO_ATUAL.md atualizado com tudo que foi feito?\n[ ] Novas armadilhas em 02-REGRAS_E_CULTURA.md?\n[ ] Log em historico/ para as tarefas desta sessão?\n\nVerifique UMA VEZ se há arquivos em app/, database/, routes/ modificados nesta sessão que ainda não estão no SSOT. Se já verificou nesta resposta, NÃO verifique novamente. Se o git status estiver limpo e o SSOT atualizado, apenas confirme e pare.\n\nComplete qualquer item pendente agora."
+      }
+    }
+  ]
+}
