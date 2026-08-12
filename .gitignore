@@ -1,1 +1,6 @@
 DIVULGACAO.md
+.1estudo/
+
+# Descomente a linha abaixo quando for fazer deploy em produção.
+# A pasta .elefante é o cérebro LOCAL do desenvolvimento e não deve ir para o servidor.
+# .elefante/
