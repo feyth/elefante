@@ -58,12 +58,16 @@ elefante/
 
 | Módulo | Propósito | Status |
 |---|---|---|
-| Template Base (.elefante/) | SSOT e regras genéricas | ✅ Atualizado (REGRA #0) |
+| Template Base (.elefante/) | SSOT e regras genéricas | ✅ Atualizado (REGRA #0 + melhorias v2.3) |
 | Template Laravel (.mestre-laravel/) | Stack Laravel específica | ✅ Atualizado completo |
 | Template Django (.mestre-django/) | Stack Django específica | ✅ Atualizado completo |
 | Template Next.js (.mestre-nextjs/) | Stack Next.js específica | ✅ Atualizado completo |
-| Template Python (.mestre-python/) | Stack Python/FastAPI/Flask | ✅ Criado completo |
+| Template Python (.mestre-python/) | Stack Python/FastAPI/Flask | ✅ Atualizado completo |
 | Proteção SSOT (.kiro/) | Hooks + Steering automático | ✅ Implementado |
+| Princípios (00-PRINCIPIOS.md) | Leis invioláveis por stack | ✅ Criado em todos os templates |
+| Checklist de Saúde do SSOT | Unit tests para documentação | ✅ Adicionado em todos os 02-REGRAS |
+| Hooks externos (hooks.yml) | Automação de pré/pós tarefas | ✅ Criado em todos os templates |
+| Modo configurável (modo.yml) | lean / completo / strict | ✅ Criado em todos os templates |
 | Documentação | README, INICIAR, GUIA | ✅ Atualizado |
 
 ## Proteção Automática do SSOT (Nova Arquitetura)
@@ -88,7 +92,7 @@ elefante/
    - Previne sessões encerrarem com documentação desatualizada
    - Status: ✅ Implementado em todos os templates
 
-### Melhorias Implementadas (Baseadas no GUIA-SSOT-HOOKS.md)
+### Melhorias v2.1 (Proteção SSOT)
 
 | Melhoria | Arquivo | Status |
 |---|---|---|
@@ -100,6 +104,20 @@ elefante/
 | Steering file SSOT | .kiro/steering/ssot-enforcement.md | ✅ |
 | Hook PostTaskExec | .kiro/hooks/ssot-commit-reminder.json | ✅ |
 | Hook Stop | .kiro/hooks/ssot-guard.json | ✅ |
+
+### Melhorias v2.3 (Inspiradas no Spec Kit — 2026-08-25)
+
+| Melhoria | Arquivo | Status |
+|---|---|---|
+| Princípios invioláveis (MUST/SHOULD) | 00-PRINCIPIOS.md (todos os templates) | ✅ |
+| Checklist de Saúde do SSOT | 02-REGRAS_E_CULTURA.md (todos) | ✅ |
+| IDs de rastreabilidade em logs | historico/_TEMPLATE_LOG.md | ✅ |
+| Handoffs explícitos pós-tarefa | AGENTS.md (todos) | ✅ |
+| Comando #elefante verificar | AGENTS.md (todos) | ✅ |
+| Comando #elefante analisar | AGENTS.md (todos) | ✅ |
+| Comando #elefante clarificar | AGENTS.md (todos) | ✅ |
+| Sistema de hooks externos | hooks.yml (todos os templates) | ✅ |
+| Preset lean / strict / completo | modo.yml (todos os templates) | ✅ |
 
 ## Integrações Externas
 > Framework é standalone, sem integrações externas.
@@ -119,14 +137,18 @@ elefante/
 | 2026-08-12 | REGRA #0 antes de todas as outras | Dar máxima prioridade visual à atualização do SSOT |
 | 2026-08-12 | Verificação única por resposta | Prevenir loops infinitos em sessões com >30 tarefas |
 | 2026-08-12 | Replicar melhorias em todos sub-frameworks | Garantir consistência entre Laravel/Django/Next.js |
+| 2026-08-25 | Separar princípios invioláveis (00-PRINCIPIOS.md) | Princípios MUST distintos das regras operacionais — inspirado em "Constitution" do Spec Kit |
+| 2026-08-25 | Checklist de Saúde do SSOT como "unit tests para docs" | Verificar qualidade da documentação, não do código — conceito do Spec Kit |
+| 2026-08-25 | IDs rastreáveis em logs (D001 [TIPO]) | Rastreabilidade de decisões entre sessões |
+| 2026-08-25 | Comandos #elefante verificar / analisar | Operações somente leitura para diagnóstico do SSOT — inspirado em converge/analyze do Spec Kit |
+| 2026-08-25 | Sistema de hooks externos (hooks.yml) | Externalizar comportamento pré/pós tarefa para arquivo editável por projeto |
+| 2026-08-25 | Modo configurável (modo.yml) | lean/completo/strict para adaptar overhead ao tamanho do projeto |
 
 ## Status do Momento
-- **Data da Implementação:** 2026-08-12
-- **Versão:** Framework Elefante v2.1 (com Proteção SSOT)
-- Todas as melhorias do GUIA-SSOT-HOOKS.md foram implementadas
-- Framework agora possui proteção tripla: Steering (sempre ativo) + Hook PostTaskExec (após tarefas) + Hook Stop (ao encerrar)
-- **Adicionado:** Template Python/FastAPI/Flask completo (.mestre-python/)
-- **Adicionado:** README.md prático e GUIA-DE-USO.md completo (v2.2)
+- **Data da Implementação:** 2026-08-25
+- **Versão:** Framework Elefante v2.3 (melhorias inspiradas no Spec Kit)
+- Todas as 9 melhorias baseadas no Spec Kit (github/spec-kit) foram implementadas
+- Novos arquivos por template: `00-PRINCIPIOS.md`, `hooks.yml`, `modo.yml`
+- AGENTS.md expandido com comandos: `#elefante verificar`, `#elefante analisar`, `#elefante clarificar`, `#elefante encerrar sessão`
 - Templates disponíveis: 4 (Laravel, Django, Next.js, Python)
-- Documentação prática criada para facilitar adoção
-- Próximo passo: Criar exemplos funcionais e vídeos demonstrativos
+- Próximo passo: Atualizar CHANGELOG-FRAMEWORK.md e documentação de uso

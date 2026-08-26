@@ -1,0 +1,74 @@
+# Framework Elefante — Configuração de Modo
+#
+# Este arquivo controla o comportamento do Elefante para este projeto.
+# Copie para o diretório .elefante/ do seu projeto e ajuste conforme necessário.
+#
+# Modos disponíveis:
+#   completo  — (padrão) Todos os arquivos, histórico obrigatório, checklist completo
+#   lean      — Modo mínimo para projetos pequenos ou experimentais
+#   strict    — Modo rígido: bloqueia execução se SSOT desatualizado
+
+modo: completo
+
+# ─── Configurações do modo lean ──────────────────────────────────────────────
+# Ativo apenas quando modo: lean
+lean:
+  # Histórico obrigatório? false = apenas sugerido
+  historico_obrigatorio: false
+
+  # Checklist de verificação reduzido (apenas 2 itens essenciais)
+  checklist_reduzido: true
+
+  # Perguntas de clarificação ativas?
+  clarificacao_ativa: false
+
+  # Número máximo de armadilhas exigidas na tabela
+  armadilhas_minimas: 0
+
+  # Atualização do SSOT: "imediata" ou "fim_de_sessao"
+  atualizacao_ssot: fim_de_sessao
+
+  # Arquivos obrigatórios no modo lean (os demais são opcionais)
+  arquivos_obrigatorios:
+    - 01-ESTADO_ATUAL.md
+    - 02-REGRAS_E_CULTURA.md
+
+  # Arquivos opcionais no modo lean
+  arquivos_opcionais:
+    - 00-PRINCIPIOS.md
+    - historico/
+    - INDICE.md
+    - DASHBOARD-ARQUITETURA.html
+
+# ─── Configurações do modo strict ────────────────────────────────────────────
+# Ativo apenas quando modo: strict
+strict:
+  # Bloquear execução se SSOT não foi atualizado nos últimos N dias
+  bloquear_se_desatualizado: true
+  dias_maximos_sem_atualizacao: 3
+
+  # Exigir log para QUALQUER tarefa (não apenas as significativas)
+  log_obrigatorio_sempre: true
+
+  # Exigir 00-PRINCIPIOS.md preenchido
+  principios_obrigatorio: true
+
+  # Número mínimo de armadilhas reais exigidas
+  armadilhas_minimas: 3
+
+# ─── Configurações gerais (aplicam a todos os modos) ─────────────────────────
+geral:
+  # Verificar hooks.yml antes de cada tarefa?
+  hooks_ativos: true
+
+  # Sugerir handoff ao final de cada resposta?
+  handoff_ativo: true
+
+  # Quantas perguntas de clarificação são permitidas por tarefa
+  clarificacao_max_perguntas: 3
+
+  # Executar #elefante analisar automaticamente a cada N tarefas (0 = desativado)
+  analisar_automatico_a_cada: 0
+
+  # Idioma dos relatórios gerados
+  idioma: pt-BR

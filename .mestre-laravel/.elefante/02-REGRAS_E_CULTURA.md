@@ -78,3 +78,35 @@ Antes de responder ao usuário após qualquer tarefa de código:
 - Ao receber `#elefante`, leia silenciosamente este diretório
 - Se arquitetura mudar, atualize `01-ESTADO_ATUAL.md` imediatamente
 - Ao finalizar task grande, crie log em `historico/` com o template
+
+
+---
+
+## 8. Checklist de Saúde do SSOT
+> **Conceito:** Unit tests para a documentação — verifica se o SSOT está bem escrito, não se o código funciona.
+> Use `#elefante analisar` para executar. Itens [Gap] indicam ausência documentada.
+
+### Completude
+- [ ] Cada módulo Laravel (Controller, Service, Model) tem responsabilidade descrita? [Completude]
+- [ ] Todas as integrações externas (APIs, serviços) têm URL/credencial documentada? [Completude]
+- [ ] As migrations principais estão listadas no SSOT? [Completude, Gap se ausente]
+- [ ] Decisões arquiteturais têm justificativa documentada? [Completude]
+
+### Clareza
+- [ ] A versão do Laravel e PHP estão especificadas no SSOT? [Clareza]
+- [ ] Os módulos 🚧 têm descrição do que falta para ✅? [Clareza]
+- [ ] A arquitetura `Controller → Action → Service → Model` está descrita? [Clareza]
+
+### Consistência
+- [ ] As rotas em `routes/` correspondem aos módulos documentados? [Consistência]
+- [ ] As regras em `02-REGRAS_E_CULTURA.md` não contradizem decisões em `historico/`? [Consistência]
+- [ ] Os princípios em `00-PRINCIPIOS.md` estão alinhados com as regras operacionais? [Consistência]
+
+### Rastreabilidade
+- [ ] Há pelo menos 1 log em `historico/` para cada feature principal? [Rastreabilidade, Gap se ausente]
+- [ ] A tabela de Armadilhas tem entradas reais (não apenas o placeholder)? [Rastreabilidade]
+- [ ] Decisões de migrations têm log correspondente? [Rastreabilidade]
+
+### Atualidade
+- [ ] A data em "Status do Momento" é dos últimos 14 dias? [Atualidade]
+- [ ] Módulos ✅ realmente estão completos no código? [Atualidade]

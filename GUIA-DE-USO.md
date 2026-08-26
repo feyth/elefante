@@ -90,8 +90,11 @@ Seu projeto agora deve ter:
 ```
 seu-projeto/
 ├── .elefante/              ✅ Memória do projeto
+│   ├── 00-PRINCIPIOS.md    ✅ Princípios invioláveis (NOVO v2.3)
 │   ├── 01-ESTADO_ATUAL.md
 │   ├── 02-REGRAS_E_CULTURA.md
+│   ├── hooks.yml           ✅ Hooks configuráveis (NOVO v2.3)
+│   ├── modo.yml            ✅ Modo lean/completo/strict (NOVO v2.3)
 │   ├── QUICK-REFERENCE.md
 │   ├── INDICE.md
 │   ├── DASHBOARD-ARQUITETURA.html
@@ -273,6 +276,18 @@ Agora vamos criar algo:
 ```
 **Use após muitas tarefas (>30) para evitar loops**
 
+#### Diagnóstico e Qualidade (NOVO v2.3)
+```
+# Verificar se o SSOT está atualizado em relação ao código
+#elefante verificar
+
+# Análise cruzada: detecta inconsistências entre os 3 arquivos core
+#elefante analisar
+
+# Sessão de clarificação antes de tarefa ambígua (máx. 3 perguntas)
+#elefante clarificar
+```
+
 ### 3.3. Workflow Típico de Um Dia
 
 ```
@@ -304,7 +319,28 @@ Agora vamos criar algo:
 
 ## 4. Entendendo a Estrutura
 
-### 4.1. `.elefante/01-ESTADO_ATUAL.md` (SSOT)
+### 4.1. `.elefante/00-PRINCIPIOS.md` (NOVO v2.3)
+
+**Princípios invioláveis do projeto.** Diferente das regras operacionais, são leis que **nunca mudam** sem decisão explícita do dev:
+
+```markdown
+## I. Segurança Inviolável
+**MUST:** Nunca remover autenticação existente.
+**MUST:** Nunca commitar credenciais ou tokens.
+
+## II. Banco de Dados
+**MUST:** Nunca alterar migration já executada em produção.
+```
+
+A IA **bloqueia** qualquer tarefa que viole um princípio MUST e avisa o dev antes de continuar.
+
+**Diferença entre `00-PRINCIPIOS.md` e `02-REGRAS_E_CULTURA.md`:**
+- Princípios: leis absolutas (segurança, arquitetura central) — NUNCA mudam sem log
+- Regras: operacionais e evolutivas (estilo de código, bibliotecas) — podem ser ajustadas
+
+---
+
+### 4.2. `.elefante/01-ESTADO_ATUAL.md` (SSOT)
 
 **O cérebro do projeto.** Contém:
 
@@ -366,7 +402,33 @@ historico/
 - Consulta decisões passadas
 - Evita repetir erros
 
-### 4.4. `.kiro/` (Proteção Automática)
+### 4.5. `.elefante/hooks.yml` (NOVO v2.3)
+
+Personaliza o comportamento do Elefante por projeto. Edite diretamente:
+
+```yaml
+hooks:
+  before_task:
+    - id: HK001
+      name: Verificar princípios
+      enabled: true       # ← desative se quiser pular
+  after_task:
+    - id: HK004
+      name: Sugerir handoff
+      enabled: false      # ← desative hooks que atrapalham seu fluxo
+```
+
+### 4.6. `.elefante/modo.yml` (NOVO v2.3)
+
+Ajuste o overhead de documentação ao tamanho do projeto:
+
+```yaml
+modo: lean       # projetos pequenos — histórico opcional, sem clarificação
+modo: completo   # padrão — fluxo completo
+modo: strict     # crítico — bloqueia se SSOT não atualizado em 3 dias
+```
+
+### 4.7. `.kiro/` (Proteção Automática)
 
 Se você usa Kiro, esses arquivos garantem que o SSOT nunca fica desatualizado:
 

@@ -5,7 +5,7 @@
 O Framework Elefante elimina a amnésia de contexto em IAs. Copie, cole e comece a desenvolver com uma IA que nunca esquece sua arquitetura.
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
-[![Version](https://img.shields.io/badge/version-2.1-green.svg)](CHANGELOG-FRAMEWORK.md)
+[![Version](https://img.shields.io/badge/version-2.3-green.svg)](CHANGELOG-FRAMEWORK.md)
 
 ---
 
@@ -119,12 +119,15 @@ A IA vai perguntar:
 ```
 seu-projeto/
 ├── .elefante/
+│   ├── 00-PRINCIPIOS.md         # ⚖️ Princípios invioláveis (MUST/SHOULD)
 │   ├── 01-ESTADO_ATUAL.md       # 🧠 Memória: onde o projeto está agora
-│   ├── 02-REGRAS_E_CULTURA.md   # 📜 Regras que a IA NUNCA quebra
+│   ├── 02-REGRAS_E_CULTURA.md   # 📜 Regras operacionais e armadilhas
+│   ├── hooks.yml                # 🔁 Hooks pré/pós tarefa configuráveis
+│   ├── modo.yml                 # ⚙️ Modo: lean / completo / strict
 │   ├── QUICK-REFERENCE.md       # 📖 Guia rápido
 │   ├── INDICE.md                # 📑 Índice de logs
 │   └── historico/
-│       └── logs_das_tarefas.md  # 📝 Histórico de decisões
+│       └── logs_das_tarefas.md  # 📝 Histórico com decisões rastreáveis (D001)
 │
 └── .kiro/                        # 🛡️ Proteção automática
     ├── hooks/
@@ -215,6 +218,65 @@ O Elefante **garante** que sua documentação nunca fica desatualizada:
 - **Hook Stop**: Checklist final ao encerrar sessão
 
 **Em sessões longas (>30 tarefas), a IA NUNCA esquece de atualizar!**
+
+### Princípios Invioláveis (`00-PRINCIPIOS.md`)
+
+Separe o que **nunca pode mudar** das regras operacionais:
+
+```markdown
+## I. Segurança Inviolável
+**MUST:** Nunca remover autenticação existente.
+**MUST:** Nunca commitar credenciais ou tokens.
+
+## II. Banco de Dados
+**MUST:** Nunca alterar migration já executada em produção.
+```
+
+A IA **bloqueia** qualquer tarefa que viole um princípio MUST antes de executar.
+
+### Comandos de Diagnóstico
+
+```
+# Verificar se SSOT está convergido com o código:
+#elefante verificar
+
+# Análise cruzada de consistência dos 3 arquivos core:
+#elefante analisar
+
+# Sessão de clarificação estruturada (máx. 3 perguntas):
+#elefante clarificar
+```
+
+### Hooks Configuráveis (`hooks.yml`)
+
+Personalize o comportamento do Elefante por projeto — sem modificar arquivos core:
+
+```yaml
+hooks:
+  before_task:
+    - id: HK001
+      name: Verificar princípios
+      enabled: true
+  after_task:
+    - id: HK003
+      name: Checklist SSOT obrigatório
+      enabled: true
+```
+
+### Modos de Operação (`modo.yml`)
+
+Adapte o overhead ao tamanho do projeto:
+
+```yaml
+# Projetos pequenos / experimentais
+modo: lean       # histórico opcional, checklist reduzido
+
+# Projetos normais (padrão)
+modo: completo   # fluxo completo
+
+# Projetos críticos / equipe
+modo: strict     # bloqueia se SSOT desatualizado há >3 dias
+```
 
 ### Sessões Longas
 

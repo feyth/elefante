@@ -22,6 +22,7 @@
 | 2026-08-12 | `20260812_implementacao_protecao_ssot.md` | Implementação da Proteção Automática do SSOT (v2.1) |
 | 2026-08-12 | `20260812_adicao_template_python.md` | Adição do template Python/FastAPI/Flask ao framework |
 | 2026-08-12 | `20260812_criar_documentacao_pratica.md` | Criação de README.md prático e GUIA-DE-USO.md (v2.2) |
+| 2026-08-25 | `20260825_melhorias_spec_kit.md` | 9 melhorias v2.3 inspiradas no Spec Kit (00-PRINCIPIOS, hooks.yml, modo.yml, novos comandos) |
 
 ### Autenticação e Segurança
 | Data | Arquivo | Descrição |
@@ -81,13 +82,16 @@ Se a categoria não existir, crie uma nova seção seguindo o padrão acima.
 
 | Arquivo | Propósito |
 |---|---|
+| `.elefante/00-PRINCIPIOS.md` | Princípios invioláveis (MUST/SHOULD) |
 | `.elefante/01-ESTADO_ATUAL.md` | SSOT — onde o projeto está agora |
-| `.elefante/02-REGRAS_E_CULTURA.md` | Regras que a IA nunca pode quebrar |
+| `.elefante/02-REGRAS_E_CULTURA.md` | Regras operacionais e armadilhas |
+| `.elefante/hooks.yml` | Hooks pré/pós tarefa configuráveis |
+| `.elefante/modo.yml` | Modo de operação (lean/completo/strict) |
 | `.elefante/DASHBOARD-ARQUITETURA.html` | Visualização da arquitetura (abrir no browser) |
 | `.elefante/QUICK-REFERENCE.md` | Comandos e fluxo do dia a dia |
 | `.elefante/historico/_TEMPLATE_LOG.md` | Template para novos logs |
 
 ---
 
-*Última atualização: 2026-08-10*  
+*Última atualização: 2026-08-25*  
 *Framework Elefante 🐘 — [Feyth Tecnologia](https://www.feyth.com.br)*

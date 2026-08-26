@@ -5,6 +5,49 @@ Mantido pela equipe **Feyth Tecnologia**.
 
 ---
 
+## [v2.3] — 2026-08-25
+
+### 9 Melhorias Inspiradas no Spec Kit (github/spec-kit)
+
+#### Adicionado
+- **`00-PRINCIPIOS.md`** em todos os 5 templates (raiz + 4 mestres)
+  - Princípios invioláveis com semântica MUST/SHOULD/MAY
+  - A IA bloqueia tarefas que violam princípios MUST antes de executar
+  - Separação clara entre princípios fundadores e regras operacionais
+  - Cada mestre tem princípios específicos da sua stack
+
+- **`hooks.yml`** em todos os 5 templates
+  - 8 hooks configuráveis (HK001–HK008): before_task, after_task, before/after_verificar, before_analisar, session_end
+  - Permite customizar comportamento do Elefante por projeto sem modificar arquivos core
+  - Inspirado no sistema `extensions.yml` do Spec Kit
+
+- **`modo.yml`** em todos os 5 templates
+  - Modo `lean`: overhead mínimo para projetos pequenos/experimentais
+  - Modo `completo`: fluxo padrão (padrão)
+  - Modo `strict`: bloqueia se SSOT desatualizado há >3 dias, log obrigatório sempre
+
+- **Comandos novos no `AGENTS.md`** (todos os templates):
+  - `#elefante verificar` — compara código atual com SSOT, relatório de convergência (somente leitura, append-only)
+  - `#elefante analisar` — análise cruzada dos 3 arquivos core, detecta inconsistências
+  - `#elefante clarificar` — sessão estruturada de clarificação, máx. 3 perguntas com recomendação
+  - `#elefante encerrar sessão` — checklist final de encerramento
+
+- **Handoffs explícitos** no `AGENTS.md`
+  - Ao final de cada resposta significativa, a IA sugere o próximo passo natural com o prompt exato
+  - Tabela de situação → próximo passo sugerido
+
+- **Checklist de Saúde do SSOT** em todos os `02-REGRAS_E_CULTURA.md`
+  - "Unit tests para documentação" — verifica qualidade do SSOT, não do código
+  - 5 dimensões: Completude, Clareza, Consistência, Rastreabilidade, Atualidade
+  - Inspirado no conceito "Unit Tests for English" do Spec Kit
+
+#### Modificado
+- **`_TEMPLATE_LOG.md`** — adicionada tabela de Decisões rastreáveis (`D001 [TIPO]`) e seção Handoff sugerido
+- **`AGENTS.md`** — reescrito com clarificação estruturada, leitura de `00-PRINCIPIOS.md` e hooks
+- **`01-ESTADO_ATUAL.md`** — atualizado para v2.3 com novos módulos e decisões documentadas
+
+---
+
 ## [v2.0] — 2026-08-10
 
 ### O que mudou (v1.0 → v2.0)

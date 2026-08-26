@@ -41,10 +41,23 @@
 
 ---
 
+## Decisões tomadas
+> Registre decisões arquiteturais com ID rastreável. Formato: `D[NNN] [TIPO] Decisão → justificativa`
+> Tipos: [ARCH] arquitetura, [STACK] tecnologia, [PATTERN] padrão de código, [INFRA] infraestrutura, [SECURITY] segurança
+
+| ID | Tipo | Decisão | Justificativa |
+|---|---|---|---|
+| D001 | [ARCH] | [Descreva a decisão] | [Por que foi tomada] |
+
+> **Como referenciar em futuras sessões:** "Ver D001 em `historico/YYYYMMDD_titulo.md`"
+
+---
+
 ## Impacto na arquitetura
 > O `01-ESTADO_ATUAL.md` foi atualizado? Se sim, o que mudou?
 
 - [ ] `01-ESTADO_ATUAL.md` atualizado
+- [ ] `00-PRINCIPIOS.md` impactado (princípio violado/amendado?)
 - [ ] `DASHBOARD-ARQUITETURA.html` atualizado
 - [ ] Nenhuma mudança estrutural
 
@@ -54,3 +67,12 @@
 > Qual é a continuação natural desta tarefa?
 
 [Descreva o próximo passo ou deixe "Nenhum — tarefa concluída".]
+
+---
+
+## Handoff sugerido
+> Próximo comando natural após esta tarefa (inspirado no spec-kit):
+
+- Se criou novo módulo: `#elefante verificar` — checar se SSOT reflete o módulo
+- Se tomou decisão arquitetural: `#elefante analisar` — verificar consistência com regras
+- Se tarefa concluída: revisar `00-PRINCIPIOS.md` para garantir nenhum princípio foi violado

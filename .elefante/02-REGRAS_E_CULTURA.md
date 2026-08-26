@@ -103,3 +103,38 @@ Antes de responder ao usuário após qualquer tarefa de código:
 - Se a arquitetura mudar, **atualize o 01-ESTADO_ATUAL.md imediatamente**.
 - Ao finalizar uma task grande, crie um novo log em `historico/` usando o template `_TEMPLATE_LOG.md`.
 - Consulte `historico/` antes de refazer algo — pode já ter sido feito e documentado.
+
+
+---
+
+## 7. Checklist de Saúde do SSOT
+> **Conceito:** Assim como unit tests verificam a qualidade do código, este checklist verifica
+> a qualidade da *documentação* — não se o sistema funciona, mas se o SSOT está bem escrito.
+> Inspirado no conceito "Unit Tests for English" do Spec Kit (github/spec-kit).
+
+Use `#elefante analisar` para executar este checklist. Itens marcados [Gap] indicam ausência documentada.
+
+### Completude
+- [ ] Cada módulo na tabela de Módulos tem sua responsabilidade descrita? [Completude]
+- [ ] Todas as integrações externas têm a URL/serviço documentado? [Completude]
+- [ ] O ambiente de deploy está descrito (local, staging, produção)? [Completude, Gap se ausente]
+- [ ] As decisões arquiteturais têm justificativa (não apenas a decisão)? [Completude]
+
+### Clareza
+- [ ] O campo "Stack" descreve linguagem + versão + framework principais? [Clareza]
+- [ ] Os módulos com status 🚧 têm descrição do que falta para ✅? [Clareza]
+- [ ] Termos técnicos específicos do projeto estão definidos? [Clareza, Gap se ausente]
+
+### Consistência
+- [ ] Os arquivos documentados em `01-ESTADO_ATUAL.md` existem no projeto? [Consistência]
+- [ ] As regras em `02-REGRAS_E_CULTURA.md` não contradizem decisões em `historico/`? [Consistência]
+- [ ] Os princípios em `00-PRINCIPIOS.md` (se existir) estão alinhados com as regras? [Consistência]
+
+### Rastreabilidade
+- [ ] Há pelo menos 1 log em `historico/` para cada feature principal? [Rastreabilidade, Gap se ausente]
+- [ ] A tabela de Armadilhas tem pelo menos 1 entrada real (não o placeholder)? [Rastreabilidade]
+- [ ] O `INDICE.md` está sincronizado com os arquivos em `historico/`? [Rastreabilidade]
+
+### Atualidade
+- [ ] A data em "Status do Momento" é dos últimos 14 dias? [Atualidade]
+- [ ] Módulos marcados ✅ realmente estão completos no código? [Atualidade]
