@@ -1,0 +1,12 @@
+{
+  "stack": "nextjs",
+  "nome": "Next.js / React",
+  "arquivos_gatilho": [
+    "next.config.js",
+    "next.config.ts",
+    "next.config.mjs"
+  ],
+  "conteudo_gatilho": {
+    "package.json": "\"next\""
+  }
+}

@@ -63,12 +63,15 @@ elefante/
 | Template Django (.mestre-django/) | Stack Django específica | ✅ Atualizado completo |
 | Template Next.js (.mestre-nextjs/) | Stack Next.js específica | ✅ Atualizado completo |
 | Template Python (.mestre-python/) | Stack Python/FastAPI/Flask | ✅ Atualizado completo |
+| Core Universal (core/) | Princípios universais, hooks e templates OKF v0.2 | ✅ Implementado v3.0 |
+| Stacks Desacopladas (stacks/) | Regras desacopladas (Laravel, Django, Python, Next.js) | ✅ Implementado v3.0 |
+| CLI Node.js Oficial (cli/) | CLI zero-dependências (init, doctor, status, log) | ✅ Implementado v3.0 |
 | Proteção SSOT (.kiro/) | Hooks + Steering automático | ✅ Implementado |
 | Princípios (00-PRINCIPIOS.md) | Leis invioláveis por stack | ✅ Criado em todos os templates |
 | Checklist de Saúde do SSOT | Unit tests para documentação | ✅ Adicionado em todos os 02-REGRAS |
 | Hooks externos (hooks.yml) | Automação de pré/pós tarefas | ✅ Criado em todos os templates |
 | Modo configurável (modo.yml) | lean / completo / strict | ✅ Criado em todos os templates |
-| Documentação | README, INICIAR, GUIA | ✅ Atualizado |
+| Documentação & Roadmap | README, GUIA, ROADMAP-3.0.md | ✅ Atualizado v3.0 |
 
 ## Proteção Automática do SSOT (Nova Arquitetura)
 
@@ -149,14 +152,16 @@ elefante/
 | 2026-10-17 | Criar utilitário de migração automática (elefante migrar) | Garantir transição transparente de projetos v2.3 para v3.0 sem retrabalho manual |
 | 2026-10-17 | Posicionamento como camada declarativa curada compatível com OKF v0.2 | Complementar ferramentas de infraestrutura (como ai-memory) com princípios, regras e ADRs |
 | 2026-10-17 | Versionamento de .elefante/ no Git para equipes | Memória técnica é do time; apenas .elefante/local/ (handoffs e rascunhos) fica no .gitignore |
+| 2026-10-18 | CLI Node.js Oficial Zero-Dependências (`cli/`) | Execução multiplataforma com npx @feyth/elefante contendo init, doctor, status e log |
+| 2026-10-18 | Arquitetura Modular Desacoplada (`core/` + `stacks/`) | Eliminação da duplicação dos mestres antigos; 00-PRINCIPIOS e templates universais no core |
+| 2026-10-18 | Fronteira de Confiança (Trust Boundary) nos adaptadores | Regras e Princípios são INSTRUÇÕES soberanas; histórico e armadilhas são tratados como DADOS |
 
 ## Status do Momento
-- **Data da Implementação:** 2026-10-17
-- **Versão:** Framework Elefante v2.4 (Estabilização de Instalação e Roadmap v3.0)
-- Fase 0 do roadmap concluída:
-  - Comandos de instalação corrigidos em README.md e GUIA-DE-USO.md
-  - CLI `elefante.ps1` atualizado para aceitar stack (`init [laravel|django|python|nextjs]`) e copiar `.kiro/`
-  - Templates sincronizados em todos os 4 mestres (`_TEMPLATE_LOG.md` e `INDICE.md`)
-  - `LICENSE` (MIT) adicionado e `setup_elefante.json` atualizado para v2.4
-  - `ROADMAP-3.0.md` criado com decisões aprovadas
-- Próximo passo: Iniciar a Fase 1 da v3.0 (estrutura `core/` + CLI Node.js multiplataforma).
+- **Data da Implementação:** 2026-10-18
+- **Versão:** Framework Elefante v3.0.0-alpha.1 (Fundação v3.0 Concluída)
+- Fase 1 do roadmap concluída:
+  - `core/` criado com `00-PRINCIPIOS.md`, `hooks.yml`, `modo.yml`, templates atômicos OKF v0.2 (`decisao.md`, `armadilha.md`, `handoff.md`, `log_tarefa.md`) e `AGENTS.md` com Trust Boundary.
+  - `stacks/` estruturado para Laravel, Django, Python e Next.js com `detect.json` e regras desacopladas.
+  - `cli/` implementado com zero dependências externas: `init` (com detecção e `--plan`), `status` (inspeção do projeto), `doctor` (auditoria determinística de integridade e segredos) e `log` (registro com auto-indexação).
+  - Adaptador poliglota dinâmico para 5 famílias de agentes (Antigravity, Claude Code, Cursor, Gemini CLI, Kiro).
+- Próximo passo: Fase 2 (Migrador v2->v3 e expansão de templates atômicos).

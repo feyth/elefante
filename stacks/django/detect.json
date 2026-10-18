@@ -1,0 +1,12 @@
+{
+  "stack": "django",
+  "nome": "Python / Django",
+  "arquivos_gatilho": [
+    "manage.py",
+    "wsgi.py"
+  ],
+  "conteudo_gatilho": {
+    "requirements.txt": "django",
+    "pyproject.toml": "django"
+  }
+}

@@ -1,0 +1,11 @@
+{
+  "stack": "laravel",
+  "nome": "PHP / Laravel",
+  "arquivos_gatilho": [
+    "artisan",
+    "composer.json"
+  ],
+  "conteudo_gatilho": {
+    "composer.json": "laravel/framework"
+  }
+}

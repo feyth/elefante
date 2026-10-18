@@ -1,0 +1,30 @@
+{
+  "name": "@feyth/elefante",
+  "version": "3.0.0-alpha.1",
+  "description": "CLI Oficial do Framework Elefante — Memória e governança de contexto para desenvolvimento com IA",
+  "type": "module",
+  "bin": {
+    "elefante": "./bin/elefante.js"
+  },
+  "main": "./src/index.js",
+  "scripts": {
+    "start": "node ./bin/elefante.js"
+  },
+  "author": "Feyth Tecnologia (https://www.feyth.com.br)",
+  "license": "MIT",
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "keywords": [
+    "ai",
+    "context-engineering",
+    "llm",
+    "cursor",
+    "claude-code",
+    "windsurf",
+    "kiro",
+    "antigravity",
+    "memory",
+    "ssot"
+  ]
+}
