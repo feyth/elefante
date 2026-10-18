@@ -31,9 +31,6 @@ elefante/
 │   ├── ROADMAP.md
 │   ├── CHANGELOG.md
 │   └── INICIAR-LEGADO.md
-├── legado/                       # Artefatos legados v2 arquivados
-│   ├── mestres/                  # Antigos .mestre-*
-│   └── elefante.ps1
 ├── .elefante/                    # Memória do próprio meta-framework
 ├── AGENTS.md                     # Protocolo Universal Aberto para qualquer IA/Editor
 ├── .gitignore

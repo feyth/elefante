@@ -78,25 +78,21 @@ O CLI oficial do Elefante roda com **Node.js (>= 18)** sem nenhuma dependência 
 
 ---
 
-### Instalação Manual Alternativa (Legado)
+### Instalação Manual (Sem Node.js)
 
-Se preferir não usar o Node.js, os templates standalone continuam disponíveis:
+Se preferir não usar o Node.js, copie o núcleo e a stack desejada diretamente para o seu projeto:
 
 ```bash
-# Laravel/PHP
-cp -r elefante/.mestre-laravel/. seu-projeto-laravel/
+# 1. Crie a pasta de memória
+mkdir -p seu-projeto/.elefante
 
-# Django/Python
-cp -r elefante/.mestre-django/. seu-projeto-django/
+# 2. Copie os arquivos universais do core/
+cp -r core/* seu-projeto/.elefante/
+cp core/AGENTS.md seu-projeto/AGENTS.md
 
-# Python/FastAPI/Flask
-cp -r elefante/.mestre-python/. seu-projeto-python/
-
-# Next.js/React
-cp -r elefante/.mestre-nextjs/. seu-projeto-nextjs/
+# 3. Copie as regras da sua stack (ex: laravel, django, python, nextjs)
+cp -r stacks/laravel/* seu-projeto/.elefante/
 ```
-
-> ⚠️ Em bash, use sempre `pasta/.` para não ignorar arquivos ocultos (`.elefante`, `.agents`, `.kiro`).
 
 A IA vai perguntar:
 1. Nome do projeto
