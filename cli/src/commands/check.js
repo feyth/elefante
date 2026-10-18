@@ -102,6 +102,15 @@ export function runCheck(targetDir = process.cwd(), options = {}) {
 
       // 2. Checagem de diff substancial (impedir commits onde o SSOT só teve espaço, linha vazia ou pontuação trivial)
       try {
+        // Ler limite configurável em modo.yml (default: 8 caracteres alfanuméricos)
+        let minDiffChars = 8;
+        const modoPath = path.join(targetDir, '.elefante', 'modo.yml');
+        if (fs.existsSync(modoPath)) {
+          const modoContent = fs.readFileSync(modoPath, 'utf8');
+          const match = modoContent.match(/min_diff_chars:\s*(\d+)/i);
+          if (match) minDiffChars = parseInt(match[1], 10);
+        }
+
         const diffCmd = isStagedOnly
           ? 'git diff --cached -U0 -- .elefante/01-ESTADO_ATUAL.md'
           : 'git diff -U0 HEAD -- .elefante/01-ESTADO_ATUAL.md';
@@ -115,11 +124,12 @@ export function runCheck(targetDir = process.cwd(), options = {}) {
 
           const addedAlphaNumeric = addedLines.join('').replace(/[^a-zA-Z0-9À-ÿ]/g, '');
 
-          // Heurística transparente: exige pelo menos 8 caracteres alfanuméricos substantivos
-          if (addedAlphaNumeric.length < 8 && !changedFiles.some(f => f.includes('.elefante/historico/'))) {
+          // Heurística transparente: exige pelo menos N caracteres alfanuméricos substantivos (padrão: 8)
+          if (addedAlphaNumeric.length < minDiffChars && !changedFiles.some(f => f.includes('.elefante/historico/'))) {
             console.log(`${c.red}${c.bold}❌ BLOQUEIO: ATUALIZAÇÃO TRIVIAL / COSMÉTICA NO SSOT${c.reset}`);
-            console.log(`${c.yellow}A modificação em 01-ESTADO_ATUAL.md não adicionou conteúdo substantivo (${addedAlphaNumeric.length} caractere(s) útil(eis)).${c.reset}`);
+            console.log(`${c.yellow}A modificação em 01-ESTADO_ATUAL.md não adicionou conteúdo substantivo (${addedAlphaNumeric.length}/${minDiffChars} caracteres úteis mínimos).${c.reset}`);
             console.log(`${c.dim}Heurística: alterações em código estrutural exigem documentar o módulo, rota ou decisão técnica real.${c.reset}`);
+            console.log(`${c.dim}(O limiar de ${minDiffChars} caracteres pode ser ajustado em .elefante/modo.yml sob 'min_diff_chars')${c.reset}`);
             console.log(`${c.dim}Alternativa: crie um log formal com 'npx @feyth/elefante log "título"'.${c.reset}\n`);
             return false;
           }
@@ -127,6 +137,7 @@ export function runCheck(targetDir = process.cwd(), options = {}) {
       } catch {
         // Ignora falhas de diff em ambientes sem histórico inicial
       }
+
 
     }
   }

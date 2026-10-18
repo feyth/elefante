@@ -72,3 +72,9 @@ geral:
 
   # Idioma dos relatórios gerados
   idioma: pt-BR
+
+  # Limiar de caracteres alfanuméricos úteis exigidos no diff do SSOT (elefante check).
+  # Justificativa do valor 8: bloqueia edições cosméticas ("- OK", "true", "v1.0" ou pontuação isolada),
+  # enquanto aceita atualizações reais de arquitetura ("Auth JWT", "Model User", "Rota /api").
+  min_diff_chars: 8
+

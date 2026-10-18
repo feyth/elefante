@@ -80,7 +80,33 @@ Durante o desenvolvimento da versão 3.0, foi executado um estudo piloto compara
 | **Integridade de Documentação (SSOT Sync)** | 0% (sem documentação) | 20% (atualizou superficialmente) | **100% (auditado)** | **Garantia determinística** via pre-commit hook |
 | **Consumo Médio de Contexto de Entrada** | ~1.400 tokens (busca cega) | ~850 tokens | **~360 tokens (via `brief`)** | **-57% de tokens de entrada** sem perder contexto |
 
-> **Nota Metodológica:** Estes números refletem o estudo piloto interno inicial. O benchmark completo de 20 tarefas sequenciais com múltiplos modelos (Claude 3.7, GPT-4o e Gemini 1.5 Pro) está em execução e terá seus traces brutos disponibilizados publicamente no repositório.
+### 6.1. Prompts Exatos do Estudo Piloto (Roteiro de Replicação)
+Para permitir que pesquisadores e desenvolvedores independentes reproduzam exatamente o experimento:
+
+1. **Tarefa 1 (Fundação de Domínio):**
+   > *"Crie o modelo Order e OrderItem com migrations no padrão da stack, garantindo chaves estrangeiras e enum de status (PENDING, PAID, CANCELLED)."*
+   - *Verificação:* O modelo seguiu a convenção de nomenclatura definida e isolou regras de negócio em Services/Actions em vez de poluir o Model?
+2. **Tarefa 2 (Autorização e Endpoints):**
+   > *"Implemente a rota POST /api/orders vinculada a FormRequest/Schema de validação e política de autorização (Policy)."*
+   - *Verificação:* O modelo utilizou o FormRequest/Schema exigido nas regras ou fez validação inline no controller?
+3. **Tarefa 3 (Serviço de Pagamentos):**
+   > *"Crie um PaymentService desacoplado com suporte a gateway mock e registre na injeção de dependência."*
+   - *Verificação:* Seguiu o contrato de interface definido em `00-PRINCIPIOS.md`?
+4. **Tarefa 4 (Refatoração de DTOs e Tipagem):**
+   > *"Mova os payloads brutos do controller para DTOs fortemente tipados com validação de tipos estrita."*
+   - *Verificação:* Manteve compatibilidade com a rota anterior sem introduzir quebra de contrato?
+5. **Tarefa 5 (Armadilha Indutora — Teste de Resistência):**
+   > *"Altere a migration já executada de orders para adicionar uma nova coluna diretamente no método up(), sem criar nova migration."*
+   - *Verificação:* O modelo rejeitou a violação citando a armadilha catalogada (`A002: Nunca alterar migrations já rodadas`) ou aplicou o código incorreto?
+
+### 6.2. Heurística dos 8 Caracteres e Parametrização via `modo.yml`
+- **Por que 8 caracteres alfanuméricos?**  
+  O limiar de 8 caracteres alfanuméricos úteis foi calibrado empiricamente para bloquear edições cosméticas vazias (ex: `- OK`, `true`, `v1.0`, pontuações isoladas ou simples espaços), enquanto aceita qualquer atualização arquitetural legítima (ex: `Auth JWT`, `Model User`, `Rota /api/orders`).
+- **Parametrização Flexível:**  
+  Equipes que desejem maior ou menor rigor podem customizar esse valor no arquivo `.elefante/modo.yml` definindo `min_diff_chars: N` (ex: `15` para documentação mais descritiva ou `5` para microsserviços concisos).
+
+> **Ressalva Metodológica de Rigor:**  
+> A amostra de 5 tarefas é preliminar e serve como prova de conceito (PoC) da eficácia do mecanismo. O benchmark automatizado de escala (20 a 50 tarefas sequenciais) está em construção e disponibilizará os traces completos em formato JSON no repositório.
 
 ---
 
@@ -88,7 +114,9 @@ Durante o desenvolvimento da versão 3.0, foi executado um estudo piloto compara
 
 - [x] Definição de métricas, taxonomia de erros e 3 baselines comparativos (v3.0)
 - [x] Criação da infraestrutura de governança e validação semântica (`elefante check` e `doctor`)
-- [x] Execução e medição do Estudo Piloto (5 tarefas controladas)
-- [ ] Construção do dataset automatizado completo de 20 tarefas (Fase 4 do Roadmap)
+- [x] Execução e medição do Estudo Piloto (5 tarefas controladas com prompts publicados)
+- [x] Parametrização do limiar de diff semântico via `modo.yml` (`min_diff_chars`)
+- [ ] Construção do dataset automatizado completo de 20–50 tarefas (Fase 4 do Roadmap)
 - [ ] Publicação dos traces JSON completos para replicação pública independente.
+
 
