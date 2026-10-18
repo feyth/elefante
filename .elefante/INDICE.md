@@ -60,6 +60,7 @@
 |---|---|---|
 | 2026-10-18 | `20261018_conclusao_fase1_fundacao_v30.md` | Fundação v3.0: Core Universal, Stacks Desacopladas e CLI Oficial Node.js |
 | 2026-10-18 | `20261018_conclusao_fase2_migracao_e_export.md` | Interoperabilidade v3.0: Migrador Automático, Handoff e Padrão OKF v0.2 |
+| 2026-10-18 | `20261018_conclusao_fase3_garantias_e_hooks.md` | Governança v3.0: Hook Pre-Commit Determinístico e Compactador de Histórico |
 
 ### Deploy / Infraestrutura
 | Data | Arquivo | Descrição |

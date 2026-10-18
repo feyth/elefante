@@ -9,6 +9,8 @@ import { runLog } from './commands/log.js';
 import { runMigrate } from './commands/migrate.js';
 import { runHandoff } from './commands/handoff.js';
 import { runExport } from './commands/export.js';
+import { runCheck, installPreCommitHook } from './commands/check.js';
+import { runCompact } from './commands/compact.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -42,6 +44,12 @@ ${c.bold}COMANDOS DISPONÍVEIS:${c.reset}
 
   ${c.green}status${c.reset}              Exibe resumo do SSOT, módulos e adaptadores de IA ativos.
   ${c.green}doctor${c.reset}              Audita placeholders, saúde do SSOT e segredos expostos.
+  ${c.green}check${c.reset}               Verifica se código estrutural foi alterado sem atualizar SSOT.
+                      Opções: ${c.dim}--staged (apenas staged), --install-hook (instala no Git)${c.reset}
+
+  ${c.green}compactar${c.reset}           Arquiva sessões antigas em historico/ mantendo índice íntegro.
+                      Opções: ${c.dim}--keep=N (padrão: 5), --plan${c.reset}
+
   ${c.green}log${c.reset} <título>        Cria um novo log em .elefante/historico/ e atualiza INDICE.md.
   ${c.green}migrar${c.reset}              Migra projetos v2.x para a arquitetura atômica v3.0 (suporta --plan).
   ${c.green}handoff${c.reset} [nota]       Gera resumo de transição em .elefante/local/HANDOFF.md para trocar de IA.
@@ -50,11 +58,11 @@ ${c.bold}COMANDOS DISPONÍVEIS:${c.reset}
   ${c.green}version${c.reset}             Exibe a versão instalada do framework.
 
 ${c.bold}EXEMPLOS:${c.reset}
-  ${c.dim}# Inicialização interativa com detecção automática de stack:${c.reset}
-  ${c.cyan}npx @feyth/elefante init${c.reset}
+  ${c.dim}# Instalar hook bloqueante de pre-commit no Git:${c.reset}
+  ${c.cyan}npx @feyth/elefante check --install-hook${c.reset}
 
-  ${c.dim}# Migrar projeto existente v2.x para o formato v3.0:${c.reset}
-  ${c.cyan}npx @feyth/elefante migrar --plan${c.reset}
+  ${c.dim}# Compactar histórico mantendo apenas os 5 logs mais recentes ativos:${c.reset}
+  ${c.cyan}npx @feyth/elefante compactar --keep=5${c.reset}
 
   ${c.dim}# Diagnóstico de integridade do projeto:${c.reset}
   ${c.cyan}npx @feyth/elefante doctor${c.reset}
@@ -111,6 +119,21 @@ export function main(args = process.argv.slice(2)) {
     case 'doctor': {
       const ok = runDoctor(targetDir);
       if (!ok) process.exitCode = 1;
+      break;
+    }
+
+    case 'check': {
+      const isStaged = args.includes('--staged');
+      const isInstall = args.includes('--install-hook') || args[1] === 'install-hook';
+      const ok = runCheck(targetDir, { staged: isStaged, installHook: isInstall });
+      if (!ok) process.exitCode = 1;
+      break;
+    }
+
+    case 'compactar':
+    case 'compact': {
+      const keepVal = parseOption('--keep=') || args[1] || '5';
+      runCompact(targetDir, { keep: keepVal, plan: isPlan });
       break;
     }
 

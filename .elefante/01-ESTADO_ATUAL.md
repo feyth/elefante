@@ -158,14 +158,15 @@ elefante/
 | 2026-10-18 | Migrador Automático Não-Destrutivo (`elefante migrar`) | Backup automático e extração de decisões/armadilhas tabulares para arquivos atômicos |
 | 2026-10-18 | Handoff Tipado Privativo (`elefante handoff`) | Transição de contexto local em `.elefante/local/HANDOFF.md` com status git e histórico |
 | 2026-10-18 | Exportador de Memória e Padrão OKF v0.2 (`elefante export`) | Exportação para formatos Claude Projects e especificação aberta OKF v0.2 |
+| 2026-10-18 | Hook Git Bloqueante Pré-Commit (`elefante check`) | Verificação determinística que bloqueia commits de código estrutural sem atualização de SSOT/log |
+| 2026-10-18 | Compactador Ordenado de Histórico (`elefante compactar`) | Arquivamento cronológico para `historico/arquivo/YYYY/` mantendo índice de links sem quebra |
 
 ## Status do Momento
 - **Data da Implementação:** 2026-10-18
-- **Versão:** Framework Elefante v3.0.0-alpha.2 (Fase 1 e Fase 2 Concluídas)
-- Fase 1 (Fundação) e Fase 2 (Migração e Interoperabilidade) concluídas:
+- **Versão:** Framework Elefante v3.0.0-alpha.3 (Fases 1, 2 e 3 Concluídas)
+- Fases 1, 2 e 3 concluídas:
   - `core/` e `stacks/` estruturados e testados.
-  - CLI com suite completa de comandos: `init`, `status`, `doctor`, `log`, `migrar`, `handoff` e `export`.
-  - Migrador com suporte a `--plan`, backup de timestamp e extração de decisões/armadilhas em formato atômico.
-  - Handoff local privativo com captura de git status e último log.
-  - Exportador para OKF v0.2 (Open Knowledge Format) e Claude Projects.
-- Próximo passo: Fase 3 (Garantias determinísticas com pre-commit e compactação de histórico).
+  - CLI com suite completa de comandos: `init`, `status`, `doctor`, `log`, `migrar`, `handoff`, `export`, `check` e `compactar`.
+  - Hook de `pre-commit` Git nativo instalado via `elefante check --install-hook` para garantia inegociável de governança.
+  - Compactador com suporte a `--keep=N` e `--plan` para preservação escalável de longo prazo.
+- Próximo passo: Fase 4 (Testes end-to-end, benchmark de tokens e release final v3.0.0).
