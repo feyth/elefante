@@ -2,4 +2,15 @@
 
 import { main } from '../src/index.js';
 
-main();
+try {
+  const result = main();
+  if (result && typeof result.then === 'function') {
+    result.catch((err) => {
+      console.error(err?.message ?? err);
+      process.exit(1);
+    });
+  }
+} catch (err) {
+  console.error(err?.message ?? err);
+  process.exit(1);
+}

@@ -49,6 +49,7 @@
       ".elefante/00-PRINCIPIOS.md",
       ".elefante/01-ESTADO_ATUAL.md",
       ".elefante/02-REGRAS_E_CULTURA.md",
+      ".elefante/AGENTS.md",
       ".elefante/setup_elefante.json",
       ".elefante/INICIAR.md",
       ".elefante/hooks.yml",

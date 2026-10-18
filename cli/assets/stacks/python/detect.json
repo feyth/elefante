@@ -1,0 +1,10 @@
+{
+  "stack": "python",
+  "nome": "Python (FastAPI / Flask / Scripts)",
+  "arquivos_gatilho": [
+    "pyproject.toml",
+    "requirements.txt",
+    "Pipfile",
+    "main.py"
+  ]
+}

@@ -1,0 +1,68 @@
+{
+  "nome": "Assistente de Inicialização do Elefante",
+  "versao": "3.0.0",
+  "descricao": "Roteiro guiado para o agente de IA calibrar e ativar a memória do projeto automaticamente.",
+  "gatilho_sugerido": "#elefante leia setup_elefante.json e configure este projeto",
+  "passos": [
+    {
+      "passo": 1,
+      "acao": "Instalação do Protocolo Universal AGENTS.md",
+      "instrucao": "Se a pasta atual de memória se chamar 'template' ou 'elefante', certifique-se de que ela se torne '.elefante'. Em seguida, copie o arquivo AGENTS.md de dentro da pasta de memória para a raiz do projeto (./AGENTS.md), para que o editor e futuros prompts reconheçam o protocolo automaticamente."
+    },
+    {
+      "passo": 2,
+      "acao": "Análise Silenciosa do Projeto",
+      "instrucao": "Examine a raiz do projeto em busca de arquivos de dependência (composer.json, package.json, requirements.txt, pyproject.toml, Gemfile, etc.) para deduzir automaticamente stack, frameworks, versões e bibliotecas já existentes."
+    },
+    {
+      "passo": 3,
+      "acao": "Entrevista Rápida (Apenas o que faltar)",
+      "instrucao": "Pergunte ao desenvolvedor em UMA ÚNICA mensagem apenas o que você não conseguiu deduzir dos arquivos: 1. Nome do projeto, 2. Objetivo principal do sistema em uma frase, 3. Alguma regra ou proibição inegociável de código (ex: 'sem jQuery', 'sempre Tailwind')."
+    },
+    {
+      "passo": 4,
+      "acao": "Preencher .elefante/01-ESTADO_ATUAL.md (SSOT)",
+      "instrucao": "Abra e preencha o SSOT com o Nome do Projeto, Stack completa, Arquitetura, Módulos Iniciais e Status do Momento."
+    },
+    {
+      "passo": 5,
+      "acao": "Calibrar 00-PRINCIPIOS.md e 02-REGRAS_E_CULTURA.md",
+      "instrucao": "Ajuste as regras de código de acordo com o ecossistema detectado e as respostas do usuário, mantendo os princípios MUST invioláveis."
+    },
+    {
+      "passo": 6,
+      "acao": "Criar Primeiro Log Histórico",
+      "instrucao": "Gere o log inicial em .elefante/historico/YYYYMMDD_inicializacao.md e adicione a entrada no .elefante/INDICE.md."
+    },
+    {
+      "passo": 7,
+      "acao": "Conclusão e Prontidão",
+      "instrucao": "Responda: '🐘 Memória do Elefante inicializada com sucesso para este projeto! O protocolo AGENTS.md e o SSOT estão prontos. Qual será a nossa primeira tarefa de desenvolvimento?'"
+    }
+  ],
+  "estrutura_esperada": {
+    "raiz_do_projeto": [
+      ".elefante/",
+      "AGENTS.md"
+    ],
+    "dentro_de_elefante": [
+      ".elefante/00-PRINCIPIOS.md",
+      ".elefante/01-ESTADO_ATUAL.md",
+      ".elefante/02-REGRAS_E_CULTURA.md",
+      ".elefante/AGENTS.md",
+      ".elefante/setup_elefante.json",
+      ".elefante/INICIAR.md",
+      ".elefante/hooks.yml",
+      ".elefante/modo.yml",
+      ".elefante/QUICK-REFERENCE.md",
+      ".elefante/INDICE.md",
+      ".elefante/historico/"
+    ]
+  },
+  "notas_importantes": [
+    "AGENTS.md na raiz é o protocolo universal aberto lido por qualquer editor ou agente de IA.",
+    "Sempre inicie prompts subsequentes com '#elefante' para ativar o ciclo de consulta ao SSOT.",
+    "O SSOT (01-ESTADO_ATUAL.md) deve ser atualizado imediatamente após qualquer alteração estrutural no código.",
+    "Decisões arquiteturais relevantes devem ser registradas em .elefante/historico/ com IDs rastreáveis (D001 [TIPO])."
+  ]
+}

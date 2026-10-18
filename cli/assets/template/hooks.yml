@@ -1,0 +1,119 @@
+# Framework Elefante — Sistema de Hooks
+#
+# Este arquivo define ações automáticas que a IA deve executar
+# antes e depois de cada operação #elefante.
+#
+# Inspirado no sistema de extensões do Spec Kit (github/spec-kit).
+# Permite customizar o comportamento do Elefante por projeto
+# sem modificar os arquivos core do framework.
+#
+# Como usar:
+#   - enabled: true/false — ativa ou desativa o hook
+#   - optional: true — IA informa mas não bloqueia se falhar
+#   - optional: false — IA executa e aguarda antes de prosseguir
+#   - condition: expressão textual que a IA avalia (ex: "se há arquivos novos em app/")
+
+hooks:
+
+  # ─── ANTES de qualquer tarefa ────────────────────────────────────────────
+  before_task:
+    - id: HK001
+      name: Verificar SSOT atualizado
+      description: Confirma que 01-ESTADO_ATUAL.md não está desatualizado há mais de 7 dias
+      enabled: true
+      optional: true
+      action: >
+        Verifique a data de "Status do Momento" em 01-ESTADO_ATUAL.md.
+        Se for anterior a 7 dias atrás, avise o dev antes de prosseguir:
+        "⚠️ SSOT pode estar desatualizado. Última atualização: [data]. Continuar mesmo assim?"
+
+    - id: HK002
+      name: Verificar princípios
+      description: Lê 00-PRINCIPIOS.md e verifica se a tarefa solicitada viola algum MUST
+      enabled: true
+      optional: false
+      action: >
+        Leia .elefante/00-PRINCIPIOS.md silenciosamente.
+        Se a tarefa solicitada violar qualquer princípio MUST,
+        BLOQUEIE a execução e informe o dev qual princípio está sendo violado
+        antes de prosseguir.
+
+  # ─── DEPOIS de qualquer tarefa ───────────────────────────────────────────
+  after_task:
+    - id: HK003
+      name: Checklist SSOT obrigatório
+      description: Verifica se o SSOT precisa ser atualizado após a tarefa
+      enabled: true
+      optional: false
+      action: >
+        Execute o checklist obrigatório:
+        1. Modifiquei arquivos estruturais (app/, database/, routes/, models.py, etc)?
+        2. Se SIM: 01-ESTADO_ATUAL.md reflete essas mudanças?
+        3. Descobri armadilha nova? Documentei em 02-REGRAS_E_CULTURA.md?
+        4. Tarefa foi significativa (>1h)? Criei log em historico/?
+        Não passe para a próxima tarefa sem concluir este checklist.
+
+    - id: HK004
+      name: Sugerir handoff
+      description: Sugere o próximo comando natural após a tarefa
+      enabled: true
+      optional: true
+      action: >
+        Ao final da resposta, sugira o próximo passo natural com o prompt exato.
+        Exemplos:
+        - Após criar módulo: "Próximo: `#elefante verificar` para confirmar SSOT"
+        - Após decisão arquitetural: "Próximo: `#elefante analisar` para checar consistência"
+        - Após bug fix: "Próximo: documentar armadilha em 02-REGRAS_E_CULTURA.md"
+
+  # ─── ANTES de #elefante verificar ────────────────────────────────────────
+  before_verificar:
+    - id: HK005
+      name: Confirmar artefatos existentes
+      description: Verifica que 01-ESTADO_ATUAL.md existe antes de rodar verificação
+      enabled: true
+      optional: false
+      action: >
+        Confirme que .elefante/01-ESTADO_ATUAL.md existe e não está vazio.
+        Se não existir, instrua o dev a rodar o setup inicial (INICIAR.md).
+
+  # ─── DEPOIS de #elefante verificar ───────────────────────────────────────
+  after_verificar:
+    - id: HK006
+      name: Relatório de convergência
+      description: Após verificar, reporta status e sugere ação
+      enabled: true
+      optional: true
+      action: >
+        Após o relatório de verificação:
+        - Se há itens desatualizados: sugira atualizar com "#elefante [descrever mudança]"
+        - Se SSOT está convergido: confirme "✅ SSOT convergido — nenhuma atualização necessária"
+
+  # ─── ANTES de #elefante analisar ─────────────────────────────────────────
+  before_analisar:
+    - id: HK007
+      name: Carregar todos os artefatos
+      description: Garante que os 3 arquivos core estão carregados antes da análise
+      enabled: true
+      optional: false
+      action: >
+        Carregue silenciosamente antes de analisar:
+        1. .elefante/01-ESTADO_ATUAL.md
+        2. .elefante/02-REGRAS_E_CULTURA.md
+        3. .elefante/00-PRINCIPIOS.md (se existir)
+        4. .elefante/historico/ (últimos 3 logs)
+        Se algum estiver ausente, informe o dev qual arquivo falta.
+
+  # ─── Hooks de sessão ─────────────────────────────────────────────────────
+  session_end:
+    - id: HK008
+      name: Checklist de encerramento
+      description: Checklist final ao encerrar sessão
+      enabled: true
+      optional: false
+      action: >
+        Antes de encerrar a sessão:
+        - [ ] 01-ESTADO_ATUAL.md reflete tudo que foi feito nesta sessão?
+        - [ ] Novas armadilhas documentadas em 02-REGRAS_E_CULTURA.md?
+        - [ ] Log criado em historico/ para tarefas significativas?
+        - [ ] INDICE.md atualizado com novos logs?
+        Se algum item estiver pendente, complete antes de encerrar.

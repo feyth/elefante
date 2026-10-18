@@ -73,10 +73,17 @@ export async function commandInit(args, options = {}) {
     return;
   }
 
-  let coreDir = path.join(repoRoot, "core");
-  let stackDir = path.join(repoRoot, "stacks", stack);
+  // 1. Prioriza templates embutidos no proprio pacote npm (cli/assets/)
+  let coreDir = path.resolve(import.meta.dirname, "../../assets/core");
+  let stackDir = path.resolve(import.meta.dirname, `../../assets/stacks/${stack}`);
 
-  // Fallback caso esteja instalado em subdiretorio npm
+  // 2. Fallback para execucao direta no monorepo local
+  if (!fs.existsSync(coreDir)) {
+    coreDir = path.join(repoRoot, "core");
+    stackDir = path.join(repoRoot, "stacks", stack);
+  }
+
+  // 3. Fallback relativo a pasta da CLI
   if (!fs.existsSync(coreDir)) {
     coreDir = path.resolve(import.meta.dirname, "../../core");
     stackDir = path.resolve(import.meta.dirname, "../../stacks", stack);

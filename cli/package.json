@@ -7,9 +7,27 @@
     "elefante": "./bin/elefante.js"
   },
   "main": "./src/index.js",
-  "scripts": {
-    "start": "node ./bin/elefante.js"
+  "files": [
+    "bin",
+    "src",
+    "assets"
+  ],
+  "publishConfig": {
+    "access": "public"
   },
+  "scripts": {
+    "start": "node ./bin/elefante.js",
+    "test": "node ./test/smoke.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/feyth/elefante.git",
+    "directory": "cli"
+  },
+  "bugs": {
+    "url": "https://github.com/feyth/elefante/issues"
+  },
+  "homepage": "https://github.com/feyth/elefante#readme",
   "author": "Feyth Tecnologia (https://www.feyth.com.br)",
   "license": "MIT",
   "engines": {
@@ -19,12 +37,14 @@
     "ai",
     "context-engineering",
     "llm",
+    "agents-md",
+    "claude-md",
     "cursor",
     "claude-code",
     "windsurf",
-    "kiro",
     "antigravity",
     "memory",
-    "ssot"
+    "ssot",
+    "okf"
   ]
 }

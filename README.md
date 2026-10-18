@@ -83,7 +83,7 @@ O CLI oficial do Elefante não possui dependências externas pesadas e disponibi
 | `npx @feyth/elefante compactar` | Arquiva logs antigos em `historico/arquivo/YYYY/` mantendo links do índice e reduzindo overhead. |
 | `npx @feyth/elefante handoff "nota"` | Cria resumo de transição local em `.elefante/local/HANDOFF.md` para alternar entre diferentes IAs ou devs. |
 | `npx @feyth/elefante migrar` | Converte bases legadas v2.x para a arquitetura modular v3.0 com backup prévio automático. |
-| `npx @feyth/elefante export okf` | Exporta o contexto do projeto em formato **OKF v0.2 (Open Knowledge Format)**. |
+| `npx @feyth/elefante export [formato]` | Exporta o contexto da memória: `okf` (Open Knowledge Format v0.2), `claude` (Claude Projects) ou `markdown`. |
 
 ---
 
