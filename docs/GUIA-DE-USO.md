@@ -76,29 +76,19 @@ Seu projeto agora deve ter:
 
 ```
 seu-projeto/
-├── .elefante/              ✅ Memória do projeto
-│   ├── 00-PRINCIPIOS.md    ✅ Princípios invioláveis (NOVO v2.3)
-│   ├── 01-ESTADO_ATUAL.md
-│   ├── 02-REGRAS_E_CULTURA.md
-│   ├── hooks.yml           ✅ Hooks configuráveis (NOVO v2.3)
-│   ├── modo.yml            ✅ Modo lean/completo/strict (NOVO v2.3)
-│   ├── QUICK-REFERENCE.md
-│   ├── INDICE.md
-│   ├── DASHBOARD-ARQUITETURA.html
-│   └── historico/
-│       ├── .keep
-│       └── _TEMPLATE_LOG.md
+├── .elefante/              ✅ Memória ativa do projeto
+│   ├── 00-PRINCIPIOS.md    ✅ Princípios invioláveis (MUST/SHOULD)
+│   ├── 01-ESTADO_ATUAL.md  ✅ Estado atual único (SSOT)
+│   ├── 02-REGRAS_E_CULTURA.md ✅ Padrões de código e armadilhas mapeadas
+│   ├── setup_elefante.json ✅ Assistente de configuração guiado
+│   ├── INICIAR.md          ✅ Roteiro de onboarding em markdown
+│   ├── hooks.yml           ✅ Hooks declarativos
+│   ├── modo.yml            ✅ Modo: lean / completo / strict
+│   ├── QUICK-REFERENCE.md  ✅ Guia rápido de comandos
+│   ├── INDICE.md           ✅ Índice de decisões históricas
+│   └── historico/          ✅ Logs rastreáveis de tarefas
 │
-├── .agents/                ✅ Configuração da IA
-│   └── AGENTS.md
-│
-├── .kiro/                  ✅ Proteção automática (opcional)
-│   ├── hooks/
-│   └── steering/
-│
-├── INICIAR.md              ✅ Roteiro de configuração
-├── README-ELEFANTE.md      ✅ Documentação
-└── LEIA-ME.md              ✅ Informações do template
+└── AGENTS.md               ✅ Protocolo universal aberto para qualquer editor/IA
 ```
 
 ---
@@ -189,11 +179,11 @@ Agora vamos criar algo:
 
 1. IA lê `01-ESTADO_ATUAL.md` → sabe sua stack e regras
 2. IA lê `02-REGRAS_E_CULTURA.md` → sabe que você usa FormRequest
-3. IA gera código perfeito seguindo seus padrões
+3. IA gera código aderente aos padrões e contratos da arquitetura
 4. IA atualiza `01-ESTADO_ATUAL.md` → adiciona "Módulo Produtos"
 5. IA cria log em `historico/20260812_criar_crud_produtos.md`
 
-**Resultado:** Código production-ready em segundos! 🚀
+**Resultado:** Código alinhado com a arquitetura e documentado! 🚀
 
 ---
 
@@ -415,15 +405,17 @@ modo: completo   # padrão — fluxo completo
 modo: strict     # crítico — bloqueia se SSOT não atualizado em 3 dias
 ```
 
-### 4.7. `.kiro/` (Proteção Automática)
+### 4.7. Hook Pré-Commit no Git (`elefante check`)
 
-Se você usa Kiro, esses arquivos garantem que o SSOT nunca fica desatualizado:
+O Elefante oferece uma barreira determinística no Git que não depende de nenhuma IDE:
 
-- **`hooks/ssot-commit-reminder.json`**: Verifica após cada tarefa
-- **`hooks/ssot-guard.json`**: Checklist ao encerrar sessão
-- **`steering/ssot-enforcement.md`**: Regras sempre ativas
+```bash
+# Instala o hook de pre-commit no seu repositório:
+npx @feyth/elefante check --install-hook
+```
 
-**Funciona sem Kiro?** Sim, mas sem proteção automática.
+- **Como funciona:** Antes de cada `git commit`, o hook inspeciona os arquivos modificados. Se arquivos estruturais da stack (`app/`, `src/`, `database/`, `routes/`, `models.py`, etc.) forem alterados sem modificação correspondente no SSOT (`01-ESTADO_ATUAL.md`) ou adição de log de sessão em `historico/`, o commit é **bloqueado**.
+- **Funciona onde?** Em qualquer terminal, no Git CLI, no VS Code, no Cursor, no Windsurf ou em qualquer GUI Git.
 
 ---
 
@@ -540,15 +532,16 @@ No `.gitignore`:
 #elefante releia o estado atual e continue
 ```
 
-### 6.4. Hooks Não Funcionam
+### 6.4. Esquecimento de Atualização da Memória
 
-**Sintoma:** IA não verifica SSOT automaticamente
+**Sintoma:** Você ou a IA fazem alterações no código mas o SSOT fica desatualizado
 
-**Causa:** Você não está usando Kiro (ou hooks não estão configurados)
+**Causa:** Falta de barreira automatizada antes de salvar no Git
 
 **Solução:**
-- Use Kiro para hooks automáticos, OU
-- Lembre manualmente: `#elefante verificar se SSOT foi atualizado`
+- Instale o hook pré-commit determinístico: `npx @feyth/elefante check --install-hook`
+- O Git rejeitará qualquer commit com alterações estruturais se o SSOT não for atualizado.
+- Use `#elefante verificar` a qualquer momento para checar a convergência.
 
 ### 6.5. IA Ignora Regras
 
@@ -570,20 +563,20 @@ No `.gitignore`:
 
 ### 7.1. Projeto Existente (Sem Elefante)
 
-**Cenário:** Você tem um projeto Laravel pronto e quer adicionar Elefante
+**Cenário:** Você tem um projeto Laravel pronto e quer adicionar o Elefante
 
 ```bash
-# 1. Copie o template
-cp -r elefante/.mestre-laravel/. seu-projeto-existente/
+# 1. Inicialize no projeto existente (ou copie a pasta template/)
+npx @feyth/elefante init laravel
 
-# 2. Configure
-#elefante leia o INICIAR.md e configure
+# 2. Configure a memória
+#elefante leia setup_elefante.json e configure
 
-# 3. Sincronize com código existente
+# 3. Sincronize com o código existente
 #elefante leia todos os models, controllers e migrations existentes
 e preencha o 01-ESTADO_ATUAL.md com o estado real do projeto
 
-# 4. A IA vai escanear tudo e criar o SSOT completo
+# 4. A IA vai escanear a base de código e preencher o SSOT
 ```
 
 ### 7.2. Múltiplos Projetos
@@ -622,17 +615,17 @@ Dev 2: git pull
 
 ### 7.4. Migrar Stack
 
-**Cenário:** Você quer mudar de Laravel para FastAPI
+**Cenário:** Você quer migrar a stack de um projeto existente
 
 ```bash
-# 1. Copie novo template
-cp -r elefante/.mestre-python/. seu-projeto/
+# 1. Reinicialize ou altere para a nova stack (ex: python / FastAPI)
+npx @feyth/elefante init python --force
 
 # 2. Migre informações
-#elefante leia o antigo 01-ESTADO_ATUAL.md do Laravel
-e crie um novo para FastAPI mantendo as mesmas regras de negócio
+#elefante leia o antigo 01-ESTADO_ATUAL.md
+e adapte para FastAPI mantendo as mesmas regras de negócio
 
-# 3. IA traduz contexto para nova stack
+# 3. IA traduz contexto e convenções para a nova stack
 ```
 
 ### 7.5. Auditoria de Código

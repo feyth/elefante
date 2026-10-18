@@ -9,7 +9,7 @@
 
 O **Elefante** é uma **camada de memória declarativa e curada** (princípios, regras por stack, decisões arquiteturais justificadas e catálogo de armadilhas).
 
-Enquanto ferramentas de infraestrutura capturam histórico episódico bruto via hooks de processo e indexam em banco vetorial, o Elefante garante que a IA sempre **respeite as leis e padrões do projeto** desde o primeiro prompt, com **zero dependências e zero aprisionamento de ferramentas**.
+Enquanto ferramentas de infraestrutura capturam histórico episódico bruto via hooks de processo e indexam em banco vetorial, o Elefante atua para que a IA sempre **respeite as leis e padrões do projeto** desde o primeiro prompt, com **zero dependências e zero aprisionamento de ferramentas**.
 
 ---
 
