@@ -1,6 +1,12 @@
 DIVULGACAO.md
 .1estudo/
 
+# Arquivos locais e privativos de sessão
+.elefante/local/
+elefante-okf.json
+elefante-claude-project.md
+CONTEXTO-CONSOLIDADO.md
+
 # Descomente a linha abaixo quando for fazer deploy em produção.
 # A pasta .elefante é o cérebro LOCAL do desenvolvimento e não deve ir para o servidor.
 # .elefante/

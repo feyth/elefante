@@ -6,6 +6,9 @@ import { runInit } from './commands/init.js';
 import { runStatus } from './commands/status.js';
 import { runDoctor } from './commands/doctor.js';
 import { runLog } from './commands/log.js';
+import { runMigrate } from './commands/migrate.js';
+import { runHandoff } from './commands/handoff.js';
+import { runExport } from './commands/export.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -40,6 +43,9 @@ ${c.bold}COMANDOS DISPONÍVEIS:${c.reset}
   ${c.green}status${c.reset}              Exibe resumo do SSOT, módulos e adaptadores de IA ativos.
   ${c.green}doctor${c.reset}              Audita placeholders, saúde do SSOT e segredos expostos.
   ${c.green}log${c.reset} <título>        Cria um novo log em .elefante/historico/ e atualiza INDICE.md.
+  ${c.green}migrar${c.reset}              Migra projetos v2.x para a arquitetura atômica v3.0 (suporta --plan).
+  ${c.green}handoff${c.reset} [nota]       Gera resumo de transição em .elefante/local/HANDOFF.md para trocar de IA.
+  ${c.green}export${c.reset} [formato]     Exporta contexto da memória: ${c.dim}markdown, claude, okf (OKF v0.2)${c.reset}
   ${c.green}help${c.reset}                Exibe esta mensagem de ajuda.
   ${c.green}version${c.reset}             Exibe a versão instalada do framework.
 
@@ -47,14 +53,17 @@ ${c.bold}EXEMPLOS:${c.reset}
   ${c.dim}# Inicialização interativa com detecção automática de stack:${c.reset}
   ${c.cyan}npx @feyth/elefante init${c.reset}
 
-  ${c.dim}# Simular inicialização sem alterar nenhum arquivo:${c.reset}
-  ${c.cyan}npx @feyth/elefante init laravel --plan${c.reset}
+  ${c.dim}# Migrar projeto existente v2.x para o formato v3.0:${c.reset}
+  ${c.cyan}npx @feyth/elefante migrar --plan${c.reset}
 
   ${c.dim}# Diagnóstico de integridade do projeto:${c.reset}
   ${c.cyan}npx @feyth/elefante doctor${c.reset}
 
-  ${c.dim}# Criar log de sessão concluída:${c.reset}
-  ${c.cyan}npx @feyth/elefante log "refatoracao da camada de servico"${c.reset}
+  ${c.dim}# Registrar handoff de contexto ao encerrar sessão:${c.reset}
+  ${c.cyan}npx @feyth/elefante handoff "pausado antes da migration de pagamento"${c.reset}
+
+  ${c.dim}# Exportar manifesto de conhecimento padronizado (OKF v0.2):${c.reset}
+  ${c.cyan}npx @feyth/elefante export okf${c.reset}
 `);
 }
 
@@ -108,6 +117,25 @@ export function main(args = process.argv.slice(2)) {
     case 'log': {
       const title = args.slice(1).filter(a => !a.startsWith('-')).join(' ');
       runLog(title, targetDir);
+      break;
+    }
+
+    case 'migrar':
+    case 'migrate': {
+      runMigrate(targetDir, { plan: isPlan, force: isForce });
+      break;
+    }
+
+    case 'handoff': {
+      const note = args.slice(1).filter(a => !a.startsWith('-')).join(' ');
+      runHandoff(note, targetDir);
+      break;
+    }
+
+    case 'export':
+    case 'export-okf': {
+      const format = command === 'export-okf' ? 'okf' : (args[1] || 'markdown');
+      runExport(format, targetDir);
       break;
     }
 

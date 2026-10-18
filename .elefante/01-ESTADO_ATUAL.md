@@ -155,13 +155,17 @@ elefante/
 | 2026-10-18 | CLI Node.js Oficial Zero-Dependências (`cli/`) | Execução multiplataforma com npx @feyth/elefante contendo init, doctor, status e log |
 | 2026-10-18 | Arquitetura Modular Desacoplada (`core/` + `stacks/`) | Eliminação da duplicação dos mestres antigos; 00-PRINCIPIOS e templates universais no core |
 | 2026-10-18 | Fronteira de Confiança (Trust Boundary) nos adaptadores | Regras e Princípios são INSTRUÇÕES soberanas; histórico e armadilhas são tratados como DADOS |
+| 2026-10-18 | Migrador Automático Não-Destrutivo (`elefante migrar`) | Backup automático e extração de decisões/armadilhas tabulares para arquivos atômicos |
+| 2026-10-18 | Handoff Tipado Privativo (`elefante handoff`) | Transição de contexto local em `.elefante/local/HANDOFF.md` com status git e histórico |
+| 2026-10-18 | Exportador de Memória e Padrão OKF v0.2 (`elefante export`) | Exportação para formatos Claude Projects e especificação aberta OKF v0.2 |
 
 ## Status do Momento
 - **Data da Implementação:** 2026-10-18
-- **Versão:** Framework Elefante v3.0.0-alpha.1 (Fundação v3.0 Concluída)
-- Fase 1 do roadmap concluída:
-  - `core/` criado com `00-PRINCIPIOS.md`, `hooks.yml`, `modo.yml`, templates atômicos OKF v0.2 (`decisao.md`, `armadilha.md`, `handoff.md`, `log_tarefa.md`) e `AGENTS.md` com Trust Boundary.
-  - `stacks/` estruturado para Laravel, Django, Python e Next.js com `detect.json` e regras desacopladas.
-  - `cli/` implementado com zero dependências externas: `init` (com detecção e `--plan`), `status` (inspeção do projeto), `doctor` (auditoria determinística de integridade e segredos) e `log` (registro com auto-indexação).
-  - Adaptador poliglota dinâmico para 5 famílias de agentes (Antigravity, Claude Code, Cursor, Gemini CLI, Kiro).
-- Próximo passo: Fase 2 (Migrador v2->v3 e expansão de templates atômicos).
+- **Versão:** Framework Elefante v3.0.0-alpha.2 (Fase 1 e Fase 2 Concluídas)
+- Fase 1 (Fundação) e Fase 2 (Migração e Interoperabilidade) concluídas:
+  - `core/` e `stacks/` estruturados e testados.
+  - CLI com suite completa de comandos: `init`, `status`, `doctor`, `log`, `migrar`, `handoff` e `export`.
+  - Migrador com suporte a `--plan`, backup de timestamp e extração de decisões/armadilhas em formato atômico.
+  - Handoff local privativo com captura de git status e último log.
+  - Exportador para OKF v0.2 (Open Knowledge Format) e Claude Projects.
+- Próximo passo: Fase 3 (Garantias determinísticas com pre-commit e compactação de histórico).
