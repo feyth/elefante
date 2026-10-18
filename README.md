@@ -1,73 +1,86 @@
 # 🐘 Framework Elefante
 
-> **Memória em tempo real para desenvolvimento com IA - Simples, mas robusto**
+> **Memória em tempo real e governança contínua para desenvolvimento com IA**
 
-O Framework Elefante elimina a amnésia de contexto em IAs. Copie, cole e comece a desenvolver com uma IA que nunca esquece sua arquitetura.
+O Framework Elefante elimina a amnésia de contexto em IAs. Instale em segundos, codifique com qualquer agente e mantenha uma IA que nunca esquece sua arquitetura, regras e armadilhas.
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
-[![Version](https://img.shields.io/badge/version-2.4-green.svg)](CHANGELOG-FRAMEWORK.md)
+[![Version](https://img.shields.io/badge/version-3.0.0-green.svg)](CHANGELOG-FRAMEWORK.md)
+[![OKF](https://img.shields.io/badge/standard-OKF%20v0.2-orange.svg)](elefante-okf.json)
 
 ---
 
-## 🎯 Em 30 Segundos
+## 🎯 Em 30 Segundos (Novo CLI Oficial v3.0)
+
+Em qualquer projeto novo ou existente, execute:
 
 ```bash
-# 1. Copie o template da sua stack (note o "/." — copia também as pastas ocultas)
-cp -r elefante/.mestre-laravel/. seu-projeto/
+# 1. Inicialize o Elefante no seu projeto (auto-detecta stack e agentes de IA instalados):
+npx @feyth/elefante init
 
-# 2. No Kiro/Cursor/Claude, digite:
-#elefante leia o INICIAR.md e configure este projeto
+# 2. Na sua IDE favorita (Cursor, Claude Code, Antigravity, Kiro, Windsurf), inicie com:
+#elefante leia o estado atual e vamos começar
 
-# 3. A IA faz perguntas, configura tudo automaticamente
-
-# 4. Pronto! Agora sempre use #elefante:
-#elefante crie uma API de produtos com CRUD completo
+# 3. A IA lê a arquitetura, segue suas regras inegociáveis e atualiza a documentação sozinha!
 ```
 
-**A IA agora:**
-- ✅ Lê sua arquitetura automaticamente
-- ✅ Gera código consistente com suas regras
-- ✅ Atualiza a documentação sozinha
-- ✅ Nunca esquece o contexto, mesmo em sessões longas
+**O que o Elefante garante:**
+- ✅ **Fronteira de Confiança (Trust Boundary):** Princípios e Regras operam como instruções soberanas; histórico passado é tratado como dado contextual.
+- ✅ **Hook Pré-Commit no Git:** Bloqueia commits de código estrutural sem atualização de documentação (`elefante check --install-hook`).
+- ✅ **Handoff Privativo:** Alterne entre diferentes IAs sem perder o fio da meada (`elefante handoff`).
+- ✅ **Interoperabilidade Aberta:** Compatível nativamente com o padrão aberto **OKF v0.2** (`elefante export okf`).
 
 ---
 
 ## 💡 Por Que Usar?
 
-### Antes do Elefante ❌
+### Sem o Elefante ❌
 ```
-Você: "Crie uma API de usuários"
+Você: "Crie uma API de pagamentos"
 
 IA: *Lê 50 arquivos aleatórios*
-    *Gasta 10.000 tokens*
-    *Esquece suas regras*
-    *Usa jQuery quando você usa Alpine*
-    *Documentação fica desatualizada*
+    *Gasta 25.000 tokens à toa*
+    *Esquece suas regras de arquitetura*
+    *Mistura lógica de negócio dentro de controllers*
+    *A documentação fica desatualizada*
 ```
 
-### Com o Elefante ✅
+### Com o Elefante v3.0 ✅
 ```
-Você: "#elefante crie uma API de usuários"
+Você: "#elefante crie uma API de pagamentos"
 
-IA: *Lê os arquivos do .elefante/ (regras, estado, princípios)*
-    *Segue suas regras*
-    *Usa as bibliotecas certas*
-    *Atualiza a documentação ao final*
+IA: *Lê os arquivos curados do .elefante/ (Princípios, SSOT, Regras)*
+    *Respeita a arquitetura definida (Controller -> Action -> Service)*
+    *Desvia das armadilhas conhecidas do projeto*
+    *Atualiza o SSOT e gera log de sessão ao concluir*
 ```
-
-**Resultado:** a IA parte do contexto curado do projeto em vez de redescobri-lo a cada sessão.
-
-> Ainda não publicamos medições de economia de tokens. Um benchmark reproduzível está no [roadmap da v3.0](ROADMAP-3.0.md).
 
 ---
 
-## 🚀 Instalação Rápida
+## 🚀 Instalação e Comandos do CLI
 
-### Pré-requisitos
-- Uma IDE com IA integrada (Kiro, Cursor, Windsurf, ou Claude/ChatGPT)
-- Um projeto em qualquer linguagem
+O CLI oficial do Elefante roda com **Node.js (>= 18)** sem nenhuma dependência externa:
 
-### Passo 1: Escolha Seu Template
+### Comandos Disponíveis
+
+| Comando | Descrição |
+|---|---|
+| `npx @feyth/elefante init` | Inicializa o framework (detecta Laravel, Django, Python ou Next.js). |
+| `npx @feyth/elefante status` | Exibe o status do SSOT, módulos concluídos e adaptadores ativos. |
+| `npx @feyth/elefante doctor` | Unit tests da documentação, auditoria de integridade e scanner de segredos. |
+| `npx @feyth/elefante check` | Valida se código estrutural foi alterado sem atualizar documentação. |
+| `npx @feyth/elefante check --install-hook` | Instala hook de pre-commit no Git para bloqueio determinístico. |
+| `npx @feyth/elefante log "título"` | Cria novo log em `historico/` e auto-indexa no `INDICE.md`. |
+| `npx @feyth/elefante migrar` | Migra projetos legados v2.x para o formato modular v3.0 (suporta `--plan`). |
+| `npx @feyth/elefante handoff "nota"` | Cria resumo de transição em `.elefante/local/HANDOFF.md`. |
+| `npx @feyth/elefante export okf` | Exporta manifesto compatível com Open Knowledge Format (OKF v0.2). |
+| `npx @feyth/elefante compactar` | Arquiva sessões antigas preservando todos os links do índice. |
+
+---
+
+### Instalação Manual Alternativa (Legado)
+
+Se preferir não usar o Node.js, os templates standalone continuam disponíveis:
 
 ```bash
 # Laravel/PHP
@@ -83,21 +96,7 @@ cp -r elefante/.mestre-python/. seu-projeto-python/
 cp -r elefante/.mestre-nextjs/. seu-projeto-nextjs/
 ```
 
-> ⚠️ Use `pasta/.` e não `pasta/*`: em bash o `*` **ignora** `.elefante/`, `.agents/` e `.kiro/`.
-
-**Windows (PowerShell)** — rode de dentro do seu projeto:
-
-```powershell
-C:\caminho\para\elefante\elefante.ps1 init laravel   # ou django | python | nextjs
-```
-
-### Passo 2: Configure com a IA
-
-No Kiro, Cursor ou sua IDE favorita:
-
-```
-#elefante leia o INICIAR.md e configure este projeto
-```
+> ⚠️ Em bash, use sempre `pasta/.` para não ignorar arquivos ocultos (`.elefante`, `.agents`, `.kiro`).
 
 A IA vai perguntar:
 1. Nome do projeto

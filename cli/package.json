@@ -1,6 +1,6 @@
 {
   "name": "@feyth/elefante",
-  "version": "3.0.0-alpha.1",
+  "version": "3.0.0",
   "description": "CLI Oficial do Framework Elefante — Memória e governança de contexto para desenvolvimento com IA",
   "type": "module",
   "bin": {

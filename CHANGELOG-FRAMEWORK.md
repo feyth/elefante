@@ -3,6 +3,28 @@
 Histórico de versões e evolução do framework.  
 Mantido pela equipe **Feyth Tecnologia**.
 
+## [v3.0.0] — 2026-10-18
+
+### Arquitetura Modular, CLI Oficial Node.js e Padrão Aberto OKF v0.2
+
+#### Adicionado
+- **CLI Oficial Multiplataforma (`cli/`)**:
+  - Executável com zero dependências externas via `npx @feyth/elefante`.
+  - Comandos: `init`, `status`, `doctor`, `check`, `compactar`, `log`, `migrar`, `handoff` e `export`.
+- **Arquitetura Modular Desacoplada**:
+  - `core/`: princípios universais, hooks, modos e templates atômicos (`decisao.md`, `armadilha.md`, `handoff.md`).
+  - `stacks/`: regras desacopladas para Laravel, Django, Python e Next.js com manifestos `detect.json`.
+- **Fronteira de Confiança (Trust Boundary)**:
+  - Princípios e Regras operam como instruções soberanas; histórico de sessões e armadilhas passadas são injetados estritamente como dados contextuais.
+- **Hook Git Pré-Commit Bloqueante (`elefante check --install-hook`)**:
+  - Bloqueia commits de código estrutural sem atualização simultânea de documentação.
+- **Interoperabilidade com Padrões Abertos**:
+  - Exportação para **Open Knowledge Format (OKF v0.2)** (`elefante export okf`) e Claude Projects (`elefante export claude`).
+- **Migrador Automático Não-Destrutivo (`elefante migrar`)**:
+  - Conversão de bases v2.x para v3.0 com backup de timestamp e extração de decisões/armadilhas atômicas.
+- **Handoff Tipado Privativo (`elefante handoff`)**:
+  - Transição de contexto local em `.elefante/local/HANDOFF.md` para alternar entre diferentes agentes de IA.
+
 ---
 
 ## [v2.4] — 2026-10-17

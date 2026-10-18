@@ -1,13 +1,13 @@
 {
   "nome": "Assistente de Inicialização do Elefante",
-  "versao": "2.4",
+  "versao": "3.0.0",
   "descricao": "Guia passo a passo para a IA iniciar e estruturar a memória do projeto do zero.",
   "gatilho_sugerido": "#elefante leia o INICIAR.md e configure este projeto",
   "passos": [
     {
       "passo": 1,
-      "acao": "Identificar Stack e Copiar Template",
-      "instrucao": "Identifique a stack (Laravel, Django, Python ou Next.js) e copie a pasta do respectivo template (.mestre-laravel, .mestre-django, .mestre-python ou .mestre-nextjs) para a raiz do novo projeto, preservando arquivos ocultos (.elefante, .agents, .kiro)."
+      "acao": "Inicializar com CLI ou Copiar Template",
+      "instrucao": "Execute 'npx @feyth/elefante init' na raiz do projeto (ou copie a stack de stacks/ e core/). O CLI detecta automaticamente o ambiente e gera os adaptadores de IA necessários."
     },
     {
       "passo": 2,
