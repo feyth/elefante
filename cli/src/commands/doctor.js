@@ -166,6 +166,49 @@ export function runDoctor(targetDir = process.cwd(), options = {}) {
     });
   }
 
+  // 6. Auditoria de Densidade de Contexto & Orçamento de Tokens (Anti-Burocracia)
+  if (fs.existsSync(ssotPath)) {
+    const ssotStats = fs.statSync(ssotPath);
+    const ssotLines = fs.readFileSync(ssotPath, 'utf8').split('\n').length;
+    const estTokens = Math.round(ssotStats.size / 3.8);
+
+    if (ssotLines > 250 || ssotStats.size > 8192) {
+      warnings.push({
+        file: '.elefante/01-ESTADO_ATUAL.md',
+        msg: `Alerta de Burocracia de Contexto: O SSOT possui ${ssotLines} linhas (~${estTokens} tokens). Mantenha o SSOT cirúrgico para evitar context bloat e desperdício de tokens.`
+      });
+    } else {
+      passes.push(`Orçamento de contexto enxuto no SSOT: ${ssotLines} linhas (~${estTokens} tokens estimados)`);
+    }
+  }
+
+  // 7. Checar diluição de princípios
+  const princPath = path.join(elefanteDir, '00-PRINCIPIOS.md');
+  if (fs.existsSync(princPath)) {
+    const pContent = fs.readFileSync(princPath, 'utf8');
+    const mustCount = (pContent.match(/\bMUST\b/g) || []).length;
+    if (mustCount > 5) {
+      warnings.push({
+        file: '.elefante/00-PRINCIPIOS.md',
+        msg: `Diluição de Atenção: ${mustCount} princípios MUST detectados. Mais de 5 regras inegociáveis diminuem a aderência do modelo. Deixe apenas as leis fundamentais.`
+      });
+    } else if (mustCount > 0) {
+      passes.push(`Princípios MUST com foco cirúrgico (${mustCount} leis inegociáveis)`);
+    }
+  }
+
+  // 8. Checar acúmulo de logs históricos não compactados
+  const histDir = path.join(elefanteDir, 'historico');
+  if (fs.existsSync(histDir)) {
+    const rootLogs = fs.readdirSync(histDir).filter(f => f.endsWith('.md') && !f.startsWith('_'));
+    if (rootLogs.length > 8) {
+      warnings.push({
+        file: '.elefante/historico/',
+        msg: `Histórico acumulando ${rootLogs.length} logs na raiz. Execute 'npx @feyth/elefante compactar' para arquivar sessões antigas e economizar contexto.`
+      });
+    }
+  }
+
   // Relatório Final
   passes.forEach(p => console.log(`  ${c.green}✅ [OK]${c.reset} ${p}`));
 

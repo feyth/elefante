@@ -106,14 +106,18 @@ A proteção do SSOT no Elefante v3.0 não depende de nenhum software, plugin ou
 | 2026-10-18 | Compactador Ordenado de Histórico (`elefante compactar`) | Arquivamento cronológico para `historico/arquivo/YYYY/` mantendo índice de links sem quebra |
 | 2026-10-18 | Otimização Estrutural da Raiz (`docs/` e `legado/`) | Redução drástica da raiz eliminando duplicações e agrupando documentação secundária em `docs/` |
 | 2026-10-18 | Desacoplamento Total de IDE/Editor (`D018`) | O Elefante torna-se 100% agnóstico via `AGENTS.md` universal e Git Hooks; remoção da dependência forçada do Kiro |
+| 2026-10-18 | Validação Semântica no Pre-Commit (`D019`) | `elefante check` inspeciona o git diff do SSOT impedindo burlas por espaços/vírgulas e bloqueia placeholders não preenchidos |
+| 2026-10-18 | Modo Ultra-Leve e Expansão (`D020`) | `elefante init --lite` gera apenas 1 arquivo `AGENTS.md` sem pastas para mitigar sobrecarga inicial; `elefante expand` desmembra sob demanda |
+| 2026-10-18 | Linter de Tokens e Briefing Cirúrgico (`D021`) | `elefante doctor` monitora orçamento de tokens (<250 linhas / <8KB) e diluição de MUST (>5); `elefante brief` condensa contexto em ~350 tokens |
 
 ## Status do Momento
 - **Data da Implementação:** 2026-10-18
-- **Versão:** Framework Elefante v3.0.0 (Release Oficial Estável - 100% Agnóstico de Editor)
+- **Versão:** Framework Elefante v3.0.0 (Release Oficial Estável - 100% Agnóstico de Editor & Anti-Burocracia)
 - Ciclo de evolução do Roadmap v3.0 concluído e validado:
   - Framework 100% agnóstico a qualquer editor (VS Code, Cursor, Windsurf, JetBrains, Neovim, Claude Code, Terminal).
   - Padrão universal aberto `AGENTS.md` adotado como protocolo primário de IA.
-  - Pasta `.kiro/` desvinculada e removida da raiz; adaptadores específicos agora gerados apenas sob demanda real.
-  - Raiz despoluída para apenas 3 arquivos e pastas modulares (`core/`, `stacks/`, `cli/`, `docs/`, `legado/`).
+  - Mitigação de sobrecarga inicial com Modo Ultra-Leve (`init --lite`) e expansão atômica (`expand`).
+  - Proteção contra amnésia e burla com validação semântica profunda (`check`) e auditoria de orçamento de contexto (`doctor` + `brief`).
   - Governança determinística assegurada via Git Hook (`elefante check`).
 - Próximo passo: Adoção em projetos produtivos e coleta de métricas de benchmark.
+

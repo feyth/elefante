@@ -64,6 +64,8 @@
 | 2026-10-18 | `20261018_release_oficial_v300.md` | Release Oficial Estável do Framework Elefante v3.0.0 |
 | 2026-10-18 | `20261018_otimizacao_estrutural_e_limpeza.md` | Otimização Estrutural da Raiz: docs/, legado/ e Auditoria de Init |
 | 2026-10-18 | `20261018_desacoplamento_total_de_editor.md` | Desacoplamento Total de Editor: Padrão Universal AGENTS.md |
+| 2026-10-18 | `20261018_validacao_semantica_modo_lite_e_brief.md` | Governança Semântica no Pre-Commit, Modo Lite e Linter de Orçamento de Tokens |
+
 
 ### Deploy / Infraestrutura
 | Data | Arquivo | Descrição |

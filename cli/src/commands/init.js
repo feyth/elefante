@@ -54,6 +54,62 @@ export async function commandInit(args, options = {}) {
     process.exit(1);
   }
 
+  const isLite = args.includes("--lite") || options.lite;
+
+  // Modo Lite: Gera apenas 1 arquivo AGENTS.md auto-contido na raiz (zero pastas, zero burocracia)
+  if (isLite) {
+    const agentsFile = path.join(targetDir, "AGENTS.md");
+    if (fs.existsSync(agentsFile) && !isForce && !isPlan) {
+      logWarn(`Arquivo AGENTS.md já existe em: ${targetDir}. Use --force para sobrescrever.`);
+      return;
+    }
+
+    if (isPlan) {
+      logOk("Simulação: Geraria apenas o arquivo AGENTS.md ultra-compacto na raiz (Modo Lite).");
+      return;
+    }
+
+    const liteContent = `# 🐘 Protocolo Elefante (Modo Lite — Arquivo Único)
+
+> Memória e governança de contexto para este projeto. Quando o projeto crescer para múltiplos módulos ou equipe, execute \`npx @feyth/elefante expand\` para desmembrar na estrutura completa.
+
+---
+
+## ⚖️ Princípios Invioláveis (MUST)
+1. **MUST:** Manter funções puras e controllers finos; nunca misturar regras de negócio em camadas de apresentação.
+2. **MUST:** Nunca deixar tokens, chaves de API ou credenciais no código ou na documentação.
+3. **MUST:** Ao modificar rotas, modelos ou arquitetura, atualizar este arquivo antes de concluir a resposta.
+
+---
+
+## 🧠 Estado Atual do Projeto
+- **Projeto:** ${path.basename(targetDir)}
+- **Stack:** ${stack || "Auto-detectada"}
+- **Status do Momento:** Protótipo inicial / MVP em desenvolvimento.
+- **Módulos Ativos:** Core (\`/\`)
+
+---
+
+## 🛑 Armadilhas Conhecidas
+| ID | Sintoma | Solução Correta |
+|---|---|---|
+| A001 | Perda de contexto em sessões longas | Relembrar regras consultando este arquivo antes de codar |
+
+---
+
+## 🤖 Instrução para o Agente de IA
+Sempre que o desenvolvedor iniciar uma tarefa com \`#elefante\` (ou no chat desta pasta):
+1. Leia as regras acima antes de escrever código.
+2. Siga rigorosamente a stack e as leis MUST.
+3. Se você alterar rotas, contratos ou arquitetura, atualize a seção **Estado Atual** deste arquivo antes de responder.
+`;
+
+    fs.writeFileSync(agentsFile, liteContent, "utf8");
+    logOk("Modo Lite inicializado com sucesso: apenas AGENTS.md na raiz!");
+    console.log(`  ${c.dim}Zero pastas, zero overhead. Quando precisar de governança completa, rode:${c.reset} ${c.cyan}npx @feyth/elefante expand${c.reset}\n`);
+    return;
+  }
+
   // 2. Deteccao de agentes instalados
   const agents = detectAgents(targetDir);
   if (agents.length > 0) {
@@ -220,5 +276,7 @@ export async function runInit(options = {}) {
   if (options.stack) args.push(options.stack);
   if (options.plan) args.push('--plan');
   if (options.force) args.push('--force');
+  if (options.lite) args.push('--lite');
   return commandInit(args, options);
 }
+

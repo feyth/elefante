@@ -78,15 +78,58 @@ export function runCheck(targetDir = process.cwd(), options = {}) {
     console.log(`\n${c.bold}Para manter a IA sincronizada com sua base de código:${c.reset}`);
     console.log(`  1. Atualize ${c.cyan}.elefante/01-ESTADO_ATUAL.md${c.reset} refletindo a mudança, ou`);
     console.log(`  2. Crie um log de sessão: ${c.cyan}npx @feyth/elefante log "descricao da alteracao"${c.reset}`);
-    console.log(`  ${c.dim}(Para ignorar este bloqueio em emergências, use 'git commit --no-verify')${c.reset}\n`);
+    console.log(`  ${c.dim}(Para ignorar este bloqueio em emergências pontuais, use 'git commit --no-verify')${c.reset}\n`);
 
     return false;
+  }
+
+  // Validação Semântica Profunda: Evitar "burlar" o SSOT com alteração cosmética ou placeholders
+  if (structuralChanges.length > 0 && ssotChanged) {
+    const ssotPath = path.join(targetDir, '.elefante', '01-ESTADO_ATUAL.md');
+    if (fs.existsSync(ssotPath)) {
+      const content = fs.readFileSync(ssotPath, 'utf8');
+
+      // 1. Checagem de placeholders não resolvidos
+      const placeholderRegex = /\[(PREENCHER|NOME\s+DO\s+SEU\s+PROJETO|SUA\s+URL|SUBSTITUA|INFORME|X\.X\.X)\]/gi;
+      const placeholders = content.match(placeholderRegex);
+      if (placeholders && placeholders.length > 0) {
+        console.log(`${c.red}${c.bold}❌ BLOQUEIO: PLACEHOLDERS PENDENTES NO SSOT${c.reset}`);
+        console.log(`${c.yellow}O arquivo 01-ESTADO_ATUAL.md foi tocado, mas ainda contém ${placeholders.length} placeholder(s) genérico(s):${c.reset}`);
+        [...new Set(placeholders)].forEach(p => console.log(`  ${c.dim}↳ ${p}${c.reset}`));
+        console.log(`\n${c.bold}Preencha os valores reais da sua arquitetura antes de realizar o commit.${c.reset}\n`);
+        return false;
+      }
+
+      // 2. Checagem de diff substancial (impedir commits onde o SSOT só teve espaço ou linha em branco)
+      try {
+        const diffCmd = isStagedOnly
+          ? 'git diff --cached -U0 -- .elefante/01-ESTADO_ATUAL.md'
+          : 'git diff -U0 HEAD -- .elefante/01-ESTADO_ATUAL.md';
+        const diffOut = execSync(diffCmd, { cwd: targetDir, encoding: 'utf8', stdio: ['pipe', 'pipe', 'ignore'] }).trim();
+        if (diffOut) {
+          const addedLines = diffOut
+            .split(/[\r\n]+/)
+            .filter(l => l.startsWith('+') && !l.startsWith('+++'))
+            .map(l => l.slice(1).trim())
+            .filter(Boolean);
+
+          if (addedLines.length === 0 && !changedFiles.some(f => f.includes('.elefante/historico/'))) {
+            console.log(`${c.red}${c.bold}❌ BLOQUEIO: ATUALIZAÇÃO SEM CONTEÚDO NO SSOT${c.reset}`);
+            console.log(`${c.yellow}A modificação em 01-ESTADO_ATUAL.md contém apenas espaços em branco ou linhas vazias.${c.reset}`);
+            console.log(`${c.dim}Alterações em código estrutural exigem documentação real do que mudou.${c.reset}\n`);
+            return false;
+          }
+        }
+      } catch {
+        // Ignora falhas de diff em ambientes sem histórico inicial
+      }
+    }
   }
 
   console.log(`${c.green}✔ Governança e integridade preservadas:${c.reset}`);
   if (structuralChanges.length > 0 && ssotChanged) {
     console.log(`  - ${structuralChanges.length} arquivo(s) estrutural(is) alterado(s)`);
-    console.log(`  - SSOT / Histórico devidamente atualizado no mesmo commit.`);
+    console.log(`  - SSOT / Histórico devidamente atualizado com conteúdo substantivo.`);
   } else {
     console.log(`  - Nenhuma alteração estrutural não-documentada detectada.`);
   }

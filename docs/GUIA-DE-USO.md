@@ -62,13 +62,30 @@ npx @feyth/elefante init
 ```
 O CLI detectará automaticamente se seu projeto é **Laravel**, **Django**, **Python** ou **Next.js**, e criará a estrutura `.elefante/` com o protocolo universal `AGENTS.md`.
 
+> **Dica — Modo Ultra-Leve (Zero Burocracia):**  
+> Para protótipos, scripts ou projetos menores onde você quer apenas as diretrizes essenciais em 1 único arquivo sem pastas:
+> ```bash
+> npx @feyth/elefante init --lite
+> ```
+> Quando o projeto crescer e precisar da governança completa, basta rodar:
+> ```bash
+> npx @feyth/elefante expand
+> ```
+
 #### Via Pasta Única (Sem Node.js)
 Copie a pasta **`template/`** do Elefante para o seu projeto e renomeie-a para **`.elefante`**.
 No chat com seu agente, envie:
 ```
 #elefante leia setup_elefante.json e configure este projeto
 ```
+
+### 1.4. Resumo de Contexto Ultra-Compacto (`brief`)
+Se o seu modelo de IA tiver janela de contexto reduzida ou você quiser economizar tokens de entrada:
+```bash
+npx @feyth/elefante brief
 ```
+Gera um briefing cirúrgico (~350 tokens) contendo apenas o essencial: stack, status atual, 3 princípios MUST e armadilhas principais. Suporta `--save` para gerar `.elefante/BRIEF.md`.
+
 
 ### 1.5. Verifique a Estrutura Copiada
 

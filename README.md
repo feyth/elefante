@@ -74,16 +74,20 @@ O CLI oficial do Elefante não possui dependências externas pesadas e disponibi
 
 | Comando | Descrição |
 |---|---|
-| `npx @feyth/elefante init [stack]` | Inicializa o framework (suporta `laravel`, `django`, `python`, `nextjs` ou auto-detecção; flag `--plan`). |
+| `npx @feyth/elefante init [stack]` | Inicializa o framework (suporta `laravel`, `django`, `python`, `nextjs` ou auto-detecção; flags `--lite`, `--plan`, `--force`). |
+| `npx @feyth/elefante init --lite` | **Modo Ultra-Leve:** gera apenas 1 arquivo `AGENTS.md` na raiz, com zero pastas e zero burocracia para protótipos ou scripts. |
+| `npx @feyth/elefante expand` | Converte um projeto em modo lite para a estrutura completa e modular `.elefante/` sob demanda. |
+| `npx @feyth/elefante brief` | Gera briefing cirúrgico de contexto (~350 tokens) para colar na IA evitando estouro de janela (suporta `--save`). |
 | `npx @feyth/elefante status` | Exibe o resumo do SSOT, percentual de módulos concluídos e protocolo de IA ativo. |
-| `npx @feyth/elefante doctor` | Executa diagnóstico profundo: placeholders pendentes, defasagem de datas, regras MUST e scanner de segredos. |
-| `npx @feyth/elefante check` | Verifica se código estrutural foi alterado sem atualização correspondente da documentação. |
-| `npx @feyth/elefante check --install-hook` | Instala hook de pre-commit no `.git/hooks/` para validação determinística antes de cada commit. |
+| `npx @feyth/elefante doctor` | Diagnóstico profundo: placeholders pendentes, linter de orçamento de tokens, diluição de princípios MUST e scanner de segredos. |
+| `npx @feyth/elefante check` | Verificação semântica: bloqueia alterações em código estrutural se o SSOT não for substancialmente atualizado ou mantiver placeholders. |
+| `npx @feyth/elefante check --install-hook` | Instala hook de pre-commit no `.git/hooks/` para validação determinística semântica antes de cada commit. |
 | `npx @feyth/elefante log "título"` | Gera um novo arquivo de log em `historico/` e auto-indexa no `INDICE.md`. |
 | `npx @feyth/elefante compactar` | Arquiva logs antigos em `historico/arquivo/YYYY/` mantendo links do índice e reduzindo overhead. |
 | `npx @feyth/elefante handoff "nota"` | Cria resumo de transição local em `.elefante/local/HANDOFF.md` para alternar entre diferentes IAs ou devs. |
 | `npx @feyth/elefante migrar` | Converte bases legadas v2.x para a arquitetura modular v3.0 com backup prévio automático. |
 | `npx @feyth/elefante export [formato]` | Exporta o contexto da memória: `okf` (Open Knowledge Format v0.2), `claude` (Claude Projects) ou `markdown`. |
+
 
 ---
 
