@@ -8,9 +8,10 @@ import { generateAdapters } from "../utils/adapters.js";
 const VALID_STACKS = ["laravel", "django", "python", "nextjs"];
 
 export async function commandInit(args, options = {}) {
-  const targetDir = process.cwd();
+  const targetDir = options.targetDir || process.cwd();
   const repoRoot = path.resolve(import.meta.dirname, "../../..");
   const isPlan = args.includes("--plan") || options.plan;
+  const isForce = args.includes("--force") || options.force;
 
   let stack = args.find((a) => !a.startsWith("-"))?.toLowerCase();
 
@@ -62,8 +63,24 @@ export async function commandInit(args, options = {}) {
   }
 
   const elefanteDir = path.join(targetDir, ".elefante");
-  const coreDir = path.join(repoRoot, "core");
-  const stackDir = path.join(repoRoot, "stacks", stack);
+
+  if (fs.existsSync(elefanteDir) && !isForce && !isPlan) {
+    console.log("");
+    logWarn(`Diretorio .elefante/ ja existe em: ${targetDir}`);
+    console.log(`  ${c.dim}Para forcar a sobrescrita, execute:${c.reset} ${c.cyan}npx @feyth/elefante init --force${c.reset}`);
+    console.log(`  ${c.dim}Para auditar a integridade atual:${c.reset}   ${c.cyan}npx @feyth/elefante doctor${c.reset}`);
+    console.log("");
+    return;
+  }
+
+  let coreDir = path.join(repoRoot, "core");
+  let stackDir = path.join(repoRoot, "stacks", stack);
+
+  // Fallback caso esteja instalado em subdiretorio npm
+  if (!fs.existsSync(coreDir)) {
+    coreDir = path.resolve(import.meta.dirname, "../../core");
+    stackDir = path.resolve(import.meta.dirname, "../../stacks", stack);
+  }
 
   if (!fs.existsSync(coreDir) || !fs.existsSync(stackDir)) {
     logErr(`Diretorios core ou stack nao encontrados no framework (esperado: ${coreDir})`);

@@ -62,6 +62,7 @@
 | 2026-10-18 | `20261018_conclusao_fase2_migracao_e_export.md` | Interoperabilidade v3.0: Migrador Automático, Handoff e Padrão OKF v0.2 |
 | 2026-10-18 | `20261018_conclusao_fase3_garantias_e_hooks.md` | Governança v3.0: Hook Pre-Commit Determinístico e Compactador de Histórico |
 | 2026-10-18 | `20261018_release_oficial_v300.md` | Release Oficial Estável do Framework Elefante v3.0.0 |
+| 2026-10-18 | `20261018_otimizacao_estrutural_e_limpeza.md` | Otimização Estrutural da Raiz: docs/, legado/ e Auditoria de Init |
 
 ### Deploy / Infraestrutura
 | Data | Arquivo | Descrição |

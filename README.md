@@ -5,7 +5,7 @@
 O Framework Elefante elimina a amnésia de contexto em IAs. Instale em segundos, codifique com qualquer agente e mantenha uma IA que nunca esquece sua arquitetura, regras e armadilhas.
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
-[![Version](https://img.shields.io/badge/version-3.0.0-green.svg)](CHANGELOG-FRAMEWORK.md)
+[![Version](https://img.shields.io/badge/version-3.0.0-green.svg)](docs/CHANGELOG.md)
 [![OKF](https://img.shields.io/badge/standard-OKF%20v0.2-orange.svg)](elefante-okf.json)
 
 ---
@@ -395,12 +395,14 @@ Desenvolvido por [Feyth Tecnologia](https://www.feyth.com.br)
 
 ---
 
-## 🔗 Links Úteis
+## 🔗 Links e Documentação
 
-- [GitHub](https://github.com/feyth/elefante)
-- [Documentação](README-ELEFANTE.md)
-- [Issues](https://github.com/feyth/elefante/issues)
-- [Discussions](https://github.com/feyth/elefante/discussions)
+- [Central de Documentação](docs/README.md)
+- [Guia Completo de Uso](docs/GUIA-DE-USO.md)
+- [Roadmap Estratégico v3.0](docs/ROADMAP.md)
+- [Histórico de Versões (Changelog)](docs/CHANGELOG.md)
+- [Repositório GitHub](https://github.com/feyth/elefante)
+- [Issues e Suporte](https://github.com/feyth/elefante/issues)
 
 ---
 

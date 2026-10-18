@@ -13,45 +13,33 @@
 
 ```
 elefante/
-├── .elefante/                    # Template base do framework
-│   ├── 01-ESTADO_ATUAL.md       # SSOT template
-│   ├── 02-REGRAS_E_CULTURA.md   # Regras com REGRA #0 destacada
-│   ├── QUICK-REFERENCE.md       # Guia rápido + proteção loops
-│   ├── INDICE.md                # Índice de logs
-│   ├── DASHBOARD-ARQUITETURA.html
-│   └── historico/               # Logs de desenvolvimento
-│       ├── .keep
-│       └── _TEMPLATE_LOG.md
-├── .agents/
-│   └── AGENTS.md                # Fluxo ANTES/DURANTE/DEPOIS + checklist
-├── .kiro/                       # Proteção automática SSOT (NEW!)
-│   ├── hooks/
-│   │   ├── ssot-commit-reminder.json  # PostTaskExec - verifica após tarefas
-│   │   └── ssot-guard.json            # Stop - checklist ao encerrar
-│   └── steering/
-│       └── ssot-enforcement.md        # inclusion:always - regras persistentes
-├── .mestre-laravel/             # Template específico Laravel
-│   ├── .elefante/              # Estrutura completa replicada
-│   ├── .agents/                # AGENTS.md atualizado
-│   └── .kiro/                  # Proteção SSOT (NEW!)
-├── .mestre-django/              # Template específico Django
-│   ├── .elefante/              # Estrutura completa replicada
-│   ├── .agents/                # AGENTS.md atualizado
-│   └── .kiro/                  # Proteção SSOT (NEW!)
-├── .mestre-nextjs/              # Template específico Next.js
-│   ├── .elefante/              # Estrutura completa replicada
-│   ├── .agents/                # AGENTS.md atualizado
-│   └── .kiro/                  # Proteção SSOT (NEW!)
-├── .mestre-python/              # Template específico Python (NEW!)
-│   ├── .elefante/              # Estrutura completa replicada
-│   ├── .agents/                # AGENTS.md atualizado
-│   └── .kiro/                  # Proteção SSOT (NEW!)
-├── README-ELEFANTE.md          # Documentação principal
-├── INICIAR.md                  # Roteiro de setup (com PASSO 7 - .kiro/)
-├── GUIA-SSOT-HOOKS.md         # Guia de proteção SSOT
-├── CHANGELOG-FRAMEWORK.md
-├── setup_elefante.json
-└── elefante.ps1
+├── cli/                          # CLI oficial multiplataforma (npx @feyth/elefante)
+│   ├── bin/elefante.js
+│   └── src/
+├── core/                         # Núcleo universal de engenharia de contexto
+│   ├── 00-PRINCIPIOS.md          # Princípios invioláveis (MUST/SHOULD)
+│   ├── AGENTS.md                 # Protocolo com Fronteira de Confiança
+│   ├── hooks.yml / modo.yml      # Automação de tarefas
+│   └── templates/                # Templates atômicos (OKF v0.2)
+├── stacks/                       # Regras desacopladas por ecossistema
+│   ├── laravel/                  # detect.json + SSOT + Regras
+│   ├── django/                   # detect.json + SSOT + Regras
+│   ├── python/                   # detect.json + SSOT + Regras
+│   └── nextjs/                   # detect.json + SSOT + Regras
+├── docs/                         # Documentação detalhada centralizada
+│   ├── GUIA-DE-USO.md
+│   ├── ROADMAP.md
+│   ├── CHANGELOG.md
+│   └── INICIAR-LEGADO.md
+├── legado/                       # Artefatos legados v2 arquivados
+│   ├── mestres/                  # Antigos .mestre-*
+│   └── elefante.ps1
+├── .elefante/                    # Memória do próprio meta-framework
+├── .agents/                      # Adaptador para Antigravity / Gemini
+├── .kiro/                        # Hooks e steering
+├── .gitignore
+├── LICENSE
+└── README.md                     # Apresentação oficial e guia rápido
 ```
 
 ## Módulos do Sistema
@@ -161,14 +149,14 @@ elefante/
 | 2026-10-18 | Hook Git Bloqueante Pré-Commit (`elefante check`) | Verificação determinística que bloqueia commits de código estrutural sem atualização de SSOT/log |
 | 2026-10-18 | Compactador Ordenado de Histórico (`elefante compactar`) | Arquivamento cronológico para `historico/arquivo/YYYY/` mantendo índice de links sem quebra |
 | 2026-10-18 | Lançamento Oficial v3.0.0 Estável | Documentação atualizada, suite CLI completa e interoperabilidade OKF v0.2 |
+| 2026-10-18 | Otimização Estrutural da Raiz (`docs/` e `legado/`) | Redução drástica da raiz eliminando duplicações e agrupando documentação secundária em `docs/` |
 
 ## Status do Momento
 - **Data da Implementação:** 2026-10-18
-- **Versão:** Framework Elefante v3.0.0 (Release Oficial Estável)
-- Ciclo de evolução do Roadmap v3.0 concluído:
-  - `core/` e `stacks/` estruturados e modularizados.
-  - CLI com suite completa de comandos: `init`, `status`, `doctor`, `log`, `migrar`, `handoff`, `export`, `check` e `compactar`.
-  - Hook de `pre-commit` Git nativo instalado via `elefante check --install-hook` para garantia inegociável de governança.
-  - Compactador com suporte a `--keep=N` e `--plan` para preservação escalável de longo prazo.
-  - Documentação principal (`README.md`, `CHANGELOG-FRAMEWORK.md`, `setup_elefante.json`) 100% atualizada.
+- **Versão:** Framework Elefante v3.0.0 (Release Oficial Estável - Estrutura Enxuta)
+- Ciclo de evolução do Roadmap v3.0 concluído e validado:
+  - Raiz despoluída de 21 itens para 3 arquivos e pastas modulares (`core/`, `stacks/`, `cli/`, `docs/`, `legado/`).
+  - Documentação centralizada em `docs/` (`GUIA-DE-USO.md`, `ROADMAP.md`, `CHANGELOG.md`, `INICIAR-LEGADO.md`).
+  - Templates monolíticos antigos arquivados em `legado/mestres/`.
+  - Instalação inicial via CLI (`init.js`) auditada e com proteção contra sobrescrita acidental.
 - Próximo passo: Adoção em projetos produtivos e coleta de métricas de benchmark.
