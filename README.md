@@ -5,15 +5,15 @@
 O Framework Elefante elimina a amnésia de contexto em IAs. Copie, cole e comece a desenvolver com uma IA que nunca esquece sua arquitetura.
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
-[![Version](https://img.shields.io/badge/version-2.3-green.svg)](CHANGELOG-FRAMEWORK.md)
+[![Version](https://img.shields.io/badge/version-2.4-green.svg)](CHANGELOG-FRAMEWORK.md)
 
 ---
 
 ## 🎯 Em 30 Segundos
 
 ```bash
-# 1. Copie o template da sua stack
-cp -r elefante/.mestre-laravel/* seu-projeto/
+# 1. Copie o template da sua stack (note o "/." — copia também as pastas ocultas)
+cp -r elefante/.mestre-laravel/. seu-projeto/
 
 # 2. No Kiro/Cursor/Claude, digite:
 #elefante leia o INICIAR.md e configure este projeto
@@ -49,14 +49,15 @@ IA: *Lê 50 arquivos aleatórios*
 ```
 Você: "#elefante crie uma API de usuários"
 
-IA: *Lê SSOT (200 linhas)*
-    *Gasta 500 tokens*
+IA: *Lê os arquivos do .elefante/ (regras, estado, princípios)*
     *Segue suas regras*
     *Usa as bibliotecas certas*
-    *Atualiza documentação automaticamente*
+    *Atualiza a documentação ao final*
 ```
 
-**Resultado:** Código 10x mais consistente, economia de 95% de tokens.
+**Resultado:** a IA parte do contexto curado do projeto em vez de redescobri-lo a cada sessão.
+
+> Ainda não publicamos medições de economia de tokens. Um benchmark reproduzível está no [roadmap da v3.0](ROADMAP-3.0.md).
 
 ---
 
@@ -70,16 +71,24 @@ IA: *Lê SSOT (200 linhas)*
 
 ```bash
 # Laravel/PHP
-cp -r elefante/.mestre-laravel/* seu-projeto-laravel/
+cp -r elefante/.mestre-laravel/. seu-projeto-laravel/
 
 # Django/Python
-cp -r elefante/.mestre-django/* seu-projeto-django/
+cp -r elefante/.mestre-django/. seu-projeto-django/
 
 # Python/FastAPI/Flask
-cp -r elefante/.mestre-python/* seu-projeto-python/
+cp -r elefante/.mestre-python/. seu-projeto-python/
 
 # Next.js/React
-cp -r elefante/.mestre-nextjs/* seu-projeto-nextjs/
+cp -r elefante/.mestre-nextjs/. seu-projeto-nextjs/
+```
+
+> ⚠️ Use `pasta/.` e não `pasta/*`: em bash o `*` **ignora** `.elefante/`, `.agents/` e `.kiro/`.
+
+**Windows (PowerShell)** — rode de dentro do seu projeto:
+
+```powershell
+C:\caminho\para\elefante\elefante.ps1 init laravel   # ou django | python | nextjs
 ```
 
 ### Passo 2: Configure com a IA
@@ -290,12 +299,12 @@ modo: strict     # bloqueia se SSOT desatualizado há >3 dias
 ### Trabalho em Equipe
 
 ```
-# Cada dev mantém seu .elefante/ local
-echo ".elefante/" >> .gitignore
-echo ".kiro/" >> .gitignore
+# Versione .elefante/ no Git: decisões, regras e armadilhas são do time.
+# Ignore apenas o que é pessoal:
+echo ".elefante/local/" >> .gitignore
 
-# O código real vai pro Git
-# A memória fica local (como .env)
+# No deploy, exclua .elefante/ e .kiro/ do artefato
+# (ex: .dockerignore, rsync --exclude) — eles não vão para o servidor.
 ```
 
 ---
@@ -303,10 +312,10 @@ echo ".kiro/" >> .gitignore
 ## 📖 Documentação Completa
 
 - **[Guia de Uso Detalhado](GUIA-DE-USO.md)** ← Comece aqui!
-- [Documentação Conceitual](README-ELEFANTE.md)
-- [Guia de Proteção SSOT](GUIA-SSOT-HOOKS.md)
+- [Documentação Conceitual](README-ELEFANTE.md) (inclui a proteção SSOT via hooks/steering)
 - [Roteiro de Inicialização](INICIAR.md)
 - [Changelog](CHANGELOG-FRAMEWORK.md)
+- [Roadmap v3.0](ROADMAP-3.0.md)
 
 ---
 
@@ -338,7 +347,7 @@ Adapte um template existente. A estrutura `.elefante/` é universal.
 **Grátis e open source.** MIT License.
 
 ### Como contribuir?
-Veja [CONTRIBUTING.md](CONTRIBUTING.md) (em breve).
+Abra uma [issue](https://github.com/feyth/elefante/issues) ou um Pull Request. Veja o [Roadmap v3.0](ROADMAP-3.0.md) para saber o que está planejado.
 
 ---
 
@@ -360,16 +369,10 @@ Veja [CONTRIBUTING.md](CONTRIBUTING.md) (em breve).
 
 ---
 
-## 📊 Resultados Reais
+## 📊 Resultados
 
-> "Reduziu meu uso de tokens em 90%. A IA finalmente entende meu projeto."  
-> — Desenvolvedor usando Elefante há 2 meses
-
-> "Nunca mais precisei explicar a arquitetura do zero. #elefante e pronto."  
-> — Tech Lead de equipe com 5 devs
-
-> "O SSOT é a melhor documentação que já mantive. Ela se atualiza sozinha!"  
-> — Freelancer gerenciando 3 projetos
+Ainda não publicamos números. Preferimos medir antes de afirmar: um **eval reproduzível**
+(projeto-exemplo + perguntas, com e sem Elefante) está planejado no [Roadmap v3.0](ROADMAP-3.0.md).
 
 ---
 

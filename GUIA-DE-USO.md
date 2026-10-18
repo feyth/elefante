@@ -65,22 +65,24 @@ O Elefante tem 4 templates pré-configurados:
 ### 1.4. Copie para Seu Projeto
 
 ```bash
+# Use "pasta/." (não "pasta/*"): o * do bash ignora .elefante/, .agents/ e .kiro/
+
 # Exemplo: Projeto Laravel
-cp -r elefante/.mestre-laravel/* ~/meus-projetos/meu-projeto-laravel/
+cp -r elefante/.mestre-laravel/. ~/meus-projetos/meu-projeto-laravel/
 
 # Exemplo: Projeto Django
-cp -r elefante/.mestre-django/* ~/meus-projetos/meu-projeto-django/
+cp -r elefante/.mestre-django/. ~/meus-projetos/meu-projeto-django/
 
 # Exemplo: Projeto Python
-cp -r elefante/.mestre-python/* ~/meus-projetos/meu-api-fastapi/
+cp -r elefante/.mestre-python/. ~/meus-projetos/meu-api-fastapi/
 
 # Exemplo: Projeto Next.js
-cp -r elefante/.mestre-nextjs/* ~/meus-projetos/meu-app-nextjs/
+cp -r elefante/.mestre-nextjs/. ~/meus-projetos/meu-app-nextjs/
 ```
 
-**No Windows (PowerShell):**
+**No Windows (PowerShell)** — rode de dentro do seu projeto:
 ```powershell
-Copy-Item -Recurse -Force "elefante\.mestre-laravel\*" "C:\meus-projetos\meu-projeto\"
+C:\caminho\para\elefante\elefante.ps1 init laravel   # ou django | python | nextjs
 ```
 
 ### 1.5. Verifique a Estrutura Copiada
@@ -496,25 +498,21 @@ Isso:
 - ✅ Cria logs pendentes
 - ✅ Evita loops de verificação
 
-### 5.5. Mantenha .elefante/ Local
+### 5.5. Versione o .elefante/ (exceto o que é pessoal)
 
 No `.gitignore`:
 
 ```gitignore
-# Elefante - memória local (não compartilhar)
-.elefante/
-.kiro/
+# Elefante - apenas notas pessoais ficam fora do Git
+.elefante/local/
 ```
 
 **Por quê?**
-- Cada dev pode ter notas pessoais
-- Evita conflitos de merge
-- Como `.env` - informação local
+- Decisões, regras e armadilhas são conhecimento **do time**
+- Se cada dev tiver seu próprio `.elefante/`, as memórias divergem
+- Rascunhos e handoffs pessoais ficam em `.elefante/local/`
 
-**Compartilhe apenas:**
-- O código real
-- O `.env.example`
-- O `README.md` do projeto
+**No deploy:** exclua `.elefante/` e `.kiro/` do artefato (`.dockerignore`, `rsync --exclude`) — eles não vão para o servidor.
 
 ---
 
@@ -591,7 +589,7 @@ No `.gitignore`:
 
 ```bash
 # 1. Copie o template
-cp -r elefante/.mestre-laravel/* seu-projeto-existente/
+cp -r elefante/.mestre-laravel/. seu-projeto-existente/
 
 # 2. Configure
 #elefante leia o INICIAR.md e configure
@@ -616,15 +614,14 @@ projeto-3/.elefante/  → Contexto do projeto 3
 
 ### 7.3. Trabalho em Equipe
 
-**Setup individual:**
+**Setup do time:**
 
 ```bash
-# .gitignore (já incluído no template)
-.elefante/
-.kiro/
+# .gitignore — só o pessoal fica de fora
+.elefante/local/
 
-# Cada dev mantém seu .elefante/ local
-# Não há conflitos
+# O resto do .elefante/ vai para o Git como qualquer código
+# Conflitos são resolvidos no PR, como em qualquer arquivo
 ```
 
 **Sincronizar conhecimento:**
@@ -632,10 +629,10 @@ projeto-3/.elefante/  → Contexto do projeto 3
 ```
 Dev 1: #elefante documente a decisão de usar Redis para cache
 
-// Compartilha decisão com time (chat, wiki, etc)
+// Commit + PR: o time revisa a decisão junto com o código
 
-Dev 2: #elefante adicione no 02-REGRAS_E_CULTURA.md:
-"Usar Redis para cache de sessões e queries frequentes"
+Dev 2: git pull
+// A IA do Dev 2 já lê a decisão no próximo #elefante
 ```
 
 ### 7.4. Migrar Stack
@@ -644,7 +641,7 @@ Dev 2: #elefante adicione no 02-REGRAS_E_CULTURA.md:
 
 ```bash
 # 1. Copie novo template
-cp -r elefante/.mestre-python/* seu-projeto/
+cp -r elefante/.mestre-python/. seu-projeto/
 
 # 2. Migre informações
 #elefante leia o antigo 01-ESTADO_ATUAL.md do Laravel
@@ -716,10 +713,10 @@ Agora que você domina o Elefante:
 ## 📚 Documentação Relacionada
 
 - [README Principal](README.md) - Visão geral
-- [README Conceitual](README-ELEFANTE.md) - A filosofia do Elefante
-- [Guia de Proteção SSOT](GUIA-SSOT-HOOKS.md) - Como funciona a proteção automática
+- [README Conceitual](README-ELEFANTE.md) - A filosofia do Elefante e a proteção SSOT
 - [Roteiro de Inicialização](INICIAR.md) - Para a IA ler
 - [Changelog](CHANGELOG-FRAMEWORK.md) - Histórico de versões
+- [Roadmap v3.0](ROADMAP-3.0.md) - Próximos passos do framework
 
 ---
 

@@ -5,6 +5,32 @@ Mantido pela equipe **Feyth Tecnologia**.
 
 ---
 
+## [v2.4] — 2026-10-17
+
+### Correções de Instalação, Sincronização de Templates e Roadmap v3.0
+
+#### Corrigido
+- **Comandos de instalação no README e GUIA-DE-USO**:
+  - Corrigido `cp -r elefante/.mestre-*/*` para `cp -r elefante/.mestre-*/.` evitando que o glob `*` do bash ignore pastas ocultas essenciais (`.elefante`, `.agents`, `.kiro`).
+- **CLI `elefante.ps1`**:
+  - `Invoke-Init` agora suporta parâmetro de stack (`init [laravel|django|python|nextjs]`) ou seleção interativa numerada.
+  - Corrige busca pelo caminho do template mestre apontando para `.mestre-<stack>` em vez da pasta legada `.mestre`.
+  - Cópia da pasta `.kiro/` incluída na inicialização para ativar proteção SSOT imediatamente.
+  - Roteador de comandos atualizado para repassar argumentos ao `Invoke-Init`.
+- **Sincronização de Templates Mestres**:
+  - Paridade total de `_TEMPLATE_LOG.md` em todos os 4 templates (`.mestre-laravel`, `.mestre-django`, `.mestre-python`, `.mestre-nextjs`), agora contendo a tabela de Decisões rastreáveis com IDs `D001 [TIPO]` e seção de Handoffs sugeridos.
+  - Criado `.mestre-laravel/.elefante/INDICE.md` que estava ausente no template Laravel.
+- **Arquivos e Links**:
+  - Adicionado arquivo `LICENSE` (MIT License) oficial da Feyth Tecnologia.
+  - Atualizado `setup_elefante.json` para v2.4, incluindo menções a `00-PRINCIPIOS.md`, `hooks.yml`, `modo.yml` e `.kiro/`.
+  - Corrigidos links quebrados na documentação e alinhada a diretriz de Git em equipes (versionar `.elefante/` e ignorar apenas `.elefante/local/`).
+  - Removidos números e depoimentos de marketing sem auditoria empírica, substituindo por compromisso com benchmark formal no roadmap.
+
+#### Adicionado
+- **`ROADMAP-3.0.md`**: Plano oficial de evolução da v3.0 com 5 fases de implementação baseado no benchmark com ai-memory.
+
+---
+
 ## [v2.3] — 2026-08-25
 
 ### 9 Melhorias Inspiradas no Spec Kit (github/spec-kit)

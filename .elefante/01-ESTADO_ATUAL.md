@@ -143,12 +143,20 @@ elefante/
 | 2026-08-25 | Comandos #elefante verificar / analisar | Operações somente leitura para diagnóstico do SSOT — inspirado em converge/analyze do Spec Kit |
 | 2026-08-25 | Sistema de hooks externos (hooks.yml) | Externalizar comportamento pré/pós tarefa para arquivo editável por projeto |
 | 2026-08-25 | Modo configurável (modo.yml) | lean/completo/strict para adaptar overhead ao tamanho do projeto |
+| 2026-10-17 | Corrigir cópia de pastas ocultas e refatorar CLI elefante.ps1 | Evitar que instalador ignore .elefante, .agents e .kiro; suporte a stacks no init |
+| 2026-10-17 | Sincronizar templates dos 4 mestres | Garantir paridade com _TEMPLATE_LOG.md e INDICE.md em todos os subtemplates |
+| 2026-10-17 | Adotar CLI oficial em Node.js para Elefante v3.0 | Portabilidade multiplataforma sem runtime pesado, executável direto com npx elefante |
+| 2026-10-17 | Criar utilitário de migração automática (elefante migrar) | Garantir transição transparente de projetos v2.3 para v3.0 sem retrabalho manual |
+| 2026-10-17 | Posicionamento como camada declarativa curada compatível com OKF v0.2 | Complementar ferramentas de infraestrutura (como ai-memory) com princípios, regras e ADRs |
+| 2026-10-17 | Versionamento de .elefante/ no Git para equipes | Memória técnica é do time; apenas .elefante/local/ (handoffs e rascunhos) fica no .gitignore |
 
 ## Status do Momento
-- **Data da Implementação:** 2026-08-25
-- **Versão:** Framework Elefante v2.3 (melhorias inspiradas no Spec Kit)
-- Todas as 9 melhorias baseadas no Spec Kit (github/spec-kit) foram implementadas
-- Novos arquivos por template: `00-PRINCIPIOS.md`, `hooks.yml`, `modo.yml`
-- AGENTS.md expandido com comandos: `#elefante verificar`, `#elefante analisar`, `#elefante clarificar`, `#elefante encerrar sessão`
-- Templates disponíveis: 4 (Laravel, Django, Next.js, Python)
-- Próximo passo: Atualizar CHANGELOG-FRAMEWORK.md e documentação de uso
+- **Data da Implementação:** 2026-10-17
+- **Versão:** Framework Elefante v2.4 (Estabilização de Instalação e Roadmap v3.0)
+- Fase 0 do roadmap concluída:
+  - Comandos de instalação corrigidos em README.md e GUIA-DE-USO.md
+  - CLI `elefante.ps1` atualizado para aceitar stack (`init [laravel|django|python|nextjs]`) e copiar `.kiro/`
+  - Templates sincronizados em todos os 4 mestres (`_TEMPLATE_LOG.md` e `INDICE.md`)
+  - `LICENSE` (MIT) adicionado e `setup_elefante.json` atualizado para v2.4
+  - `ROADMAP-3.0.md` criado com decisões aprovadas
+- Próximo passo: Iniciar a Fase 1 da v3.0 (estrutura `core/` + CLI Node.js multiplataforma).

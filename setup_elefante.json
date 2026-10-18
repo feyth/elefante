@@ -1,100 +1,83 @@
 {
   "nome": "Assistente de Inicialização do Elefante",
-  "versao": "2.0",
+  "versao": "2.4",
   "descricao": "Guia passo a passo para a IA iniciar e estruturar a memória do projeto do zero.",
-  "gatilho_sugerido": "#elefante iniciar_projeto",
+  "gatilho_sugerido": "#elefante leia o INICIAR.md e configure este projeto",
   "passos": [
     {
       "passo": 1,
-      "acao": "Copiar Estrutura Base do Elefante",
-      "instrucao": "Copie a pasta '.elefante' da pasta '.mestre' para a raiz do novo projeto. Esta pasta contém: 01-ESTADO_ATUAL.md, 02-REGRAS_E_CULTURA.md, historico/, README-ELEFANTE.md e todos os documentos base."
+      "acao": "Identificar Stack e Copiar Template",
+      "instrucao": "Identifique a stack (Laravel, Django, Python ou Next.js) e copie a pasta do respectivo template (.mestre-laravel, .mestre-django, .mestre-python ou .mestre-nextjs) para a raiz do novo projeto, preservando arquivos ocultos (.elefante, .agents, .kiro)."
     },
     {
       "passo": 2,
-      "acao": "Copiar Configuração de Agentes",
-      "instrucao": "Copie a pasta '.agents' (que contém AGENTS.md) para a raiz do novo projeto. Este arquivo configura o comportamento da IA para usar o Framework Elefante automaticamente."
+      "acao": "Entrevista de Inicialização (Passo 1 do INICIAR.md)",
+      "instrucao": "Pergunte ao usuário em uma única mensagem: Nome do Projeto, Stack Backend, Stack Frontend, Banco de Dados, Bibliotecas Principais, Objetivo do Sistema e Regras Específicas."
     },
     {
       "passo": 3,
-      "acao": "Ler a Mente do Usuário",
-      "instrucao": "Pergunte ao usuário o Nome do Projeto, a Stack Tecnológica (Backend, Frontend, Banco de Dados) e o Objetivo Principal do sistema."
+      "acao": "Atualizar 01-ESTADO_ATUAL.md",
+      "instrucao": "Preencha as seções de Informações do Projeto, Stack, Arquitetura, Módulos Iniciais, Ambiente/Deploy e Status do Momento com as respostas do usuário."
     },
     {
       "passo": 4,
-      "acao": "Atualizar 01-ESTADO_ATUAL.md",
-      "instrucao": "Com base nas respostas do Passo 3, abra e preencha as lacunas [NOME DO PROJETO] e [INSERIR TECNOLOGIAS] no arquivo .elefante/01-ESTADO_ATUAL.md. Atualize seções: Informações do Projeto, Stack, Arquitetura do Sistema."
+      "acao": "Configurar 00-PRINCIPIOS.md e 02-REGRAS_E_CULTURA.md",
+      "instrucao": "Detecte os arquivos do projeto (composer.json, package.json, requirements.txt, etc.) para calibrar regras reais da stack. Mantenha os princípios MUST inegociáveis."
     },
     {
       "passo": 5,
       "acao": "Atualizar DASHBOARD-ARQUITETURA.html",
-      "instrucao": "Abra .elefante/DASHBOARD-ARQUITETURA.html e substitua TODOS os placeholders: [NOME DO PROJETO], [DATA], [X] (estatísticas), [BACKEND], [FRONTEND], [DATABASE], [BUILD_TOOL]. Defina estatísticas iniciais como 0 ou valores base do boilerplate."
+      "instrucao": "Substitua [NOME DO PROJETO], [DATA], estatísticas iniciais (0 para projeto novo) e stack informada no arquivo .elefante/DASHBOARD-ARQUITETURA.html."
     },
     {
       "passo": 6,
-      "acao": "Definir Cultura",
-      "instrucao": "Pergunte ao usuário se ele deseja adicionar alguma regra específica de código (ex: 'Sempre usar Tailwind' ou 'Proibido usar jQuery'). Atualize o arquivo .elefante/02-REGRAS_E_CULTURA.md com essas regras."
+      "acao": "Criar Log de Início e Atualizar INDICE.md",
+      "instrucao": "Crie .elefante/historico/YYYYMMDD_inicializacao_projeto.md a partir do _TEMPLATE_LOG.md e registre no .elefante/INDICE.md."
     },
     {
       "passo": 7,
-      "acao": "Criar Log de Início",
-      "instrucao": "Crie um arquivo dentro de .elefante/historico/ chamado YYYYMMDD_inicializacao_projeto.md relatando que o boilerplate do Elefante foi instanciado com sucesso, o projeto começou, e liste as tecnologias escolhidas."
+      "acao": "Confirmar Proteção SSOT (.kiro/)",
+      "instrucao": "Garanta que .kiro/hooks (ssot-commit-reminder.json, ssot-guard.json) e .kiro/steering/ssot-enforcement.md estão presentes para evitar amnésia em sessões longas."
     },
     {
       "passo": 8,
-      "acao": "Limpar Histórico Antigo (Opcional)",
-      "instrucao": "Pergunte ao usuário se deseja limpar os logs históricos antigos do projeto base (pasta historico/). Se sim, delete todos os arquivos exceto o log de inicialização recém-criado. Mantenha apenas o arquivo .keep."
-    },
-    {
-      "passo": 9,
-      "acao": "Verificar Estrutura",
-      "instrucao": "Confirme que a estrutura está correta: /.elefante/ (documentação), /.agents/ (configuração IA), .gitignore atualizado (se necessário). Liste os arquivos criados/copiados."
-    },
-    {
-      "passo": 10,
-      "acao": "Apresentação",
-      "instrucao": "Finalize o processo informando ao usuário que a Memória (SSOT) está configurada, o Framework Elefante está ativo, o Dashboard de Arquitetura foi gerado em .elefante/DASHBOARD-ARQUITETURA.html e pergunte: 'Qual será a nossa primeira missão no código?'"
+      "acao": "Apresentação e Próximo Passo",
+      "instrucao": "Confirme os arquivos configurados e pergunte ao usuário: 'Qual será a nossa primeira missão no código?'"
     }
   ],
   "estrutura_esperada": {
     "raiz_do_projeto": [
       ".elefante/",
-      ".agents/"
+      ".agents/",
+      ".kiro/"
     ],
     "dentro_de_elefante": [
+      ".elefante/00-PRINCIPIOS.md",
       ".elefante/01-ESTADO_ATUAL.md",
       ".elefante/02-REGRAS_E_CULTURA.md",
+      ".elefante/hooks.yml",
+      ".elefante/modo.yml",
+      ".elefante/QUICK-REFERENCE.md",
+      ".elefante/INDICE.md",
       ".elefante/DASHBOARD-ARQUITETURA.html",
       ".elefante/historico/",
       ".elefante/README-ELEFANTE.md"
     ],
     "dentro_de_agents": [
       ".agents/AGENTS.md"
+    ],
+    "dentro_de_kiro": [
+      ".kiro/hooks/ssot-commit-reminder.json",
+      ".kiro/hooks/ssot-guard.json",
+      ".kiro/steering/ssot-enforcement.md"
     ]
   },
   "notas_importantes": [
-    "A pasta .mestre é o MASTER e nunca deve ser modificada - apenas copiada para novos projetos",
-    "A pasta .agents deve ficar na RAIZ do projeto (não dentro de .elefante)",
-    "O arquivo .agents/AGENTS.md contém as REGRAS DE COMPORTAMENTO da IA (workflow #elefante)",
-    "Sempre use '#elefante' nos prompts para ativar o Framework",
-    "Atualize 01-ESTADO_ATUAL.md após mudanças estruturais grandes",
-    "Crie logs em historico/ após tarefas grandes (>2h de trabalho)",
-    "Workflow completo está documentado em .agents/AGENTS.md",
-    "Após setup, a IA deve seguir: Ler Mente (silencioso) → Executar Tarefa → Atualizar Memória"
-  ],
-  "arquivos_chave": {
-    ".agents/AGENTS.md": "Workflow e regras de comportamento da IA com Framework Elefante",
-    ".elefante/01-ESTADO_ATUAL.md": "SSOT - Single Source of Truth do sistema",
-    ".elefante/02-REGRAS_E_CULTURA.md": "Regras arquiteturais obrigatórias",
-    ".elefante/DASHBOARD-ARQUITETURA.html": "Dashboard visual HTML da arquitetura (atualizar sempre!)",
-    "README-ELEFANTE.md": "Introdução e documentação completa do Framework Elefante"
-  },
-  "regras_dashboard": [
-    "O DASHBOARD-ARQUITETURA.html DEVE ser atualizado SEMPRE que a arquitetura mudar",
-    "Atualizar estatísticas (Controllers, Models, Services, Views, Migrations)",
-    "Atualizar Tech Stack (Backend, Frontend, Database, Build Tool)",
-    "Adicionar novos módulos na seção 'Módulos do Sistema'",
-    "Atualizar data no header [DATA] para a data atual",
-    "Manter diagramas ASCII art alinhados e legíveis",
-    "Usar este dashboard para visualização rápida da arquitetura"
+    "Os templates .mestre-* são mestres imutáveis e servem de base para novos projetos",
+    "A pasta .agents deve ficar na RAIZ do projeto para configurar o comportamento da IA",
+    "A pasta .kiro contém hooks e steering files com inclusion:always",
+    "Sempre use a hashtag '#elefante' nos prompts para ativar o protocolo de memória",
+    "O SSOT (01-ESTADO_ATUAL.md) deve ser atualizado imediatamente após mudanças estruturais",
+    "Decisões arquiteturais devem ter ID rastreável (D001 [TIPO]) nos logs"
   ]
 }

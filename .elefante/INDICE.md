@@ -23,6 +23,7 @@
 | 2026-08-12 | `20260812_adicao_template_python.md` | Adição do template Python/FastAPI/Flask ao framework |
 | 2026-08-12 | `20260812_criar_documentacao_pratica.md` | Criação de README.md prático e GUIA-DE-USO.md (v2.2) |
 | 2026-08-25 | `20260825_melhorias_spec_kit.md` | 9 melhorias v2.3 inspiradas no Spec Kit (00-PRINCIPIOS, hooks.yml, modo.yml, novos comandos) |
+| 2026-10-17 | `20261017_estabilizacao_v24_e_roadmap_v30.md` | Estabilização de instalação v2.4, sincronização de templates e Roadmap v3.0 |
 
 ### Autenticação e Segurança
 | Data | Arquivo | Descrição |
@@ -93,5 +94,5 @@ Se a categoria não existir, crie uma nova seção seguindo o padrão acima.
 
 ---
 
-*Última atualização: 2026-08-25*  
+*Última atualização: 2026-10-17*  
 *Framework Elefante 🐘 — [Feyth Tecnologia](https://www.feyth.com.br)*
