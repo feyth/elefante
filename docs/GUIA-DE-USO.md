@@ -53,36 +53,21 @@ https://github.com/feyth/elefante/archive/refs/heads/main.zip
 
 ### 1.3. Escolha o Template da Sua Stack
 
-O Elefante tem 4 templates pré-configurados:
+O Elefante oferece duas formas de inicialização:
 
-| Se você usa... | Copie este template... |
-|---|---|
-| **Laravel/PHP** | `.mestre-laravel/` |
-| **Django** | `.mestre-django/` |
-| **Python (FastAPI/Flask/scripts)** | `.mestre-python/` |
-| **Next.js/React** | `.mestre-nextjs/` |
-
-### 1.4. Copie para Seu Projeto
-
+#### Via CLI Oficial (Node.js >= 18)
+Dentro da pasta do seu projeto, execute:
 ```bash
-# Use "pasta/." (não "pasta/*"): o * do bash ignora .elefante/, .agents/ e .kiro/
-
-# Exemplo: Projeto Laravel
-cp -r elefante/.mestre-laravel/. ~/meus-projetos/meu-projeto-laravel/
-
-# Exemplo: Projeto Django
-cp -r elefante/.mestre-django/. ~/meus-projetos/meu-projeto-django/
-
-# Exemplo: Projeto Python
-cp -r elefante/.mestre-python/. ~/meus-projetos/meu-api-fastapi/
-
-# Exemplo: Projeto Next.js
-cp -r elefante/.mestre-nextjs/. ~/meus-projetos/meu-app-nextjs/
+npx @feyth/elefante init
 ```
+O CLI detectará automaticamente se seu projeto é **Laravel**, **Django**, **Python** ou **Next.js**, e criará a estrutura `.elefante/` com o protocolo universal `AGENTS.md`.
 
-**No Windows (PowerShell)** — rode de dentro do seu projeto:
-```powershell
-C:\caminho\para\elefante\elefante.ps1 init laravel   # ou django | python | nextjs
+#### Via Pasta Única (Sem Node.js)
+Copie a pasta **`template/`** do Elefante para o seu projeto e renomeie-a para **`.elefante`**.
+No chat com seu agente, envie:
+```
+#elefante leia setup_elefante.json e configure este projeto
+```
 ```
 
 ### 1.5. Verifique a Estrutura Copiada
@@ -665,58 +650,42 @@ e crie um novo para FastAPI mantendo as mesmas regras de negócio
 
 ## 8. Perguntas Frequentes
 
-### P: Funciona com qualquer IA?
-**R:** Sim! Funciona com Kiro, Cursor, Claude, ChatGPT, etc. Os hooks automáticos são exclusivos do Kiro, mas a metodologia funciona em qualquer IA.
+### P: Funciona com qualquer IA ou editor?
+**R:** Sim! Funciona com Cursor, VS Code, Windsurf, Claude Code, Antigravity, JetBrains, ChatGPT Web ou qualquer assistente. Ele opera via padrão universal `AGENTS.md` e não requer nenhuma IDE proprietária.
 
 ### P: Preciso pagar algo?
-**R:** Não! Elefante é grátis e open source (MIT License). Você só paga pela IA que usar (Kiro, Cursor, Claude, etc).
+**R:** Não! O Elefante é 100% grátis e open source (MIT License). Você só paga pelo modelo ou IA que decidir utilizar.
 
-### P: E se eu usar outra linguagem (Go, Rust, .NET)?
-**R:** Adapte um template existente. A estrutura `.elefante/` é universal. Contribua o template de volta!
+### P: E se eu usar outra linguagem (Go, Rust, .NET, Java)?
+**R:** O template universal [`template/`](../template/) é totalmente agnóstico e opera puramente em Markdown + YAML.
 
 ### P: Posso usar em projetos comerciais?
-**R:** Sim! MIT License permite uso comercial. Apenas mantenha a atribuição à Feyth Tecnologia.
+**R:** Sim! A licença MIT permite uso comercial irrestrito.
 
 ### P: Como atualizo o Elefante?
-**R:** 
-```bash
-git pull  # No repo do Elefante
-# Compare seu .elefante/ com novos templates
-# Atualize manualmente o que quiser
-```
+**R:** Basta rodar `npx @feyth/elefante status` ou `npx @feyth/elefante doctor` no seu projeto para auditar conformidade.
 
-### P: Elefante substitui documentação técnica?
-**R:** Não! Elefante é memória para IA, não documentação para humanos. Mantenha README, wikis, etc para o time.
-
-### P: E se eu esquecer o #elefante?
-**R:** A IA não vai ler o SSOT e pode gerar código inconsistente. Crie o hábito: **sempre** `#elefante`.
-
-### P: Quanto espaço ocupa?
-**R:** ~500KB por projeto. A pasta `.elefante/` é leve (arquivos Markdown).
-
-### P: Funciona offline?
-**R:** A estrutura funciona, mas você precisa de IA online (Kiro, Cursor, Claude) para processar.
+### P: O prefixo #elefante é obrigatório?
+**R:** Em editores modernos que indexam o `AGENTS.md` (Cursor, Windsurf, Claude Code, etc.), as instruções já são carregadas automaticamente pelo agente. O prefixo `#elefante` é recomendado em interfaces web de chat ou quando você quer forçar uma verificação explícita de SSOT.
 
 ---
 
 ## 🎓 Próximos Passos
 
-Agora que você domina o Elefante:
-
-1. ✅ **Experimente em um projeto real** (comece pequeno)
-2. ✅ **Compartilhe seu feedback** (GitHub Issues/Discussions)
-3. ✅ **Ajude a melhorar** (contribua com PRs)
-4. ✅ **Espalhe a palavra** (⭐ no GitHub!)
+1. ✅ **Experimente em um projeto real** (usando a pasta `template/` ou `npx @feyth/elefante init`)
+2. ✅ **Ative o hook pré-commit** (`npx @feyth/elefante check --install-hook`)
+3. ✅ **Compartilhe seu feedback** (GitHub Issues/Discussions)
+4. ✅ **Ajude a melhorar** (contribua com PRs)
 
 ---
 
 ## 📚 Documentação Relacionada
 
-- [README Principal](README.md) - Visão geral
-- [README Conceitual](README-ELEFANTE.md) - A filosofia do Elefante e a proteção SSOT
-- [Roteiro de Inicialização](INICIAR.md) - Para a IA ler
-- [Changelog](CHANGELOG-FRAMEWORK.md) - Histórico de versões
-- [Roadmap v3.0](ROADMAP-3.0.md) - Próximos passos do framework
+- [README Principal](../README.md) - Visão geral e inicialização rápida
+- [Roteiro de Inicialização](../INICIAR.md) - Roteiro guiado para o agente
+- [Benchmark e Protocolo Eval](BENCHMARK.md) - Metodologia de medição e testes
+- [Roadmap de Engenharia v3.0](ROADMAP.md) - Próximos passos e releases
+- [Histórico de Mudanças (Changelog)](CHANGELOG.md) - Histórico completo de versões
 
 ---
 

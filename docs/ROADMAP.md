@@ -1,92 +1,73 @@
 # 🗺️ Roadmap Framework Elefante v3.0
 
 > Documento oficial de evolução arquitetural do **Framework Elefante 🐘**.  
-> Baseado no estudo comparativo com [ai-memory](https://github.com/akitaonrails/ai-memory) e aprovado pela engenharia.
+> Baseado no estudo comparativo com ferramentas de memória de IA e aprovado pela engenharia.
 
 ---
 
 ## 🎯 Visão Estratégica
 
-O **Elefante** é uma **camada de memória declarativa e curada** (princípios, regras por stack, decisões arquiteturais justificadas e armadilhas reais).
+O **Elefante** é uma **camada de memória declarativa e curada** (princípios, regras por stack, decisões arquiteturais justificadas e catálogo de armadilhas).
 
-Enquanto ferramentas de infraestrutura (como o *ai-memory*) capturam histórico episódico bruto via hooks de processo e indexam em banco vetorial/SQLite, o Elefante garante que a IA sempre **respeite as leis e padrões do projeto** desde o primeiro prompt, com **zero dependências e zero aprisionamento**.
-
-Os dois mundos se complementam: o Elefante 3.0 adota o formato padrão **OKF v0.2 (Open Knowledge Format)** para que qualquer ferramenta ou agente consiga ler sua base de conhecimento.
+Enquanto ferramentas de infraestrutura capturam histórico episódico bruto via hooks de processo e indexam em banco vetorial, o Elefante garante que a IA sempre **respeite as leis e padrões do projeto** desde o primeiro prompt, com **zero dependências e zero aprisionamento de ferramentas**.
 
 ---
 
 ## 🧭 Decisões Arquiteturais Consolidadas (v3.0)
 
-1. **Linguagem do CLI Oficial:** **Node.js** (`npx elefante init`, `npx elefante check`, `npx elefante brief`).  
-   - *Por quê:* Multiplataforma nativa (Windows, Linux, macOS), sem necessidade de instalar binários compilados pesados, executável com um comando via NPX.
-
-2. **Compatibilidade e Transição:** **Migração Automática** (`elefante migrar`).  
-   - Converte automaticamente projetos na v2.3 (tabelas em arquivos monolíticos) para a estrutura atômica da v3.0, sem quebrar bases existentes.
-
-3. **Posicionamento de Mercado:** **Camada Curada Complementar**.  
-   - Foco em princípios inegociáveis, convenções de stack, árvore de decisões (ADRs) e catálogo de armadilhas. Exportável para OKF v0.2.
+1. **Linguagem do CLI Oficial:** **Node.js** (`npx @feyth/elefante`).  
+   - Multiplataforma nativa (Windows, Linux, macOS), executável instantaneamente sem runtimes compilados adicionais.
+2. **Padrão Universal Único:** **`AGENTS.md`**  
+   - Desacoplamento total de editores proprietários. Adaptadores específicos só são gerados se a respectiva pasta já existir no repositório.
+3. **Pasta Única para Onboarding Manual:** **`template/`**  
+   - Uma pasta limpa e autocontida que pode ser copiada diretamente para qualquer projeto sem necessidade de ferramentas de linha de comando.
+4. **Governança Determinística:** **Git Hook (`elefante check`)**  
+   - Bloqueio pré-commit de alterações estruturais sem sincronização do SSOT.
+5. **Compatibilidade e Transição:** **Migração Não-Destrutiva (`elefante migrar`)**  
+   - Converte automaticamente projetos v2.x para a arquitetura v3.0 com backup prévio.
 
 ---
 
 ## 🚀 Fases de Implementação
 
 ### 🟢 Fase 0 — Correção e Estabilização (v2.4) [CONCLUÍDA]
-- [x] Corrigir comandos de instalação (`cp -r .mestre-*/*` que ignorava pastas ocultas `.elefante`, `.agents`, `.kiro`).
-- [x] Refatorar `elefante.ps1 init` para aceitar stacks (`laravel`, `django`, `python`, `nextjs`) e copiar `.kiro/`.
-- [x] Sincronizar templates dos 4 mestres (`_TEMPLATE_LOG.md` com IDs `D001 [TIPO]` e Handoffs; criar `INDICE.md` no Laravel).
+- [x] Corrigir comandos de instalação que ignoravam arquivos ocultos.
+- [x] Sincronizar templates dos 4 mestres (`_TEMPLATE_LOG.md` com IDs `D001 [TIPO]`).
 - [x] Criar arquivo `LICENSE` (MIT) e remover links quebrados.
-- [x] Atualizar `setup_elefante.json` para v2.4.
-- [x] Remover números e depoimentos sem comprovação empírica, substituindo por compromisso com benchmark auditável.
+- [x] Remover números e depoimentos sem comprovação empírica.
 
 ---
 
-### 🟡 Fase 1 — Fundação & Novo CLI Multiplataforma (Node.js)
-- [ ] Criar pacote `@feyth/elefante` (ou CLI standalone em `cli/` no monorepo).
-- [ ] `elefante init [stack]`:
-  - Detecção automática de IDEs/Agentes instalados (Claude Code, Cursor, Windsurf, Kiro, Antigravity, VS Code).
-  - Geração automática de adaptadores: `AGENTS.md` (padrão agnóstico), `CLAUDE.md`, `.cursor/rules/elefante.mdc`, `GEMINI.md`, `.kiro/steering/`.
-  - Flag `--plan` (simulação dry-run sem alterar disco) e execução idempotente.
-- [ ] `elefante doctor`:
-  - Verificação determinística de integridade: checa placeholders `[PREENCHER]`, links quebrados, SSOT desatualizado (>7 dias), divergência de regras e vazamento acidental de tokens/segredos.
-- [ ] Reestruturação do repositório em `core/` (arquivos universais) + `stacks/` (apenas o que varia por stack), eliminando duplicação de templates.
+### 🟢 Fase 1 — Fundação, CLI Multiplataforma & Desacoplamento (v3.0) [CONCLUÍDA]
+- [x] CLI oficial em `cli/` com comandos `init`, `status`, `doctor`, `log`, `check`, `migrar`, `handoff`, `export`, `compactar`.
+- [x] Detecção automática de ambiente e geração sob demanda de adaptadores.
+- [x] Adoção do padrão aberto universal `AGENTS.md` na raiz e remoção de qualquer amarração a ferramentas específicas.
+- [x] Reestruturação do repositório em `core/` (universais), `stacks/` (desacopladas por tecnologia) e `template/` (pasta única limpa).
+- [x] Diagnóstico `elefante doctor`: auditoria de placeholders, defasagem de datas, princípios MUST e segredos expostos.
 
 ---
 
-### 🟠 Fase 2 — Memória Atômica & Orçamento de Contexto
-- [ ] **Briefing Dinâmico com Orçamento (`BRIEF.md`):**
-  - Gerador que condensa o contexto crítico em até 4.000 caracteres (princípios MUST, stack, módulos ativos, armadilhas fixadas e handoff aberto).
-  - Redução drástica de consumo de contexto: de ~10.000 tokens para ~1.500 tokens por tarefa.
-- [ ] **Páginas Atômicas com Frontmatter (OKF v0.2):**
-  - Migrar tabelas embutidas para arquivos individuais:
-    - `.elefante/decisoes/D001-nome.md` (status: ativa/substituida, tags, justificativa).
-    - `.elefante/armadilhas/A001-nome.md` (como evitar, severidade).
-    - `.elefante/procedimentos/deploy.md`.
-- [ ] **Mecanismo de Supersede (Substituição Histórica):**
-  - Decisões revertidas recebem `status: substituida` e `substituida_por: D00X`, garantindo rastreabilidade imutável no Git sem apagar o passado.
-- [ ] **Handoff Tipado (`.elefante/local/HANDOFF.md`):**
-  - Transição perfeita entre agentes diferentes (ex: pausar no Claude Code e retomar no Cursor/Antigravity): *Onde parei, o que falhou, o que está aberto, próximo comando*.
-- [ ] **Comando `elefante migrar`:**
-  - Utilitário de migração automática para bases v2.3.
+### 🟢 Fase 2 — Memória Modular & Transição de Contexto (v3.0) [CONCLUÍDA]
+- [x] **Templates Atômicos (OKF v0.2):** Formato padronizado para decisões (`decisao.md`), armadilhas (`armadilha.md`) e procedimentos.
+- [x] **Handoff Tipado (`.elefante/local/HANDOFF.md`):** Transição de contexto local para alternar entre diferentes IAs ou desenvolvedores.
+- [x] **Comando `elefante migrar`:** Migrador automático com backup para converter projetos v2.x para v3.0.
+- [x] **Exportador OKF (`elefante export okf`):** Exportação de manifesto de contexto padronizado.
 
 ---
 
-### 🔵 Fase 3 — Garantias Determinísticas & Hooks Reais
-- [ ] Hook de `pre-commit` no Git (`elefante check`):
-  - Alerta bloqueante se arquivos estruturais (`app/`, `database/`, `routes/`, `models.py`) forem modificados sem atualização correspondente no SSOT ou log de tarefa.
-- [ ] Integração com eventos de fim de sessão dos agentes (Claude Code `SessionEnd`, Kiro `Stop`):
-  - Monta automaticamente o rascunho de handoff lendo `git diff --stat`.
-- [ ] Comando `elefante compactar`:
-  - Arquiva logs de sessões antigas para `arquivo/` preservando apenas os resumos no índice.
+### 🟢 Fase 3 — Garantias Determinísticas & Governança (v3.0) [CONCLUÍDA]
+- [x] **Hook de Pre-Commit no Git (`elefante check`):** Bloqueio determinístico se código estrutural for modificado sem atualização do SSOT ou log.
+- [x] **Instalador de Hook (`elefante check --install-hook`):** Configura `.git/hooks/pre-commit` com um único comando.
+- [x] **Comando `elefante compactar`:** Arquivamento cronológico de histórico em `historico/arquivo/YYYY/` mantendo links do índice.
+- [x] **Onboarding de 1 Prompt:** Assistente guiado `setup_elefante.json` e `INICIAR.md` em `template/` e no core.
 
 ---
 
-### 🟣 Fase 4 — Benchmark e Avaliação Empírica (Eval)
-- [ ] Criação de projeto-exemplo de teste e bateria de 30 perguntas arquiteturais complexas.
-- [ ] Benchmark comparativo auditável:
-  - Taxa de acerto arquitetural com Elefante vs. sem Elefante.
-  - Consumo real de tokens medido via proxy/SDK.
-- [ ] Exportador OKF (`elefante export-okf`):
-  - Empacota o conhecimento do Elefante para ingestão direta em qualquer ferramenta compatível com OKF v0.2 (como o *ai-memory*).
+### 🟡 Fase 4 — Benchmark e Avaliação Empírica (Eval) [EM ANDAMENTO]
+- [x] Protocolo formal de avaliação documentado em [**`docs/BENCHMARK.md`**](BENCHMARK.md).
+- [ ] Construção do dataset padronizado de 20 tarefas sequenciais para teste controlado.
+- [ ] Execução de testes A/B (com Elefante vs. sem Elefante) em modelos líderes (Claude, GPT-4o).
+- [ ] Publicação do relatório oficial com métricas de drift arquitetural, taxa de armadilhas evitadas e consumo real de tokens.
 
 ---
 

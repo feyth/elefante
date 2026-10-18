@@ -1,34 +1,44 @@
 # 🐘 Framework Elefante
 
-> **Memória em tempo real e governança contínua para desenvolvimento com IA**
+> **Memória declarativa, governança contínua e redução de amnésia de contexto para desenvolvimento com IA.**
 
-O Framework Elefante elimina a amnésia de contexto em IAs. Instale em segundos, codifique com qualquer agente e mantenha uma IA que nunca esquece sua arquitetura, regras e armadilhas.
+O Framework Elefante organiza o contexto do projeto em uma estrutura minimalista e agnóstica. Ele estabelece princípios arquiteturais invioláveis, um Estado Atual único (SSOT) e um catálogo de armadilhas conhecidas, integrando-se nativamente a qualquer editor ou agente de IA através de padrões abertos.
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 [![Version](https://img.shields.io/badge/version-3.0.0-green.svg)](docs/CHANGELOG.md)
-[![OKF](https://img.shields.io/badge/standard-OKF%20v0.2-orange.svg)](elefante-okf.json)
+[![Status: Active](https://img.shields.io/badge/status-active-blue.svg)](docs/ROADMAP.md)
 
 ---
 
-## 🎯 Em 30 Segundos (Novo CLI Oficial v3.0)
+## 🎯 Inicialização Rápida
 
-Em qualquer projeto novo ou existente, execute:
+Você pode inicializar o Elefante no seu projeto de duas formas simples:
 
+### Opção A: Via Pasta Única (`template/`) — Sem Node.js
+Se preferir não usar o terminal:
+1. Copie a pasta **[`template/`](template/)** para a raiz do seu projeto e renomeie-a para **`.elefante`** *(copie apenas essa pasta; nada mais é necessário)*.
+2. Abra o chat com o seu assistente de IA (Cursor, VS Code, Windsurf, Claude Code, etc.) e envie:
+   ```
+   #elefante leia setup_elefante.json e configure este projeto
+   ```
+   *(ou: `leia .elefante/setup_elefante.json e configure este projeto`)*
+3. A IA copia o protocolo **`AGENTS.md`** para a raiz automaticamente, analisa os arquivos do seu repositório (`composer.json`, `package.json`, etc.), faz 2 perguntas rápidas de alinhamento e calibra o SSOT.
+
+---
+
+### Opção B: Via CLI Oficial (Node.js >= 18)
+Se preferir o terminal:
 ```bash
-# 1. Inicialize o Elefante no seu projeto (auto-detecta stack e agentes de IA instalados):
+# 1. Inicialize o Elefante (detecta stack e gera o protocolo AGENTS.md):
 npx @feyth/elefante init
 
-# 2. Na sua IDE favorita (Cursor, Claude Code, Antigravity, Kiro, Windsurf), inicie com:
-#elefante leia o estado atual e vamos começar
+# 2. Ative a verificação determinística pré-commit no Git:
+npx @feyth/elefante check --install-hook
 
-# 3. A IA lê a arquitetura, segue suas regras inegociáveis e atualiza a documentação sozinha!
+# 3. Inicie uma tarefa no seu editor:
+#elefante crie o fluxo de autenticação com JWT
 ```
-
-**O que o Elefante garante:**
-- ✅ **Fronteira de Confiança (Trust Boundary):** Princípios e Regras operam como instruções soberanas; histórico passado é tratado como dado contextual.
-- ✅ **Hook Pré-Commit no Git:** Bloqueia commits de código estrutural sem atualização de documentação (`elefante check --install-hook`).
-- ✅ **Handoff Privativo:** Alterne entre diferentes IAs sem perder o fio da meada (`elefante handoff`).
-- ✅ **Interoperabilidade Aberta:** Compatível nativamente com o padrão aberto **OKF v0.2** (`elefante export okf`).
+*(Nota: O CLI também pode ser executado localmente via `node cli/bin/elefante.js <comando>`)*.
 
 ---
 
@@ -38,364 +48,144 @@ npx @feyth/elefante init
 ```
 Você: "Crie uma API de pagamentos"
 
-IA: *Lê 50 arquivos aleatórios*
-    *Gasta 25.000 tokens à toa*
-    *Esquece suas regras de arquitetura*
-    *Mistura lógica de negócio dentro de controllers*
-    *A documentação fica desatualizada*
+IA: *Lê dezenas de arquivos dispersos*
+    *Consome 20.000+ tokens de contexto sem foco*
+    *Ignora padrões arquiteturais estabelecidos*
+    *Mistura regras de negócio em controllers/views*
+    *Não documenta alterações nem atualiza dependências*
 ```
 
 ### Com o Elefante v3.0 ✅
 ```
 Você: "#elefante crie uma API de pagamentos"
 
-IA: *Lê os arquivos curados do .elefante/ (Princípios, SSOT, Regras)*
-    *Respeita a arquitetura definida (Controller -> Action -> Service)*
-    *Desvia das armadilhas conhecidas do projeto*
-    *Atualiza o SSOT e gera log de sessão ao concluir*
+IA: *Lê os arquivos curados em .elefante/ (Princípios, SSOT, Regras)*
+    *Respeita a arquitetura definida (ex: Controller -> Action -> Service)*
+    *Evita armadilhas já mapeadas no catálogo histórico*
+    *Atualiza o SSOT (01-ESTADO_ATUAL.md) ao modificar arquivos estruturais*
+    *Registra decisões com IDs rastreáveis (D001 [TIPO])*
 ```
 
 ---
 
-## 🚀 Instalação e Comandos do CLI
+## 🛠️ Comandos do CLI Oficial
 
-O CLI oficial do Elefante roda com **Node.js (>= 18)** sem nenhuma dependência externa:
-
-### Comandos Disponíveis
+O CLI oficial do Elefante não possui dependências externas pesadas e disponibiliza ferramentas para auditoria, governança e transição:
 
 | Comando | Descrição |
 |---|---|
-| `npx @feyth/elefante init` | Inicializa o framework (detecta Laravel, Django, Python ou Next.js). |
-| `npx @feyth/elefante status` | Exibe o status do SSOT, módulos concluídos e adaptadores ativos. |
-| `npx @feyth/elefante doctor` | Unit tests da documentação, auditoria de integridade e scanner de segredos. |
-| `npx @feyth/elefante check` | Valida se código estrutural foi alterado sem atualizar documentação. |
-| `npx @feyth/elefante check --install-hook` | Instala hook de pre-commit no Git para bloqueio determinístico. |
-| `npx @feyth/elefante log "título"` | Cria novo log em `historico/` e auto-indexa no `INDICE.md`. |
-| `npx @feyth/elefante migrar` | Migra projetos legados v2.x para o formato modular v3.0 (suporta `--plan`). |
-| `npx @feyth/elefante handoff "nota"` | Cria resumo de transição em `.elefante/local/HANDOFF.md`. |
-| `npx @feyth/elefante export okf` | Exporta manifesto compatível com Open Knowledge Format (OKF v0.2). |
-| `npx @feyth/elefante compactar` | Arquiva sessões antigas preservando todos os links do índice. |
+| `npx @feyth/elefante init [stack]` | Inicializa o framework (suporta `laravel`, `django`, `python`, `nextjs` ou auto-detecção; flag `--plan`). |
+| `npx @feyth/elefante status` | Exibe o resumo do SSOT, percentual de módulos concluídos e protocolo de IA ativo. |
+| `npx @feyth/elefante doctor` | Executa diagnóstico profundo: placeholders pendentes, defasagem de datas, regras MUST e scanner de segredos. |
+| `npx @feyth/elefante check` | Verifica se código estrutural foi alterado sem atualização correspondente da documentação. |
+| `npx @feyth/elefante check --install-hook` | Instala hook de pre-commit no `.git/hooks/` para validação determinística antes de cada commit. |
+| `npx @feyth/elefante log "título"` | Gera um novo arquivo de log em `historico/` e auto-indexa no `INDICE.md`. |
+| `npx @feyth/elefante compactar` | Arquiva logs antigos em `historico/arquivo/YYYY/` mantendo links do índice e reduzindo overhead. |
+| `npx @feyth/elefante handoff "nota"` | Cria resumo de transição local em `.elefante/local/HANDOFF.md` para alternar entre diferentes IAs ou devs. |
+| `npx @feyth/elefante migrar` | Converte bases legadas v2.x para a arquitetura modular v3.0 com backup prévio automático. |
+| `npx @feyth/elefante export okf` | Exporta o contexto do projeto em formato **OKF v0.2 (Open Knowledge Format)**. |
 
 ---
 
-### 🚀 Inicialização com Pasta Única (Copiar & Colar — 1 Prompt)
-
-Se você não quiser usar terminal nem rodar comandos, basta copiar uma pasta:
-
-1. Copie a pasta **`template/`** para dentro do seu projeto e renomeie-a para **`.elefante`** *(você só precisa copiar essa pasta, nada mais!)*.
-2. No chat com a sua IA em qualquer editor (VS Code, Cursor, Windsurf, Claude, etc.), envie:
-
-```
-#elefante leia setup_elefante.json e configure este projeto
-```
-*(ou se a pasta ainda se chamar `template`: `leia template/setup_elefante.json e configure este projeto`)*
-
-**A IA cuida de 100% do resto sozinha:**
-- Instala o protocolo universal `AGENTS.md` na raiz do seu projeto automaticamente;
-- Analisa silenciosamente os arquivos do projeto (`composer.json`, `package.json`, etc.);
-- Faz 2 perguntas rápidas (nome e objetivo do sistema);
-- Preenche o SSOT (`01-ESTADO_ATUAL.md`), calibra as regras e cria o log inicial;
-- Deixa tudo pronto para codar!
-
-### Passo 3: Comece a Usar
-
-**A partir de agora, SEMPRE comece seus prompts com `#elefante`:**
-
-```
-#elefante crie o sistema de autenticação com JWT
-#elefante adicione validação nos formulários
-#elefante corrija o bug no controller de pedidos
-#elefante refatore o código seguindo clean code
-```
-
----
-
-## 📚 Como Funciona?
-
-### A Estrutura (criada automaticamente)
+## 📚 Como Funciona a Estrutura
 
 ```
 seu-projeto/
 ├── .elefante/
 │   ├── 00-PRINCIPIOS.md         # ⚖️ Princípios invioláveis (MUST/SHOULD)
-│   ├── 01-ESTADO_ATUAL.md       # 🧠 Memória: onde o projeto está agora (SSOT)
-│   ├── 02-REGRAS_E_CULTURA.md   # 📜 Regras operacionais e armadilhas
+│   ├── 01-ESTADO_ATUAL.md       # 🧠 SSOT: onde o projeto está agora (Módulos, Stack, Arquitetura)
+│   ├── 02-REGRAS_E_CULTURA.md   # 📜 Padrões de código e armadilhas mapeadas
+│   ├── setup_elefante.json      # 🤖 Assistente de onboarding guiado
+│   ├── INICIAR.md               # 📖 Guia de inicialização em markdown
 │   ├── hooks.yml                # 🔁 Hooks declarativos pré/pós tarefa
-│   ├── modo.yml                 # ⚙️ Modo: lean / completo / strict
-│   ├── QUICK-REFERENCE.md       # 📖 Guia rápido
-│   ├── INDICE.md                # 📑 Índice de logs
-│   └── historico/               # 📝 Histórico com decisões rastreáveis (D001)
+│   ├── modo.yml                 # ⚙️ Modo de overhead: lean / completo / strict
+│   ├── QUICK-REFERENCE.md       # 📋 Consulta rápida de comandos
+│   ├── INDICE.md                # 📑 Índice cronológico de decisões técnicas
+│   └── historico/               # 📝 Logs de tarefas e decisões rastreáveis (D001 [TIPO])
 │
-└── AGENTS.md                    # 🌐 Padrão Universal aberto lido por qualquer editor/IA
+└── AGENTS.md                    # 🌐 Protocolo universal aberto lido por qualquer editor/IA
 ```
 
-### O Ciclo Automático
+### O Ciclo Operacional
 
 ```
-1. Você: "#elefante crie API de produtos"
+1. Você inicia uma solicitação com o agente
    ↓
-2. IA lê: .elefante/01-ESTADO_ATUAL.md (SSOT)
+2. IA lê silenciosamente: 00-PRINCIPIOS.md e 01-ESTADO_ATUAL.md
    ↓
-3. IA lê: .elefante/02-REGRAS_E_CULTURA.md (Regras)
+3. IA consulta: 02-REGRAS_E_CULTURA.md (evita armadilhas conhecidas)
    ↓
-4. IA gera: código perfeito, seguindo seus padrões
+4. IA implementa o código seguindo as convenções da stack
    ↓
-5. Hooks verificam: "SSOT foi atualizado?"
+5. Ao tocar em arquivos estruturais, a IA atualiza o SSOT (01-ESTADO_ATUAL.md)
    ↓
-6. IA atualiza: .elefante/01-ESTADO_ATUAL.md automaticamente
-   ↓
-7. IA cria: log em historico/ (decisões importantes)
-```
-
-**Tudo automático. Você só codifica.**
-
----
-
-## 🎓 Exemplos Práticos
-
-### Exemplo 1: Criar um CRUD Completo
-
-```
-#elefante crie um CRUD completo de produtos com:
-- model Product (nome, preço, descrição, estoque)
-- validação de formulários
-- API REST com JSON
-- testes unitários
-```
-
-**A IA:**
-1. Lê seu SSOT → sabe que você usa Laravel + Sanctum
-2. Cria model, migration, controller, requests, resources
-3. Segue suas regras → validação via FormRequest, não inline
-4. Atualiza SSOT → adiciona "Módulo Produtos" na tabela
-5. Cria log → registra decisão de usar API Resource
-
-### Exemplo 2: Adicionar Feature
-
-```
-#elefante adicione autenticação de dois fatores (2FA) via SMS
-```
-
-**A IA:**
-1. Lê SSOT → vê que já existe módulo de autenticação
-2. Estende controller existente (não cria novo)
-3. Adiciona campo 2FA na migration
-4. Usa biblioteca já listada no SSOT
-5. Atualiza SSOT com nova feature
-6. Cria log da implementação
-
-### Exemplo 3: Refatoração
-
-```
-#elefante refatore o AuthController seguindo clean code
-```
-
-**A IA:**
-1. Lê regras → vê que você usa padrão Action
-2. Extrai lógica para Actions individuais
-3. Mantém rotas e contratos existentes
-4. Atualiza SSOT se arquitetura mudou
-5. Documenta mudanças no histórico
-
----
-
-## 💎 Recursos Avançados
-
-### Proteção Automática do SSOT
-
-O Elefante **garante** que sua documentação nunca fica desatualizada:
-
-- **Steering File** (`inclusion: always`): Regras sobrevivem à compressão de contexto
-- **Hook PostTaskExec**: Verifica SSOT após cada tarefa
-- **Hook Stop**: Checklist final ao encerrar sessão
-
-**Em sessões longas (>30 tarefas), a IA NUNCA esquece de atualizar!**
-
-### Princípios Invioláveis (`00-PRINCIPIOS.md`)
-
-Separe o que **nunca pode mudar** das regras operacionais:
-
-```markdown
-## I. Segurança Inviolável
-**MUST:** Nunca remover autenticação existente.
-**MUST:** Nunca commitar credenciais ou tokens.
-
-## II. Banco de Dados
-**MUST:** Nunca alterar migration já executada em produção.
-```
-
-A IA **bloqueia** qualquer tarefa que viole um princípio MUST antes de executar.
-
-### Comandos de Diagnóstico
-
-```
-# Verificar se SSOT está convergido com o código:
-#elefante verificar
-
-# Análise cruzada de consistência dos 3 arquivos core:
-#elefante analisar
-
-# Sessão de clarificação estruturada (máx. 3 perguntas):
-#elefante clarificar
-```
-
-### Hooks Configuráveis (`hooks.yml`)
-
-Personalize o comportamento do Elefante por projeto — sem modificar arquivos core:
-
-```yaml
-hooks:
-  before_task:
-    - id: HK001
-      name: Verificar princípios
-      enabled: true
-  after_task:
-    - id: HK003
-      name: Checklist SSOT obrigatório
-      enabled: true
-```
-
-### Modos de Operação (`modo.yml`)
-
-Adapte o overhead ao tamanho do projeto:
-
-```yaml
-# Projetos pequenos / experimentais
-modo: lean       # histórico opcional, checklist reduzido
-
-# Projetos normais (padrão)
-modo: completo   # fluxo completo
-
-# Projetos críticos / equipe
-modo: strict     # bloqueia se SSOT desatualizado há >3 dias
-```
-
-### Sessões Longas
-
-```
-# Após muitas tarefas, encerre explicitamente:
-#elefante encerrar sessão
-
-# Isso evita loops de verificação
-```
-
-### Trabalho em Equipe
-
-```
-# Versione .elefante/ no Git: decisões, regras e armadilhas são do time.
-# Ignore apenas o que é pessoal:
-echo ".elefante/local/" >> .gitignore
-
-# No deploy, exclua .elefante/ e .kiro/ do artefato
-# (ex: .dockerignore, rsync --exclude) — eles não vão para o servidor.
+6. O hook pré-commit (elefante check) valida a integridade antes do commit
 ```
 
 ---
 
-## 📖 Documentação Completa
+## 🛡️ Governança e Validação do SSOT
 
-- **[Guia de Uso Detalhado](GUIA-DE-USO.md)** ← Comece aqui!
-- [Documentação Conceitual](README-ELEFANTE.md) (inclui a proteção SSOT via hooks/steering)
-- [Roteiro de Inicialização](INICIAR.md)
-- [Changelog](CHANGELOG-FRAMEWORK.md)
-- [Roadmap v3.0](ROADMAP-3.0.md)
+Em sessões longas com IA, a perda de contexto (*context drift*) é um risco comum. O Elefante mitiga esse problema em duas camadas complementares:
+
+### 1. Fronteira de Confiança (Trust Boundary) no `AGENTS.md`
+- **Instruções Soberanas:** `00-PRINCIPIOS.md` e `02-REGRAS_E_CULTURA.md` contêm as regras ativas de engenharia. Princípios `MUST` têm prioridade máxima sobre qualquer pedido ambíguo.
+- **Dados Históricos:** O diretório `historico/` é explicitamente classificado como **dado factual de leitura**, nunca comando executável, evitando alucinações baseadas em decisões antigas já superadas.
+
+### 2. Barreira Determinística (`elefante check`)
+O hook pré-commit do Git valida alterações estruturais no código contra a documentação:
+- **Heurística de Arquivos Estruturais:** Monitora alterações em diretórios centrais (`app/`, `src/`, `database/`, `routes/`, `config/`, `api/`, `pages/`) e modelos (`models.py`, `urls.py`, etc.).
+- **Regra de Bloqueio:** Se arquivos estruturais forem modificados no commit e nem `01-ESTADO_ATUAL.md` nem `historico/` forem atualizados, o commit é **bloqueado**.
+- **Validação Semântica Profunda:** Para checar se a atualização é real (e não apenas uma alteração de espaçamento ou vírgula), o comando `npx @feyth/elefante doctor` audita se há placeholders não preenchidos (`[PREENCHER]`), datas desatualizadas (>14 dias) e chaves sensíveis/segredos expostos.
 
 ---
 
 ## 🛠️ Stacks Suportadas
 
-| Stack | Template | Status |
+| Stack | Recursos Iniciais | Modo de Uso |
 |---|---|---|
-| Laravel/PHP | `.mestre-laravel` | ✅ Completo |
-| Django/Python | `.mestre-django` | ✅ Completo |
-| Python/FastAPI/Flask | `.mestre-python` | ✅ Completo |
-| Next.js/React | `.mestre-nextjs` | ✅ Completo |
-
-**Quer outra stack?** [Abra uma issue](https://github.com/feyth/elefante/issues) ou adapte um template existente!
-
----
-
-## ❓ FAQ
-
-### Preciso de um editor ou IDE específica?
-**Não! O Elefante é 100% agnóstico a qualquer editor.** Funciona perfeitamente com **VS Code, Cursor, Windsurf, JetBrains, Neovim, Claude Code, Terminal** ou qualquer IDE. Ele não depende de nenhum plugin ou software proprietário.
-
-### Como a proteção do SSOT é garantida se eu não uso Kiro?
-De duas formas determinísticas:
-1. **Via Git Hook nativo:** Execute `npx @feyth/elefante check --install-hook` para que o Git bloqueie commits estruturais sem documentação atualizada em qualquer terminal ou editor.
-2. **Via Instrução Universal (`AGENTS.md`):** O protocolo universal de agentes é seguido por qualquer IA moderna.
-
-### E se eu usar outra linguagem?
-Adapte um template existente ou crie o seu. A estrutura `.elefante/` é universal e puramente em Markdown + YAML.
-
-### Quanto custa?
-**Grátis e open source.** Licença MIT.
-
-### Como contribuir?
-Abra uma [issue](https://github.com/feyth/elefante/issues) ou um Pull Request. Veja o [Roadmap v3.0](docs/ROADMAP.md) para saber o que está planejado.
+| **Laravel / PHP** | Actions, FormRequests, Migrations, Policies | `npx @feyth/elefante init laravel` ou [`stacks/laravel`](stacks/laravel/) |
+| **Django / Python** | Services, Models, URLs, CBVs | `npx @feyth/elefante init django` ou [`stacks/django`](stacks/django/) |
+| **Python / FastAPI / Flask** | Routers, Pydantic schemas, Dependency Injection | `npx @feyth/elefante init python` ou [`stacks/python`](stacks/python/) |
+| **Next.js / React** | App Router, Server Actions, Componentes | `npx @feyth/elefante init nextjs` ou [`stacks/nextjs`](stacks/nextjs/) |
+| **Universal / Outra Stack** | Template agnóstico pronto para qualquer ecossistema | Copiar pasta [`template/`](template/) |
 
 ---
 
-## 🎯 Próximos Passos
+## ❓ Perguntas Frequentes (FAQ)
 
-1. **[Leia o Guia de Uso Completo](docs/GUIA-DE-USO.md)**
-2. **Experimente em um projeto teste** (15 minutos)
-3. **Compartilhe seu feedback** (Issues/Discussions)
+### O prefixo `#elefante` é obrigatório em todo prompt?
+**Não é obrigatório em editores modernos que indexam o `AGENTS.md`** (como Cursor, Windsurf, Claude Code e Antigravity). Esses ambientes carregam as instruções automaticamente no contexto do agente.
+O prefixo `#elefante` é recomendado em:
+1. Interfaces web de chat (ChatGPT Web, Claude Web, Gemini Web) para sinalizar o protocolo;
+2. Comandos operacionais especiais (`#elefante verificar`, `#elefante analisar`, `#elefante configurar`).
 
----
+### Preciso de uma IDE ou ferramenta proprietária específica?
+**Não.** O Elefante é 100% agnóstico. Não depende de plugins de editores específicos nem de serviços proprietários. Opera inteiramente com Markdown, YAML, Git e Node.js opcional.
 
-## 💪 Casos de Uso
+### O que é o padrão OKF v0.2?
+O *Open Knowledge Format (OKF)* é uma proposta de especificação aberta para representação e intercâmbio de conhecimento técnico entre ferramentas de IA. O comando `elefante export okf` empacota a memória do projeto em um manifesto padronizado para fácil consumo por sistemas de RAG e agentes externos.
 
-- ✅ **Projetos pessoais:** Mantenha contexto entre sessões
-- ✅ **Projetos de equipe:** Padronize código com regras claras
-- ✅ **Aprendizado:** A IA ensina boas práticas do seu stack
-- ✅ **Refatoração:** Mantenha consistência em código legado
-- ✅ **Protótipos rápidos:** IA gera código production-ready
+### O pacote `@feyth/elefante` está no npm?
+O código da CLI reside no diretório [`cli/`](cli/) deste repositório e pode ser executado diretamente com `node cli/bin/elefante.js`. Para consumo via `npx @feyth/elefante`, a publicação é realizada no escopo `@feyth` no registro oficial do npm.
 
----
-
-## 📊 Resultados
-
-Ainda não publicamos números. Preferimos medir antes de afirmar: um **eval reproduzível**
-(projeto-exemplo + perguntas, com e sem Elefante) está planejado no [Roadmap v3.0](ROADMAP-3.0.md).
+### Onde estão as evidências empíricas de ganho de produtividade?
+Preferimos medir com transparência antes de fazer alegações definitivas. O protocolo formal de avaliação e testes controlados está documentado em **[`docs/BENCHMARK.md`](docs/BENCHMARK.md)**.
 
 ---
 
-## 🌟 Contribua
+## 📖 Documentação Central
 
-O Elefante é open source e feito pela comunidade.
-
-- ⭐ Dê uma estrela no [GitHub](https://github.com/feyth/elefante)
-- 🐛 Reporte bugs nas [Issues](https://github.com/feyth/elefante/issues)
-- 💡 Sugira melhorias nas [Discussions](https://github.com/feyth/elefante/discussions)
-- 📖 Melhore a documentação via Pull Request
+- [Central de Documentação](docs/README.md)
+- [Guia Completo de Uso](docs/GUIA-DE-USO.md)
+- [Protocolo de Avaliação e Benchmark](docs/BENCHMARK.md)
+- [Roadmap de Engenharia v3.0](docs/ROADMAP.md)
+- [Histórico de Mudanças (Changelog)](docs/CHANGELOG.md)
 
 ---
 
 ## 📜 Licença
 
-MIT License - use livremente, até comercialmente.
+Distribuído sob a licença MIT. Consulte [LICENSE](LICENSE) para mais detalhes.
 
-**Atribuição obrigatória:**  
-Desenvolvido por [Feyth Tecnologia](https://www.feyth.com.br)
-
----
-
-## 🔗 Links e Documentação
-
-- [Central de Documentação](docs/README.md)
-- [Guia Completo de Uso](docs/GUIA-DE-USO.md)
-- [Roadmap Estratégico v3.0](docs/ROADMAP.md)
-- [Histórico de Versões (Changelog)](docs/CHANGELOG.md)
-- [Repositório GitHub](https://github.com/feyth/elefante)
-- [Issues e Suporte](https://github.com/feyth/elefante/issues)
-
----
-
-<p align="center">
-  <strong>Feito com ❤️ e visão arquitetural por <a href="https://www.feyth.com.br">Feyth Tecnologia</a></strong>
-</p>
-
-<p align="center">
-  🐘 <em>Um elefante nunca esquece. Seu código também não deveria.</em> 🐘
-</p>
+Desenvolvido por [Feyth Tecnologia](https://www.feyth.com.br).
