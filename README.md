@@ -128,21 +128,16 @@ A IA vai perguntar:
 seu-projeto/
 ├── .elefante/
 │   ├── 00-PRINCIPIOS.md         # ⚖️ Princípios invioláveis (MUST/SHOULD)
-│   ├── 01-ESTADO_ATUAL.md       # 🧠 Memória: onde o projeto está agora
+│   ├── 01-ESTADO_ATUAL.md       # 🧠 Memória: onde o projeto está agora (SSOT)
 │   ├── 02-REGRAS_E_CULTURA.md   # 📜 Regras operacionais e armadilhas
-│   ├── hooks.yml                # 🔁 Hooks pré/pós tarefa configuráveis
+│   ├── hooks.yml                # 🔁 Hooks declarativos pré/pós tarefa
 │   ├── modo.yml                 # ⚙️ Modo: lean / completo / strict
 │   ├── QUICK-REFERENCE.md       # 📖 Guia rápido
 │   ├── INDICE.md                # 📑 Índice de logs
-│   └── historico/
-│       └── logs_das_tarefas.md  # 📝 Histórico com decisões rastreáveis (D001)
+│   └── historico/               # 📝 Histórico com decisões rastreáveis (D001)
 │
-└── .kiro/                        # 🛡️ Proteção automática
-    ├── hooks/
-    │   ├── ssot-commit-reminder.json  # Lembra de atualizar SSOT
-    │   └── ssot-guard.json            # Verifica ao encerrar
-    └── steering/
-        └── ssot-enforcement.md        # Regras sempre ativas
+├── AGENTS.md                    # 🌐 Padrão Universal lido por qualquer editor/IA
+└── CLAUDE.md                    # 🤖 Adaptador Claude Code / Anthropic
 ```
 
 ### O Ciclo Automático
@@ -333,26 +328,28 @@ echo ".elefante/local/" >> .gitignore
 
 ## ❓ FAQ
 
-### Preciso instalar algo?
-**Não.** É só copiar os arquivos. Funciona com qualquer IA.
+### Preciso de um editor ou IDE específica?
+**Não! O Elefante é 100% agnóstico a qualquer editor.** Funciona perfeitamente com **VS Code, Cursor, Windsurf, JetBrains, Neovim, Claude Code, Terminal** ou qualquer IDE. Ele não depende de nenhum plugin ou software proprietário.
 
-### Funciona sem Kiro?
-**Sim!** Funciona com Cursor, Claude, ChatGPT, ou qualquer IA. Os hooks do Kiro são opcionais (mas recomendados).
+### Como a proteção do SSOT é garantida se eu não uso Kiro?
+De duas formas determinísticas:
+1. **Via Git Hook nativo:** Execute `npx @feyth/elefante check --install-hook` para que o Git bloqueie commits estruturais sem documentação atualizada em qualquer terminal ou editor.
+2. **Via Instrução Universal (`AGENTS.md`):** O protocolo universal de agentes é seguido por qualquer IA moderna.
 
 ### E se eu usar outra linguagem?
-Adapte um template existente. A estrutura `.elefante/` é universal.
+Adapte um template existente ou crie o seu. A estrutura `.elefante/` é universal e puramente em Markdown + YAML.
 
 ### Quanto custa?
-**Grátis e open source.** MIT License.
+**Grátis e open source.** Licença MIT.
 
 ### Como contribuir?
-Abra uma [issue](https://github.com/feyth/elefante/issues) ou um Pull Request. Veja o [Roadmap v3.0](ROADMAP-3.0.md) para saber o que está planejado.
+Abra uma [issue](https://github.com/feyth/elefante/issues) ou um Pull Request. Veja o [Roadmap v3.0](docs/ROADMAP.md) para saber o que está planejado.
 
 ---
 
 ## 🎯 Próximos Passos
 
-1. **[Leia o Guia de Uso Completo](GUIA-DE-USO.md)** (10 minutos)
+1. **[Leia o Guia de Uso Completo](docs/GUIA-DE-USO.md)**
 2. **Experimente em um projeto teste** (15 minutos)
 3. **Compartilhe seu feedback** (Issues/Discussions)
 

@@ -63,6 +63,7 @@
 | 2026-10-18 | `20261018_conclusao_fase3_garantias_e_hooks.md` | Governança v3.0: Hook Pre-Commit Determinístico e Compactador de Histórico |
 | 2026-10-18 | `20261018_release_oficial_v300.md` | Release Oficial Estável do Framework Elefante v3.0.0 |
 | 2026-10-18 | `20261018_otimizacao_estrutural_e_limpeza.md` | Otimização Estrutural da Raiz: docs/, legado/ e Auditoria de Init |
+| 2026-10-18 | `20261018_desacoplamento_total_de_editor.md` | Desacoplamento Total de Editor: Padrão Universal AGENTS.md |
 
 ### Deploy / Infraestrutura
 | Data | Arquivo | Descrição |

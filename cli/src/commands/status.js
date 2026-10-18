@@ -93,21 +93,20 @@ export function runStatus(targetDir = process.cwd(), options = {}) {
     console.log(`${c.bold}Histórico:${c.reset}  ${c.dim}Nenhum log encontrado${c.reset}`);
   }
 
-  // 5. Agentes de IA Detectados
-  const agents = detectInstalledAgents(targetDir);
+  // 5. Adaptadores de IA (100% agnóstico de editor)
   console.log(`\n${c.bold}Adaptadores de IA integrados:${c.reset}`);
-  const allAgents = [
-    { key: 'antigravity', label: 'Antigravity (.agents/AGENTS.md)' },
-    { key: 'claude', label: 'Claude Code (CLAUDE.md)' },
-    { key: 'cursor', label: 'Cursor (.cursor/rules/elefante.mdc)' },
-    { key: 'gemini', label: 'Gemini CLI (GEMINI.md)' },
-    { key: 'kiro', label: 'Kiro (.kiro/steering/)' }
-  ];
+  const hasRootAgents = fs.existsSync(path.join(targetDir, 'AGENTS.md'));
+  const hasAgentsDir = fs.existsSync(path.join(targetDir, '.agents', 'AGENTS.md'));
+  const hasClaude = fs.existsSync(path.join(targetDir, 'CLAUDE.md'));
+  const hasCursor = fs.existsSync(path.join(targetDir, '.cursor')) || fs.existsSync(path.join(targetDir, '.cursorrules'));
+  const hasWindsurf = fs.existsSync(path.join(targetDir, '.windsurfrules')) || fs.existsSync(path.join(targetDir, '.windsurf'));
+  const hasCopilot = fs.existsSync(path.join(targetDir, '.github', 'copilot-instructions.md'));
 
-  allAgents.forEach(a => {
-    const active = agents[a.key];
-    console.log(`  ${active ? c.green + '●' : c.dim + '○'} ${a.label} ${active ? `${c.green}[ativo]${c.reset}` : `${c.dim}[não detectado]${c.reset}`}`);
-  });
+  console.log(`  ${(hasRootAgents || hasAgentsDir) ? c.green + '●' : c.dim + '○'} Padrão Universal (AGENTS.md) ${(hasRootAgents || hasAgentsDir) ? `${c.green}[ativo]${c.reset}` : `${c.dim}[não detectado]${c.reset}`}`);
+  console.log(`  ${hasClaude ? c.green + '●' : c.dim + '○'} Claude Code (CLAUDE.md) ${hasClaude ? `${c.green}[ativo]${c.reset}` : `${c.dim}[não detectado]${c.reset}`}`);
+  if (hasCursor) console.log(`  ${c.green}●${c.reset} Cursor (.cursor/rules/elefante.mdc) ${c.green}[ativo]${c.reset}`);
+  if (hasWindsurf) console.log(`  ${c.green}●${c.reset} Windsurf (.windsurfrules) ${c.green}[ativo]${c.reset}`);
+  if (hasCopilot) console.log(`  ${c.green}●${c.reset} GitHub Copilot (.github/) ${c.green}[ativo]${c.reset}`);
 
   console.log(`\n${c.dim}Execute ${c.cyan}npx @feyth/elefante doctor${c.reset}${c.dim} para auditar integridade e placeholders.${c.reset}\n`);
 }

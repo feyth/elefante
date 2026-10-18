@@ -93,7 +93,7 @@ export async function commandInit(args, options = {}) {
     console.log(`  1. Criar pasta .elefante/ e subdiretorios (decisoes, armadilhas, procedimentos, historico, local)`);
     console.log(`  2. Copiar arquivos universais de core/ (00-PRINCIPIOS.md, hooks.yml, modo.yml, templates)`);
     console.log(`  3. Copiar regras especializadas de stacks/${stack}/ (01-ESTADO_ATUAL.md, 02-REGRAS_E_CULTURA.md)`);
-    console.log(`  4. Gerar adaptadores de agentes: .agents/AGENTS.md, CLAUDE.md, .cursor/rules, GEMINI.md, .kiro/`);
+    console.log(`  4. Gerar adaptadores universais: AGENTS.md, .agents/AGENTS.md, CLAUDE.md (e específicos se detectados)`);
     console.log(`  5. Adicionar .elefante/local/ ao .gitignore`);
     console.log("");
     logOk("Simulacao concluida com sucesso. Execute sem --plan para aplicar.");
@@ -180,9 +180,9 @@ Configurar as dependências do projeto e definir o primeiro módulo.
     "utf-8"
   );
 
-  // 6. Gerar adaptadores para agentes
+  // 6. Gerar adaptadores para agentes (100% agnóstico de editor)
   const agentsContent = fs.readFileSync(path.join(coreDir, "AGENTS.md"), "utf-8");
-  const adapters = generateAdapters(targetDir, agentsContent);
+  const adapters = generateAdapters(targetDir, agentsContent, { dryRun: false, detectedAgents: agents });
   logOk(`Adaptadores gerados: ${adapters.join(", ")}`);
 
   // 7. Atualizar .gitignore (apenas .elefante/local/)

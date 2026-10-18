@@ -131,13 +131,14 @@ export function runDoctor(targetDir = process.cwd(), options = {}) {
     passes.push('Nenhum segredo ou chave de API sensível exposta em .elefante/');
   }
 
-  // 5. Checar adaptadores e referências
+  // 5. Checar adaptadores e referências (agnóstico de editor)
   const agentsToCheck = [
-    { file: '.agents/AGENTS.md', label: 'Antigravity / Codex' },
-    { file: 'CLAUDE.md', label: 'Claude Code' },
+    { file: 'AGENTS.md', label: 'Universal (Padrão Aberto)' },
+    { file: '.agents/AGENTS.md', label: 'Workspace Standard (Antigravity/Codex)' },
+    { file: 'CLAUDE.md', label: 'Claude Code / Anthropic' },
     { file: '.cursor/rules/elefante.mdc', label: 'Cursor' },
-    { file: 'GEMINI.md', label: 'Gemini CLI' },
-    { file: '.kiro/steering/elefante.md', label: 'Kiro' }
+    { file: '.windsurfrules', label: 'Windsurf' },
+    { file: '.github/copilot-instructions.md', label: 'GitHub Copilot' }
   ];
 
   let adaptersFound = 0;
