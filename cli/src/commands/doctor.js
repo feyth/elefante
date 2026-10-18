@@ -156,12 +156,13 @@ export function runDoctor(targetDir = process.cwd(), options = {}) {
     }
   }
 
-  if (adaptersFound > 0) {
-    passes.push(`${adaptersFound} adaptador(es) de IA configurado(s) com ponte para o SSOT`);
+  const hasUniversalAgents = fs.existsSync(path.join(targetDir, 'AGENTS.md')) || fs.existsSync(path.join(targetDir, '.agents', 'AGENTS.md'));
+  if (hasUniversalAgents) {
+    passes.push('Protocolo universal AGENTS.md presente e sincronizado com o SSOT');
   } else {
     warnings.push({
-      file: 'Adaptadores de IA',
-      msg: 'Nenhum adaptador de agente encontrado na raiz. Rode `elefante init --force` para gerá-los.'
+      file: 'AGENTS.md',
+      msg: 'Arquivo de protocolo universal AGENTS.md ausente. Rode `elefante init --force` para gerá-lo.'
     });
   }
 

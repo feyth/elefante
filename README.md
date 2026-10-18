@@ -136,8 +136,7 @@ seu-projeto/
 │   ├── INDICE.md                # 📑 Índice de logs
 │   └── historico/               # 📝 Histórico com decisões rastreáveis (D001)
 │
-├── AGENTS.md                    # 🌐 Padrão Universal lido por qualquer editor/IA
-└── CLAUDE.md                    # 🤖 Adaptador Claude Code / Anthropic
+└── AGENTS.md                    # 🌐 Padrão Universal aberto lido por qualquer editor/IA
 ```
 
 ### O Ciclo Automático

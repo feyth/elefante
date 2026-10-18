@@ -4,8 +4,8 @@
 
 ## Informações do Projeto
 - **Projeto:** Framework Elefante (Meta-framework de gestão de contexto para IA)
-- **Stack:** Markdown + PowerShell + JSON (Kiro Hooks)
-- **Bibliotecas Chave:** Kiro IDE (hooks v2, steering files), Git
+- **Stack:** Markdown + Node.js (CLI) + Git Hooks
+- **Bibliotecas Chave:** Protocolo Universal AGENTS.md, Git, Node.js
 
 ## Arquitetura do Framework
 
@@ -35,8 +35,7 @@ elefante/
 │   ├── mestres/                  # Antigos .mestre-*
 │   └── elefante.ps1
 ├── .elefante/                    # Memória do próprio meta-framework
-├── .agents/                      # Adaptador para Antigravity / Gemini
-├── .kiro/                        # Hooks e steering
+├── AGENTS.md                     # Protocolo Universal Aberto para qualquer IA/Editor
 ├── .gitignore
 ├── LICENSE
 └── README.md                     # Apresentação oficial e guia rápido
@@ -46,77 +45,37 @@ elefante/
 
 | Módulo | Propósito | Status |
 |---|---|---|
-| Template Base (.elefante/) | SSOT e regras genéricas | ✅ Atualizado (REGRA #0 + melhorias v2.3) |
-| Template Laravel (.mestre-laravel/) | Stack Laravel específica | ✅ Atualizado completo |
-| Template Django (.mestre-django/) | Stack Django específica | ✅ Atualizado completo |
-| Template Next.js (.mestre-nextjs/) | Stack Next.js específica | ✅ Atualizado completo |
-| Template Python (.mestre-python/) | Stack Python/FastAPI/Flask | ✅ Atualizado completo |
 | Core Universal (core/) | Princípios universais, hooks e templates OKF v0.2 | ✅ Implementado v3.0 |
 | Stacks Desacopladas (stacks/) | Regras desacopladas (Laravel, Django, Python, Next.js) | ✅ Implementado v3.0 |
-| CLI Node.js Oficial (cli/) | CLI zero-dependências (init, doctor, status, log) | ✅ Implementado v3.0 |
-| Proteção SSOT (.kiro/) | Hooks + Steering automático | ✅ Implementado |
-| Princípios (00-PRINCIPIOS.md) | Leis invioláveis por stack | ✅ Criado em todos os templates |
-| Checklist de Saúde do SSOT | Unit tests para documentação | ✅ Adicionado em todos os 02-REGRAS |
-| Hooks externos (hooks.yml) | Automação de pré/pós tarefas | ✅ Criado em todos os templates |
-| Modo configurável (modo.yml) | lean / completo / strict | ✅ Criado em todos os templates |
-| Documentação & Roadmap | README, GUIA, ROADMAP-3.0.md | ✅ Atualizado v3.0 |
+| CLI Node.js Oficial (cli/) | CLI zero-dependências (init, doctor, status, log, check, export) | ✅ Implementado v3.0 |
+| Protocolo Universal (AGENTS.md) | Protocolo aberto e agnóstico de IA/Editor | ✅ Implementado v3.0 |
+| Governança Determinística (Git Hook) | Validação pré-commit de integridade do SSOT (`elefante check`) | ✅ Implementado v3.0 |
+| Princípios (00-PRINCIPIOS.md) | Leis invioláveis (MUST/SHOULD) | ✅ Criado no core e templates |
+| Checklist de Saúde do SSOT | Testes de conformidade da documentação | ✅ Presente em 02-REGRAS |
+| Hooks externos (hooks.yml) | Automação declarativa pré/pós tarefa | ✅ Criado no core e templates |
+| Modo configurável (modo.yml) | lean / completo / strict | ✅ Criado no core e templates |
+| Documentação & Roadmap | README, GUIA, ROADMAP.md centralizados | ✅ Atualizado v3.0 |
 
-## Proteção Automática do SSOT (Nova Arquitetura)
+## Proteção Automática do SSOT (Arquitetura Universal v3.0)
 
-### Componentes
+A proteção do SSOT no Elefante v3.0 não depende de nenhum software, plugin ou IDE proprietária (Kiro, Claude, Cursor, etc.). Ela opera em duas camadas puristas:
 
-1. **Steering File** (`.kiro/steering/ssot-enforcement.md`)
-   - `inclusion: always` → sobrevive à compressão de contexto
-   - Define quando atualizar e quando não atualizar SSOT
-   - Proteção contra loops (verificação única por resposta)
-   - Status: ✅ Implementado em todos os templates
+### 1. Camada Comportamental (Prompt/Protocolo Universal)
+- **`AGENTS.md`**: Definido na raiz do projeto segundo a convenção aberta da indústria. Instruções soberanas (Princípios e Regras) prevalecem sobre dados históricos (Trust Boundary).
+- **Fronteira de Confiança**: A IA é orientada a ler `00-PRINCIPIOS.md`, `01-ESTADO_ATUAL.md` e `02-REGRAS_E_CULTURA.md` no início da tarefa, e executar o checklist de verificação obrigatória ao final antes de responder.
 
-2. **Hook PostTaskExec** (`ssot-commit-reminder.json`)
-   - Dispara após cada tarefa concluída
-   - Verifica se SSOT foi atualizado
-   - Checklist de 4 itens obrigatórios
-   - Status: ✅ Implementado em todos os templates
-
-3. **Hook Stop** (`ssot-guard.json`)
-   - Dispara ao encerrar sessão
-   - Checklist final antes de parar
-   - Previne sessões encerrarem com documentação desatualizada
-   - Status: ✅ Implementado em todos os templates
-
-### Melhorias v2.1 (Proteção SSOT)
-
-| Melhoria | Arquivo | Status |
-|---|---|---|
-| REGRA #0 destacada | 02-REGRAS_E_CULTURA.md (todos) | ✅ |
-| Checklist estrutural | AGENTS.md (todos) | ✅ |
-| Seção sessões longas | QUICK-REFERENCE.md (todos) | ✅ |
-| Passo 7 configuração .kiro/ | INICIAR.md (todos) | ✅ |
-| Documentação hooks/steering | README-ELEFANTE.md | ✅ |
-| Steering file SSOT | .kiro/steering/ssot-enforcement.md | ✅ |
-| Hook PostTaskExec | .kiro/hooks/ssot-commit-reminder.json | ✅ |
-| Hook Stop | .kiro/hooks/ssot-guard.json | ✅ |
-
-### Melhorias v2.3 (Inspiradas no Spec Kit — 2026-08-25)
-
-| Melhoria | Arquivo | Status |
-|---|---|---|
-| Princípios invioláveis (MUST/SHOULD) | 00-PRINCIPIOS.md (todos os templates) | ✅ |
-| Checklist de Saúde do SSOT | 02-REGRAS_E_CULTURA.md (todos) | ✅ |
-| IDs de rastreabilidade em logs | historico/_TEMPLATE_LOG.md | ✅ |
-| Handoffs explícitos pós-tarefa | AGENTS.md (todos) | ✅ |
-| Comando #elefante verificar | AGENTS.md (todos) | ✅ |
-| Comando #elefante analisar | AGENTS.md (todos) | ✅ |
-| Comando #elefante clarificar | AGENTS.md (todos) | ✅ |
-| Sistema de hooks externos | hooks.yml (todos os templates) | ✅ |
-| Preset lean / strict / completo | modo.yml (todos os templates) | ✅ |
+### 2. Camada Determinística (Git Hook Pré-Commit)
+- **`elefante check`**: Script agnóstico executado no hook `.git/hooks/pre-commit`.
+- **Bloqueio Real**: Se arquivos estruturais da stack (ex: `app/`, `database/`, `models.py`, `src/`) forem alterados sem modificação correspondente no SSOT (`.elefante/01-ESTADO_ATUAL.md`) ou adição de log de decisão em `historico/`, o commit é **rejeitado**.
+- **Independência Total**: Funciona no terminal, no VS Code, no Cursor, no Git CLI ou em qualquer ferramenta de versionamento.
 
 ## Integrações Externas
-> Framework é standalone, sem integrações externas.
+> Framework é standalone, sem dependência de serviços externos.
 
-| Serviço | Usado Em | Notas |
+| Ferramenta | Papel | Notas |
 |---|---|---|
-| Kiro IDE | Hooks v2 + Steering | Requer Kiro para ativar proteção automática |
-| Git | Versionamento | Recomendado adicionar .elefante/ e .kiro/ ao .gitignore |
+| Git | Versionamento e Governança | Hook pré-commit (`elefante check`) garante SSOT sempre atualizado |
+| Qualquer Editor / IA | Pair Programming | Opera via protocolo universal aberto `AGENTS.md` |
 
 ## Decisões Arquiteturais
 

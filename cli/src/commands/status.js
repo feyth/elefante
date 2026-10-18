@@ -93,20 +93,22 @@ export function runStatus(targetDir = process.cwd(), options = {}) {
     console.log(`${c.bold}Histórico:${c.reset}  ${c.dim}Nenhum log encontrado${c.reset}`);
   }
 
-  // 5. Adaptadores de IA (100% agnóstico de editor)
-  console.log(`\n${c.bold}Adaptadores de IA integrados:${c.reset}`);
+  // 5. Protocolo de IA (100% agnóstico e universal)
+  console.log(`\n${c.bold}Protocolo de IA:${c.reset}`);
   const hasRootAgents = fs.existsSync(path.join(targetDir, 'AGENTS.md'));
   const hasAgentsDir = fs.existsSync(path.join(targetDir, '.agents', 'AGENTS.md'));
-  const hasClaude = fs.existsSync(path.join(targetDir, 'CLAUDE.md'));
-  const hasCursor = fs.existsSync(path.join(targetDir, '.cursor')) || fs.existsSync(path.join(targetDir, '.cursorrules'));
-  const hasWindsurf = fs.existsSync(path.join(targetDir, '.windsurfrules')) || fs.existsSync(path.join(targetDir, '.windsurf'));
-  const hasCopilot = fs.existsSync(path.join(targetDir, '.github', 'copilot-instructions.md'));
+  const universalActive = hasRootAgents || hasAgentsDir;
 
-  console.log(`  ${(hasRootAgents || hasAgentsDir) ? c.green + '●' : c.dim + '○'} Padrão Universal (AGENTS.md) ${(hasRootAgents || hasAgentsDir) ? `${c.green}[ativo]${c.reset}` : `${c.dim}[não detectado]${c.reset}`}`);
-  console.log(`  ${hasClaude ? c.green + '●' : c.dim + '○'} Claude Code (CLAUDE.md) ${hasClaude ? `${c.green}[ativo]${c.reset}` : `${c.dim}[não detectado]${c.reset}`}`);
-  if (hasCursor) console.log(`  ${c.green}●${c.reset} Cursor (.cursor/rules/elefante.mdc) ${c.green}[ativo]${c.reset}`);
-  if (hasWindsurf) console.log(`  ${c.green}●${c.reset} Windsurf (.windsurfrules) ${c.green}[ativo]${c.reset}`);
-  if (hasCopilot) console.log(`  ${c.green}●${c.reset} GitHub Copilot (.github/) ${c.green}[ativo]${c.reset}`);
+  console.log(`  ${universalActive ? c.green + '●' : c.red + '○'} Padrão Universal (AGENTS.md) ${universalActive ? `${c.green}[ativo - qualquer editor/IA]${c.reset}` : `${c.red}[ausente]${c.reset}`}`);
+
+  const specific = [];
+  if (fs.existsSync(path.join(targetDir, 'CLAUDE.md'))) specific.push('Claude Code');
+  if (fs.existsSync(path.join(targetDir, '.cursor')) || fs.existsSync(path.join(targetDir, '.cursorrules'))) specific.push('Cursor');
+  if (fs.existsSync(path.join(targetDir, '.windsurfrules')) || fs.existsSync(path.join(targetDir, '.windsurf'))) specific.push('Windsurf');
+  if (fs.existsSync(path.join(targetDir, '.github', 'copilot-instructions.md'))) specific.push('GitHub Copilot');
+  if (specific.length > 0) {
+    console.log(`  ${c.dim}↳ Extensões ativas: ${specific.join(', ')}${c.reset}`);
+  }
 
   console.log(`\n${c.dim}Execute ${c.cyan}npx @feyth/elefante doctor${c.reset}${c.dim} para auditar integridade e placeholders.${c.reset}\n`);
 }
