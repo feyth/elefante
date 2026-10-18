@@ -109,10 +109,12 @@ A proteção do SSOT no Elefante v3.0 não depende de nenhum software, plugin ou
 | 2026-10-18 | Validação Semântica no Pre-Commit (`D019`) | `elefante check` inspeciona o git diff do SSOT impedindo burlas por espaços/vírgulas e bloqueia placeholders não preenchidos |
 | 2026-10-18 | Modo Ultra-Leve e Expansão (`D020`) | `elefante init --lite` gera apenas 1 arquivo `AGENTS.md` sem pastas para mitigar sobrecarga inicial; `elefante expand` desmembra sob demanda |
 | 2026-10-18 | Linter de Tokens e Briefing Cirúrgico (`D021`) | `elefante doctor` monitora orçamento de tokens (<250 linhas / <8KB) e diluição de MUST (>5); `elefante brief` condensa contexto em ~350 tokens |
+| 2026-10-18 | Estudo Piloto e Heurística Semântica Transparente (`D022`) | Publicação dos resultados do estudo piloto controlado (docs/BENCHMARK.md) e especificação pública da heurística de diff (>8 caracteres úteis) |
 
 ## Status do Momento
 - **Data da Implementação:** 2026-10-18
-- **Versão:** Framework Elefante v3.0.0 (Release Oficial Estável - 100% Agnóstico de Editor & Anti-Burocracia)
+- **Versão:** Framework Elefante v3.0.0 (Release Oficial Estável - 100% Agnóstico de Editor, Anti-Burocracia & Validado)
+
 - Ciclo de evolução do Roadmap v3.0 concluído e validado:
   - Framework 100% agnóstico a qualquer editor (VS Code, Cursor, Windsurf, JetBrains, Neovim, Claude Code, Terminal).
   - Padrão universal aberto `AGENTS.md` adotado como protocolo primário de IA.

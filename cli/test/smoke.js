@@ -64,8 +64,67 @@ try {
     fs.rmSync(liteDir, { recursive: true, force: true });
   }
 
-  console.log('\n🎉 TODOS OS TESTES DE FUMAÇA PASSARAM COM SUCESSO!\n');
+  // 7. Teste de Validação Semântica do Check (Simulação Git Real)
+  const gitTestDir = fs.mkdtempSync(path.join(os.tmpdir(), 'elefante-git-'));
+  try {
+    const { execSync } = await import('node:child_process');
+    console.log('7. Executando teste controlado de validação semântica com Git...');
+
+    execSync('git init', { cwd: gitTestDir, stdio: 'ignore' });
+    execSync('git config user.email "test@elefante.dev"', { cwd: gitTestDir, stdio: 'ignore' });
+    execSync('git config user.name "Elefante Test"', { cwd: gitTestDir, stdio: 'ignore' });
+
+    // Inicializa projeto no repo git
+    await runInit({ stack: 'laravel', targetDir: gitTestDir });
+
+    // Limpa placeholders iniciais para criar baseline limpa
+    const ssotFile = path.join(gitTestDir, '.elefante', '01-ESTADO_ATUAL.md');
+    let ssotContent = fs.readFileSync(ssotFile, 'utf8')
+      .replace(/\[NOME DO SEU PROJETO AQUI\]/g, 'E-commerce Test')
+      .replace(/\[VERSÃO\]/g, '11.0')
+      .replace(/\[DATA AQUI\]/g, '2026-10-18');
+    fs.writeFileSync(ssotFile, ssotContent, 'utf8');
+
+    // Cria arquivo estrutural inicial
+    fs.mkdirSync(path.join(gitTestDir, 'app', 'Models'), { recursive: true });
+    fs.writeFileSync(path.join(gitTestDir, 'app', 'Models', 'User.php'), '<?php class User {}', 'utf8');
+
+    execSync('git add -A', { cwd: gitTestDir, stdio: 'ignore' });
+    execSync('git commit -m "chore: initial commit"', { cwd: gitTestDir, stdio: 'ignore' });
+
+    // 7.1 Modifica arquivo estrutural SEM tocar no SSOT -> DEVE FALHAR
+    fs.writeFileSync(path.join(gitTestDir, 'app', 'Models', 'User.php'), '<?php class User { public $id; }', 'utf8');
+    const failNoSSOT = runCheck(gitTestDir);
+    if (failNoSSOT !== false) throw new Error('Falha: runCheck deveria ter bloqueado modificação estrutural sem SSOT!');
+    console.log('  ✔ Bloqueou alteração estrutural sem alteração no SSOT.');
+
+    // 7.2 Toca o SSOT com alteração cosmética (espaços/ponto) -> DEVE FALHAR
+    fs.appendFileSync(ssotFile, '\n   .\n', 'utf8');
+    const failCosmetic = runCheck(gitTestDir);
+    if (failCosmetic !== false) throw new Error('Falha: runCheck deveria ter bloqueado alteração cosmética no SSOT!');
+    console.log('  ✔ Bloqueou burla cosmética (espaços/pontos no SSOT).');
+
+    // 7.3 Toca o SSOT com placeholders genéricos -> DEVE FALHAR
+    fs.appendFileSync(ssotFile, '\n- [PREENCHER] Nova feature pendente\n', 'utf8');
+    const failPlaceholder = runCheck(gitTestDir);
+    if (failPlaceholder !== false) throw new Error('Falha: runCheck deveria ter bloqueado SSOT com [PREENCHER]!');
+    console.log('  ✔ Bloqueou SSOT com placeholders genéricos não resolvidos.');
+
+    // 7.4 Toca o SSOT com documentação substantiva real -> DEVE PASSAR
+    // Remove o placeholder e adiciona entrada real
+    const cleanSSOT = fs.readFileSync(ssotFile, 'utf8').replace(/\[PREENCHER\] Nova feature pendente/g, '');
+    fs.writeFileSync(ssotFile, cleanSSOT + '\n| Módulo Usuários | Campo ID implementado no User Model | ✅ Concluído |\n', 'utf8');
+    const passReal = runCheck(gitTestDir);
+    if (passReal !== true) throw new Error('Falha: runCheck deveria ter aprovado SSOT com documentação substantiva!');
+    console.log('  ✔ Aprovou com sucesso após documentação técnica substantiva.');
+
+  } finally {
+    fs.rmSync(gitTestDir, { recursive: true, force: true });
+  }
+
+  console.log('\n🎉 TODOS OS TESTES DE FUMAÇA E GOVERNANÇA PASSARAM COM SUCESSO!\n');
 } finally {
   fs.rmSync(tempDir, { recursive: true, force: true });
 }
+
 

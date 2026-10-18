@@ -100,7 +100,7 @@ export function runCheck(targetDir = process.cwd(), options = {}) {
         return false;
       }
 
-      // 2. Checagem de diff substancial (impedir commits onde o SSOT só teve espaço ou linha em branco)
+      // 2. Checagem de diff substancial (impedir commits onde o SSOT só teve espaço, linha vazia ou pontuação trivial)
       try {
         const diffCmd = isStagedOnly
           ? 'git diff --cached -U0 -- .elefante/01-ESTADO_ATUAL.md'
@@ -113,16 +113,21 @@ export function runCheck(targetDir = process.cwd(), options = {}) {
             .map(l => l.slice(1).trim())
             .filter(Boolean);
 
-          if (addedLines.length === 0 && !changedFiles.some(f => f.includes('.elefante/historico/'))) {
-            console.log(`${c.red}${c.bold}❌ BLOQUEIO: ATUALIZAÇÃO SEM CONTEÚDO NO SSOT${c.reset}`);
-            console.log(`${c.yellow}A modificação em 01-ESTADO_ATUAL.md contém apenas espaços em branco ou linhas vazias.${c.reset}`);
-            console.log(`${c.dim}Alterações em código estrutural exigem documentação real do que mudou.${c.reset}\n`);
+          const addedAlphaNumeric = addedLines.join('').replace(/[^a-zA-Z0-9À-ÿ]/g, '');
+
+          // Heurística transparente: exige pelo menos 8 caracteres alfanuméricos substantivos
+          if (addedAlphaNumeric.length < 8 && !changedFiles.some(f => f.includes('.elefante/historico/'))) {
+            console.log(`${c.red}${c.bold}❌ BLOQUEIO: ATUALIZAÇÃO TRIVIAL / COSMÉTICA NO SSOT${c.reset}`);
+            console.log(`${c.yellow}A modificação em 01-ESTADO_ATUAL.md não adicionou conteúdo substantivo (${addedAlphaNumeric.length} caractere(s) útil(eis)).${c.reset}`);
+            console.log(`${c.dim}Heurística: alterações em código estrutural exigem documentar o módulo, rota ou decisão técnica real.${c.reset}`);
+            console.log(`${c.dim}Alternativa: crie um log formal com 'npx @feyth/elefante log "título"'.${c.reset}\n`);
             return false;
           }
         }
       } catch {
         // Ignora falhas de diff em ambientes sem histórico inicial
       }
+
     }
   }
 
