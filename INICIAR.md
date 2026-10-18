@@ -7,8 +7,14 @@
 
 ## ROTEIRO DE INICIALIZAÇÃO
 
-### PASSO 1 — Análise Silenciosa do Projeto
-Antes de fazer qualquer pergunta, inspecione a raiz do projeto procurando arquivos como:
+### PASSO 1 — Instalação do Protocolo Universal AGENTS.md
+- Se a pasta atual de memória se chamar `template/` ou `elefante/`, garanta que seu nome final seja `.elefante/`.
+- Copie o arquivo `AGENTS.md` de dentro da pasta de memória para a raiz do projeto (`./AGENTS.md`), para que o editor e futuros prompts reconheçam o protocolo `#elefante` automaticamente.
+
+---
+
+### PASSO 2 — Análise Silenciosa do Projeto
+Antes de fazer perguntas ao desenvolvedor, inspecione a raiz do projeto procurando arquivos como:
 - `composer.json` (PHP/Laravel)
 - `package.json` (Node.js/Next.js/React/Vue)
 - `requirements.txt` ou `pyproject.toml` (Python/Django/FastAPI)
@@ -18,7 +24,7 @@ Deduzir automaticamente: Stack backend, framework frontend, banco de dados e bib
 
 ---
 
-### PASSO 2 — Entrevista Rápida (Apenas o que faltar)
+### PASSO 3 — Entrevista Rápida (Apenas o que faltar)
 Faça uma **única mensagem** com apenas o que você não conseguiu deduzir dos arquivos:
 1. **Nome do projeto**
 2. **Objetivo principal do sistema** (em uma frase)
@@ -28,7 +34,7 @@ Aguarde a resposta do usuário antes de continuar.
 
 ---
 
-### PASSO 3 — Preencher `.elefante/01-ESTADO_ATUAL.md` (SSOT)
+### PASSO 4 — Preencher `.elefante/01-ESTADO_ATUAL.md` (SSOT)
 Abra e atualize o arquivo `.elefante/01-ESTADO_ATUAL.md`:
 - Preencha o **Nome do Projeto**, **Stack**, **Bibliotecas Chave** e **Ambiente**.
 - Preencha os **Módulos Iniciais** identificados.
@@ -36,15 +42,9 @@ Abra e atualize o arquivo `.elefante/01-ESTADO_ATUAL.md`:
 
 ---
 
-### PASSO 4 — Calibrar `.elefante/00-PRINCIPIOS.md` e `.elefante/02-REGRAS_E_CULTURA.md`
+### PASSO 5 — Calibrar `.elefante/00-PRINCIPIOS.md` e `.elefante/02-REGRAS_E_CULTURA.md`
 - No `00-PRINCIPIOS.md`: assegure que as regras inegociáveis do desenvolvedor estejam registradas como princípios MUST.
 - No `02-REGRAS_E_CULTURA.md`: registre os padrões de código e proibições acordadas.
-
----
-
-### PASSO 5 — Garantir o Protocolo Universal `AGENTS.md`
-Verifique se existe `AGENTS.md` na raiz do projeto. 
-Se não existir, copie `core/AGENTS.md` ou crie-o apontando para a pasta `.elefante/`.
 
 ---
 
@@ -55,4 +55,4 @@ Crie o arquivo `.elefante/historico/YYYYMMDD_inicializacao.md` registrando a dat
 
 ### PASSO 7 — Finalização
 Responda ao desenvolvedor:
-> "🐘 **Memória do Elefante configurada com sucesso!** O SSOT e as regras do projeto estão sincronizados. Qual será a nossa primeira missão no código?"
+> "🐘 **Memória do Elefante configurada com sucesso!** O protocolo AGENTS.md e o SSOT estão prontos. Qual será a nossa primeira missão no código?"

@@ -78,23 +78,24 @@ O CLI oficial do Elefante roda com **Node.js (>= 18)** sem nenhuma dependência 
 
 ---
 
-### 🚀 Inicialização Super Simples (1 Prompt — Copiar & Colar)
+### 🚀 Inicialização com Pasta Única (Copiar & Colar — 1 Prompt)
 
-Se você preferir não usar o terminal e apenas copiar os arquivos para o seu projeto:
+Se você não quiser usar terminal nem rodar comandos, basta copiar uma pasta:
 
-1. Copie a pasta `.elefante/` e o arquivo `AGENTS.md` para a raiz do seu projeto.
-2. Abra o chat com a sua IA favorita em qualquer editor e envie:
+1. Copie a pasta **`template/`** para dentro do seu projeto e renomeie-a para **`.elefante`** *(você só precisa copiar essa pasta, nada mais!)*.
+2. No chat com a sua IA em qualquer editor (VS Code, Cursor, Windsurf, Claude, etc.), envie:
 
 ```
 #elefante leia setup_elefante.json e configure este projeto
 ```
-*(ou: `#elefante leia INICIAR.md e configure este projeto`)*
+*(ou se a pasta ainda se chamar `template`: `leia template/setup_elefante.json e configure este projeto`)*
 
-A IA lerá o assistente em `.elefante/setup_elefante.json` e executará o setup guiado automaticamente:
-1. Analisa silenciosamente os arquivos do projeto (`composer.json`, `package.json`, `requirements.txt`, etc.);
-2. Pergunta apenas o que faltar (nome, objetivo e regras específicas de código);
-3. Preenche o SSOT (`01-ESTADO_ATUAL.md`) e calibra as regras;
-4. Cria o primeiro log histórico e deixa a memória 100% pronta!
+**A IA cuida de 100% do resto sozinha:**
+- Instala o protocolo universal `AGENTS.md` na raiz do seu projeto automaticamente;
+- Analisa silenciosamente os arquivos do projeto (`composer.json`, `package.json`, etc.);
+- Faz 2 perguntas rápidas (nome e objetivo do sistema);
+- Preenche o SSOT (`01-ESTADO_ATUAL.md`), calibra as regras e cria o log inicial;
+- Deixa tudo pronto para codar!
 
 ### Passo 3: Comece a Usar
 

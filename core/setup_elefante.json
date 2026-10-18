@@ -6,28 +6,28 @@
   "passos": [
     {
       "passo": 1,
-      "acao": "Análise Silenciosa do Projeto",
-      "instrucao": "Examine a raiz do projeto em busca de arquivos de configuração e dependência (composer.json, package.json, requirements.txt, pyproject.toml, Gemfile, pom.xml, etc.) para deduzir automaticamente stack, frameworks, versões e bibliotecas."
+      "acao": "Instalação do Protocolo Universal AGENTS.md",
+      "instrucao": "Se a pasta atual de memória se chamar 'template' ou 'elefante', certifique-se de que ela se torne '.elefante'. Em seguida, copie o arquivo AGENTS.md de dentro da pasta de memória para a raiz do projeto (./AGENTS.md), para que o editor e futuros prompts reconheçam o protocolo automaticamente."
     },
     {
       "passo": 2,
-      "acao": "Entrevista Rápida (Apenas o que faltar)",
-      "instrucao": "Pergunte ao desenvolvedor em UMA ÚNICA mensagem apenas o que não foi possível deduzir dos arquivos: 1. Nome do projeto, 2. Objetivo principal do sistema em uma frase, 3. Alguma proibição ou regra arquitetural inegociável (ex: 'sem jQuery', 'sempre Tailwind')."
+      "acao": "Análise Silenciosa do Projeto",
+      "instrucao": "Examine a raiz do projeto em busca de arquivos de dependência (composer.json, package.json, requirements.txt, pyproject.toml, Gemfile, etc.) para deduzir automaticamente stack, frameworks, versões e bibliotecas já existentes."
     },
     {
       "passo": 3,
-      "acao": "Calibrar .elefante/01-ESTADO_ATUAL.md (SSOT)",
-      "instrucao": "Abra e preencha o SSOT com o Nome do Projeto, Stack completa, Arquitetura, Módulos Iniciais e Status do Momento."
+      "acao": "Entrevista Rápida (Apenas o que faltar)",
+      "instrucao": "Pergunte ao desenvolvedor em UMA ÚNICA mensagem apenas o que você não conseguiu deduzir dos arquivos: 1. Nome do projeto, 2. Objetivo principal do sistema em uma frase, 3. Alguma regra ou proibição inegociável de código (ex: 'sem jQuery', 'sempre Tailwind')."
     },
     {
       "passo": 4,
-      "acao": "Calibrar 00-PRINCIPIOS.md e 02-REGRAS_E_CULTURA.md",
-      "instrucao": "Ajuste as regras de código e proibições de acordo com as respostas e o ecossistema detectado, mantendo os princípios MUST invioláveis."
+      "acao": "Preencher .elefante/01-ESTADO_ATUAL.md (SSOT)",
+      "instrucao": "Abra e preencha o SSOT com o Nome do Projeto, Stack completa, Arquitetura, Módulos Iniciais e Status do Momento."
     },
     {
       "passo": 5,
-      "acao": "Garantir Protocolo Universal AGENTS.md",
-      "instrucao": "Verifique se AGENTS.md existe na raiz do projeto. Se não existir, copie ou crie o protocolo universal apontando para .elefante/."
+      "acao": "Calibrar 00-PRINCIPIOS.md e 02-REGRAS_E_CULTURA.md",
+      "instrucao": "Ajuste as regras de código de acordo com o ecossistema detectado e as respostas do usuário, mantendo os princípios MUST invioláveis."
     },
     {
       "passo": 6,
@@ -37,7 +37,7 @@
     {
       "passo": 7,
       "acao": "Conclusão e Prontidão",
-      "instrucao": "Informe ao desenvolvedor: '🐘 Memória do Elefante inicializada com sucesso para este projeto! Qual será a nossa primeira tarefa de desenvolvimento?'"
+      "instrucao": "Responda: '🐘 Memória do Elefante inicializada com sucesso para este projeto! O protocolo AGENTS.md e o SSOT estão prontos. Qual será a nossa primeira tarefa de desenvolvimento?'"
     }
   ],
   "estrutura_esperada": {
@@ -59,7 +59,7 @@
     ]
   },
   "notas_importantes": [
-    "AGENTS.md na raiz é o protocolo universal lido por qualquer editor ou agente de IA.",
+    "AGENTS.md na raiz é o protocolo universal aberto lido por qualquer editor ou agente de IA.",
     "Sempre inicie prompts subsequentes com '#elefante' para ativar o ciclo de consulta ao SSOT.",
     "O SSOT (01-ESTADO_ATUAL.md) deve ser atualizado imediatamente após qualquer alteração estrutural no código.",
     "Decisões arquiteturais relevantes devem ser registradas em .elefante/historico/ com IDs rastreáveis (D001 [TIPO])."
