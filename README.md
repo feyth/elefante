@@ -78,30 +78,23 @@ O CLI oficial do Elefante roda com **Node.js (>= 18)** sem nenhuma dependência 
 
 ---
 
-### Instalação Manual (Sem Node.js)
+### 🚀 Inicialização Super Simples (1 Prompt — Copiar & Colar)
 
-Se preferir não usar o Node.js, copie o núcleo e a stack desejada diretamente para o seu projeto:
+Se você preferir não usar o terminal e apenas copiar os arquivos para o seu projeto:
 
-```bash
-# 1. Crie a pasta de memória
-mkdir -p seu-projeto/.elefante
+1. Copie a pasta `.elefante/` e o arquivo `AGENTS.md` para a raiz do seu projeto.
+2. Abra o chat com a sua IA favorita em qualquer editor e envie:
 
-# 2. Copie os arquivos universais do core/
-cp -r core/* seu-projeto/.elefante/
-cp core/AGENTS.md seu-projeto/AGENTS.md
-
-# 3. Copie as regras da sua stack (ex: laravel, django, python, nextjs)
-cp -r stacks/laravel/* seu-projeto/.elefante/
 ```
+#elefante leia setup_elefante.json e configure este projeto
+```
+*(ou: `#elefante leia INICIAR.md e configure este projeto`)*
 
-A IA vai perguntar:
-1. Nome do projeto
-2. Stack backend/frontend
-3. Banco de dados
-4. Bibliotecas principais
-5. Regras específicas
-
-**Ela configura tudo automaticamente!**
+A IA lerá o assistente em `.elefante/setup_elefante.json` e executará o setup guiado automaticamente:
+1. Analisa silenciosamente os arquivos do projeto (`composer.json`, `package.json`, `requirements.txt`, etc.);
+2. Pergunta apenas o que faltar (nome, objetivo e regras específicas de código);
+3. Preenche o SSOT (`01-ESTADO_ATUAL.md`) e calibra as regras;
+4. Cria o primeiro log histórico e deixa a memória 100% pronta!
 
 ### Passo 3: Comece a Usar
 

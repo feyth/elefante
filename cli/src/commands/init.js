@@ -109,7 +109,7 @@ export async function commandInit(args, options = {}) {
   fs.mkdirSync(path.join(elefanteDir, "local"), { recursive: true });
 
   // 4. Copiar core
-  const coreFiles = ["00-PRINCIPIOS.md", "hooks.yml", "modo.yml", "QUICK-REFERENCE.md", "DASHBOARD-ARQUITETURA.html"];
+  const coreFiles = ["00-PRINCIPIOS.md", "hooks.yml", "modo.yml", "QUICK-REFERENCE.md", "DASHBOARD-ARQUITETURA.html", "setup_elefante.json", "INICIAR.md"];
   for (const file of coreFiles) {
     const src = path.join(coreDir, file);
     if (fs.existsSync(src)) {

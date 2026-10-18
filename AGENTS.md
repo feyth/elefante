@@ -70,6 +70,7 @@ Implemente o que foi solicitado seguindo rigorosamente:
 
 ## 🧭 Comandos Especiais #elefante
 
+- `#elefante configurar` (ou `#elefante leia setup_elefante.json`): Executa o roteiro de inicialização automática da memória para novos projetos (entrevista de stack, calibração do SSOT e primeiro log).
 - `#elefante verificar`: Compara o código atual com o SSOT e gera relatório de convergência (operação de leitura, append-only).
 - `#elefante analisar`: Análise cruzada de consistência entre `00-PRINCIPIOS.md`, `01-ESTADO_ATUAL.md`, `02-REGRAS_E_CULTURA.md` e histórico.
 - `#elefante clarificar`: Inicia sessão estruturada de perguntas e respostas antes de tarefa ambígua.

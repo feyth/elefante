@@ -1,83 +1,67 @@
 {
   "nome": "Assistente de Inicialização do Elefante",
   "versao": "3.0.0",
-  "descricao": "Guia passo a passo para a IA iniciar e estruturar a memória do projeto do zero.",
-  "gatilho_sugerido": "#elefante leia o INICIAR.md e configure este projeto",
+  "descricao": "Roteiro guiado para o agente de IA calibrar e ativar a memória do projeto automaticamente.",
+  "gatilho_sugerido": "#elefante leia setup_elefante.json e configure este projeto",
   "passos": [
     {
       "passo": 1,
-      "acao": "Inicializar com CLI ou Copiar Template",
-      "instrucao": "Execute 'npx @feyth/elefante init' na raiz do projeto (ou copie a stack de stacks/ e core/). O CLI detecta automaticamente o ambiente e gera os adaptadores de IA necessários."
+      "acao": "Análise Silenciosa do Projeto",
+      "instrucao": "Examine a raiz do projeto em busca de arquivos de configuração e dependência (composer.json, package.json, requirements.txt, pyproject.toml, Gemfile, pom.xml, etc.) para deduzir automaticamente stack, frameworks, versões e bibliotecas."
     },
     {
       "passo": 2,
-      "acao": "Entrevista de Inicialização (Passo 1 do INICIAR.md)",
-      "instrucao": "Pergunte ao usuário em uma única mensagem: Nome do Projeto, Stack Backend, Stack Frontend, Banco de Dados, Bibliotecas Principais, Objetivo do Sistema e Regras Específicas."
+      "acao": "Entrevista Rápida (Apenas o que faltar)",
+      "instrucao": "Pergunte ao desenvolvedor em UMA ÚNICA mensagem apenas o que não foi possível deduzir dos arquivos: 1. Nome do projeto, 2. Objetivo principal do sistema em uma frase, 3. Alguma proibição ou regra arquitetural inegociável (ex: 'sem jQuery', 'sempre Tailwind')."
     },
     {
       "passo": 3,
-      "acao": "Atualizar 01-ESTADO_ATUAL.md",
-      "instrucao": "Preencha as seções de Informações do Projeto, Stack, Arquitetura, Módulos Iniciais, Ambiente/Deploy e Status do Momento com as respostas do usuário."
+      "acao": "Calibrar .elefante/01-ESTADO_ATUAL.md (SSOT)",
+      "instrucao": "Abra e preencha o SSOT com o Nome do Projeto, Stack completa, Arquitetura, Módulos Iniciais e Status do Momento."
     },
     {
       "passo": 4,
-      "acao": "Configurar 00-PRINCIPIOS.md e 02-REGRAS_E_CULTURA.md",
-      "instrucao": "Detecte os arquivos do projeto (composer.json, package.json, requirements.txt, etc.) para calibrar regras reais da stack. Mantenha os princípios MUST inegociáveis."
+      "acao": "Calibrar 00-PRINCIPIOS.md e 02-REGRAS_E_CULTURA.md",
+      "instrucao": "Ajuste as regras de código e proibições de acordo com as respostas e o ecossistema detectado, mantendo os princípios MUST invioláveis."
     },
     {
       "passo": 5,
-      "acao": "Atualizar DASHBOARD-ARQUITETURA.html",
-      "instrucao": "Substitua [NOME DO PROJETO], [DATA], estatísticas iniciais (0 para projeto novo) e stack informada no arquivo .elefante/DASHBOARD-ARQUITETURA.html."
+      "acao": "Garantir Protocolo Universal AGENTS.md",
+      "instrucao": "Verifique se AGENTS.md existe na raiz do projeto. Se não existir, copie ou crie o protocolo universal apontando para .elefante/."
     },
     {
       "passo": 6,
-      "acao": "Criar Log de Início e Atualizar INDICE.md",
-      "instrucao": "Crie .elefante/historico/YYYYMMDD_inicializacao_projeto.md a partir do _TEMPLATE_LOG.md e registre no .elefante/INDICE.md."
+      "acao": "Criar Primeiro Log Histórico",
+      "instrucao": "Gere o log inicial em .elefante/historico/YYYYMMDD_inicializacao.md e adicione a entrada no .elefante/INDICE.md."
     },
     {
       "passo": 7,
-      "acao": "Confirmar Proteção SSOT (.kiro/)",
-      "instrucao": "Garanta que .kiro/hooks (ssot-commit-reminder.json, ssot-guard.json) e .kiro/steering/ssot-enforcement.md estão presentes para evitar amnésia em sessões longas."
-    },
-    {
-      "passo": 8,
-      "acao": "Apresentação e Próximo Passo",
-      "instrucao": "Confirme os arquivos configurados e pergunte ao usuário: 'Qual será a nossa primeira missão no código?'"
+      "acao": "Conclusão e Prontidão",
+      "instrucao": "Informe ao desenvolvedor: '🐘 Memória do Elefante inicializada com sucesso para este projeto! Qual será a nossa primeira tarefa de desenvolvimento?'"
     }
   ],
   "estrutura_esperada": {
     "raiz_do_projeto": [
       ".elefante/",
-      ".agents/",
-      ".kiro/"
+      "AGENTS.md"
     ],
     "dentro_de_elefante": [
       ".elefante/00-PRINCIPIOS.md",
       ".elefante/01-ESTADO_ATUAL.md",
       ".elefante/02-REGRAS_E_CULTURA.md",
+      ".elefante/setup_elefante.json",
+      ".elefante/INICIAR.md",
       ".elefante/hooks.yml",
       ".elefante/modo.yml",
       ".elefante/QUICK-REFERENCE.md",
       ".elefante/INDICE.md",
-      ".elefante/DASHBOARD-ARQUITETURA.html",
-      ".elefante/historico/",
-      ".elefante/README-ELEFANTE.md"
-    ],
-    "dentro_de_agents": [
-      ".agents/AGENTS.md"
-    ],
-    "dentro_de_kiro": [
-      ".kiro/hooks/ssot-commit-reminder.json",
-      ".kiro/hooks/ssot-guard.json",
-      ".kiro/steering/ssot-enforcement.md"
+      ".elefante/historico/"
     ]
   },
   "notas_importantes": [
-    "Os templates .mestre-* são mestres imutáveis e servem de base para novos projetos",
-    "A pasta .agents deve ficar na RAIZ do projeto para configurar o comportamento da IA",
-    "A pasta .kiro contém hooks e steering files com inclusion:always",
-    "Sempre use a hashtag '#elefante' nos prompts para ativar o protocolo de memória",
-    "O SSOT (01-ESTADO_ATUAL.md) deve ser atualizado imediatamente após mudanças estruturais",
-    "Decisões arquiteturais devem ter ID rastreável (D001 [TIPO]) nos logs"
+    "AGENTS.md na raiz é o protocolo universal lido por qualquer editor ou agente de IA.",
+    "Sempre inicie prompts subsequentes com '#elefante' para ativar o ciclo de consulta ao SSOT.",
+    "O SSOT (01-ESTADO_ATUAL.md) deve ser atualizado imediatamente após qualquer alteração estrutural no código.",
+    "Decisões arquiteturais relevantes devem ser registradas em .elefante/historico/ com IDs rastreáveis (D001 [TIPO])."
   ]
 }
